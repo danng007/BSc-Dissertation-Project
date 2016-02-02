@@ -1,0 +1,27 @@
+﻿Build started 03/02/2015 17:37:14.
+     1>Project "C:\Users\bxh\Desktop\GRAFrameworkWindows\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I.\YourCode /I.\Framework /I..\freeglut\include /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Framework\Camera.cpp Framework\Main.cpp Framework\Scene.cpp Framework\StaticEngine.cpp Framework\Texture.cpp YourCode\CourseworkScene.cpp YourCode\Triangle.cpp
+         Camera.cpp
+         Main.cpp
+         Scene.cpp
+         StaticEngine.cpp
+         Texture.cpp
+         CourseworkScene.cpp
+         Triangle.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\bxh\Desktop\GRAFrameworkWindows\Release\GRAFrameworkWindows.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:..\freeglut\lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\bxh\Desktop\GRAFrameworkWindows\Release\GRAFrameworkWindows.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\bxh\Desktop\GRAFrameworkWindows\Release\GRAFrameworkWindows.lib" /MACHINE:X86 /SAFESEH Release\Camera.obj
+         Release\Main.obj
+         Release\Scene.obj
+         Release\StaticEngine.obj
+         Release\Texture.obj
+         Release\CourseworkScene.obj
+         Release\Triangle.obj
+         Generating code
+         Finished generating code
+         GRAFrameworkWindows.vcxproj -> C:\Users\bxh\Desktop\GRAFrameworkWindows\Release\GRAFrameworkWindows.exe
+     1>Done Building Project "C:\Users\bxh\Desktop\GRAFrameworkWindows\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.44
