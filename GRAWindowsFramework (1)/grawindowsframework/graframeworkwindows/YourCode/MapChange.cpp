@@ -2,10 +2,11 @@
 #include "Scene.h"
 
 //#include "MyScene.h"
-#define SIZE 50.0f
+#define SIZE 20.0f
 MapChange::MapChange(KeyControl* keyControl)
 {
 	controlKey = keyControl;
+	ReadFile();
 }
 
 MapChange::~MapChange(void)
@@ -20,9 +21,7 @@ void MapChange::ReadFile()
 	myfile.open("./file.txt");      // open input file  
 	string s;
 	if (myfile.good()) {
-		while (getline(myfile, s)) { // getline reads one line into a string  
-			// To prove that we have read in this line, print it backwards
-			// one character at a time
+		while (getline(myfile, s)) { 
 			for (int i = 0; i < s.size(); i++) {
 				buffer[j][k] = s[i];
 				cout << buffer[j][k];
@@ -38,8 +37,86 @@ void MapChange::ReadFile()
 }
 void MapChange::Draw()
 {
+	if (controlKey->GetGameStart())
+	{
+		glDisable(GL_LIGHTING);
+		glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		int width = Scene::GetWindowWidth();
+		int height = Scene::GetWindowHeight();
+		glOrtho(-width / 2, width / 2, -height / 2, height / 2, 1.0, 1000.0); //change to image view positino
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
 
 
+		glBegin(GL_QUADS);
+		for (int z = 0; z < heightUnit; z++)
+		{
+			for (int x = 0; x < widthUnit; x++)
+			{
+
+				switch (buffer[x][z])
+				{
+				case '0':
+				{
+					glColor3f(1.0f,0.0f,0.0f);
+					glNormal3f(0.0f, 1.0f, 0.0f);
+					glVertex3f(x * SIZE, z *SIZE,-10.0f);
+					glVertex3f((x + 1) * SIZE, z * SIZE, -10.0f);
+					glVertex3f((x + 1) * SIZE, (z + 1) *SIZE,-10.0f);
+					glVertex3f(x* SIZE, (z + 1)* SIZE, -10.0f);
+					break;
+				}
+				case '1':
+				{
+					glColor3f(0.0f, 1.0f, 0.0f);
+					glNormal3f(0.0f, 1.0f, 0.0f);
+					glVertex3f(x * SIZE, z *SIZE, -10.0f);
+					glVertex3f((x + 1) * SIZE, z * SIZE, -10.0f);
+					glVertex3f((x + 1) * SIZE, (z + 1) *SIZE, -10.0f);
+					glVertex3f(x* SIZE, (z + 1)* SIZE, -10.0f);
+					break;
+				}
+				case '2':
+				{
+					glColor3f(0.0f, 0.0f, 1.0f);
+					glNormal3f(0.0f, 1.0f, 0.0f);
+					glVertex3f(x * SIZE, z *SIZE, -10.0f);
+					glVertex3f((x + 1) * SIZE, z * SIZE, -10.0f);
+					glVertex3f((x + 1) * SIZE, (z + 1) *SIZE, -10.0f);
+					glVertex3f(x* SIZE, (z + 1)* SIZE, -10.0f);
+					break;
+				}
+				case '3':
+				{
+					glColor3f(1.0f, 0.0f, 1.0f);
+					glNormal3f(0.0f, 1.0f, 0.0f);
+					glVertex3f(x * SIZE, z *SIZE, -10.0f);
+					glVertex3f((x + 1) * SIZE, z * SIZE, -10.0f);
+					glVertex3f((x + 1) * SIZE, (z + 1) *SIZE, -10.0f);
+					glVertex3f(x* SIZE, (z + 1)* SIZE, -10.0f);
+					break;
+				}
+				default:
+					break;
+				}
+			}
+		}
+
+
+		glEnd();
+
+
+		glPopMatrix();
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
+		glEnable(GL_LIGHTING);
+		glMatrixMode(GL_MODELVIEW);
+
+	}
+	
 }
 void MapChange::Update(const double& deltatime)
 {
