@@ -4,12 +4,13 @@ This camera class controlls the position, view direction and projection of the c
 You may change the implementation of these functions to improve the quality of the camera.
 */
 
-#include "Scene.h"
+#include "Scene.h" // Add scene this class to check the game state, only can move and rotate camera when state are in 3D scene.
 #include "Camera.h"
 #include "VectorMaths.h"
 
 Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), currentButton(0), mouseX(0), mouseY(0)
 {
+	ReadFile();
     // set the camera position to start at (0,0,0)
     eye[0] = 0.0f;
     eye[1] = 0.0f;
@@ -39,6 +40,28 @@ Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), currentButton(0), mouseX(
 Camera::~Camera()
 {
 }
+void Camera::ReadFile()
+{
+	int j = 0, k = 0;
+	int length;
+	myfile.open("./file.txt");      // open input file  
+	string s;
+	if (myfile.good()) {
+		while (getline(myfile, s)) {
+			for (int i = 0; i < s.size(); i++) {
+				buffer[j][k] = s[i];
+				cout << buffer[j][k];
+				k++;
+			}
+			k = 0;
+			j++;
+			cout << endl;
+		}
+	}
+	cout << "Camera Read Finish\n";
+	myfile.close();
+}
+
 
 void Camera::GetEyePosition( float &x, float &y, float &z) const
 {
@@ -113,48 +136,116 @@ void Camera::Update( const double& deltaTime )
     
     if( aKey )
     {
-        sub(eye, right, speed);
+      
+		/*
+		each step judge whether walk into the wall/door/window. if yes, cancel this update.
+		*/
+		preEye[0] = eye[0];
+		preEye[1] = eye[1];
+		preEye[2] = eye[2]; 
+		sub(eye, right, speed);
+		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
+		int y = ((int)eye[2] + 300) / 50;
+		printf("x = %d, y = %d\n", x, y);
+		if (buffer[x][y] != '0')
+		{
+			eye[0] = preEye[0];
+			eye[1] = preEye[1];
+			eye[2] = preEye[2];
+		}
     }
     
     if( dKey )
     {
-        add(eye, right, speed);
+		preEye[0] = eye[0];
+		preEye[1] = eye[1];
+		preEye[2] = eye[2];
+		add(eye, right, speed);
+		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
+		int y = ((int)eye[2] + 300) / 50;
+		printf("x = %d, y = %d\n", x, y);
+		if (buffer[x][y] != '0')
+		{
+			eye[0] = preEye[0];
+			eye[1] = preEye[1];
+			eye[2] = preEye[2];
+		}
+
     }
     
     if( wKey )
     {
+		preEye[0] = eye[0];
+		preEye[1] = eye[1];
+		preEye[2] = eye[2];
         add(eye, forward, speed);
+		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
+		int y = ((int)eye[2] + 300) / 50;
+		printf("x = %d, y = %d\n", x, y);
+		if (buffer[x][y] != '0')
+		{
+			eye[0] = preEye[0];
+			eye[1] = preEye[1];
+			eye[2] = preEye[2];
+		}
     }
     
     if( sKey )
     {
-        sub(eye, forward, speed);
+		preEye[0] = eye[0];
+		preEye[1] = eye[1];
+		preEye[2] = eye[2];
+		sub(eye, forward, speed);
+		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
+		int y = ((int)eye[2] + 300) / 50;
+		printf("x = %d, y = %d\n", x, y);
+		if (buffer[x][y] != '0')
+		{
+			eye[0] = preEye[0];
+			eye[1] = preEye[1];
+			eye[2] = preEye[2];
+		}
+       
     } 
 }
 
 void Camera::HandleKey( int key, int state, int x, int y )
 {
     // toggle booleans to remember which key was pressed/released ready for the update function
-    switch (key) {
-        case 'A':
-        case 'a':
-            aKey = state;
-            break;
-        case 'D':
-        case 'd':
-            dKey = state;
-            break;
-        case 'W':
-        case 'w':
-            wKey = state;
-            break;
-        case 'S':
-        case 's':
-            sKey = state;
-            break;
-        default:
-            break;
-    }
+	if (!Scene::GetGameStart())
+	{
+		//int x = ((int)eye[0] + 300 )/ 50; // translate the current position to map file position
+		//int y = ((int)eye[2] + 300) / 50;
+		switch (key) {
+		case 'A':
+		case 'a':
+		/*	printf("Move Left x = %f  y = %f  z = %f\n", eye[0], eye[1], eye[2]);
+			printf("x= %d, y= %d, block = %c\n",x,y, buffer[x][y]);*/
+			aKey = state;
+			break;
+		case 'D':
+		case 'd':/*
+			printf("Move Right x = %f  y = %f  z = %f\n", eye[0], eye[1], eye[2]);
+			printf("x= %d, y= %d, block = %c\n", x, y, buffer[x][y]);*/
+			dKey = state;
+			break;
+		case 'W':
+		case 'w':
+	/*		printf("Move Forward x = %f  y = %f  z = %f\n", eye[0], eye[1], eye[2]);
+			printf("x= %d, y= %d, block = %c\n", x, y, buffer[x][y]);*/
+			wKey = state;
+			break;
+		case 'S':
+		case 's':
+		/*	printf("Move Back x = %f  y = %f  z = %f\n", eye[0], eye[1], eye[2]);
+			printf("x= %d, y= %d, block = %c\n", x, y, buffer[x][y]);
+		*/	sKey = state;
+			break;
+		default:
+			break;
+		}
+	}
+   
 	
 	
 }
@@ -162,69 +253,73 @@ void Camera::HandleKey( int key, int state, int x, int y )
 void Camera::HandleMouseClick( int button, int state, int x, int y )
 {
     // when the mouse is clicked remember which button was pressed and where it was pressed
-    currentButton = button;
-    mouseX = x;
-    mouseY = y;
+	if (!Scene::GetGameStart())
+	{
+		currentButton = button;
+		mouseX = x;
+		mouseY = y;
+	}
+
 }
 
 void Camera::HandleMouseMotion( int x, int y )
 {
-    float rx, ry;
-    float sensitivity = 0.01f; // speed of the camera moving
-    
-    // work out the difference between where the mouse was last used (mouseX, mouseY) to
-    // position the view direction and the current position (x, y) the mouse is in
-    rx =(float)(x-mouseX);
-    ry =(float)(y-mouseY);
-    
-    // switch on which button was pressed and only do the update if the left button was pressed
-    switch (currentButton) {
-        case GLUT_LEFT_BUTTON:
-            
-            // add on the amount of change in to the left and right view direction of the camera
-            if(rx>0)
-                add(vd, right, rx*sensitivity);
-            else
-                sub(vd, right, rx*-sensitivity);
-            // add on the amount of change in to the up and down view direction of the camera
-            if(ry>0)
-                sub(vd, up, ry*sensitivity);
-            else
-                add(vd, up, ry*-sensitivity);
-            
-            // normalise the view direction so it is length 1
-            norm(vd);
-            
-            // use the view direction crossed with the up vector to obtain the corrected right vector
-            cross(vd, up, right);
-            
-            // normalise the right vector
-            norm(right);
-            
-/* As we want out camera to stay on the same plane at the same height (i.e. not move up and down the y axis) update a forward direction vector which can be used to move the camera. This forward vector moves the camera in the same direction as the view direction except it will not contain any y component so it cannot move off of its original height. This was we are free to look up and down however moving forward and back will not move us off of the camera plane. */
+	if (!Scene::GetGameStart())
+	{
+		float rx, ry;
+		float sensitivity = 0.01f; // speed of the camera moving
 
-            forward[0] = vd[0];
-            forward[2] = vd[2];
-            norm(forward);           
-            break;
-        case GLUT_RIGHT_BUTTON:
-            break;
-        case GLUT_MIDDLE_BUTTON:
-            break;
-        default:
-            break;
-    }
-    
-    mouseX = x;
-    mouseY = y;
+		// work out the difference between where the mouse was last used (mouseX, mouseY) to
+		// position the view direction and the current position (x, y) the mouse is in
+		rx = (float)(x - mouseX);
+		ry = (float)(y - mouseY);
+
+		// switch on which button was pressed and only do the update if the left button was pressed
+		switch (currentButton) {
+		case GLUT_LEFT_BUTTON:
+
+			// add on the amount of change in to the left and right view direction of the camera
+			if (rx>0)
+				add(vd, right, rx*sensitivity);
+			else
+				sub(vd, right, rx*-sensitivity);
+			// add on the amount of change in to the up and down view direction of the camera
+			if (ry>0)
+				sub(vd, up, ry*sensitivity);
+			else
+				add(vd, up, ry*-sensitivity);
+
+			// normalise the view direction so it is length 1
+			norm(vd);
+
+			// use the view direction crossed with the up vector to obtain the corrected right vector
+			cross(vd, up, right);
+
+			// normalise the right vector
+			norm(right);
+
+			/* As we want out camera to stay on the same plane at the same height (i.e. not move up and down the y axis) update a forward direction vector which can be used to move the camera. This forward vector moves the camera in the same direction as the view direction except it will not contain any y component so it cannot move off of its original height. This was we are free to look up and down however moving forward and back will not move us off of the camera plane. */
+
+			forward[0] = vd[0];
+			forward[2] = vd[2];
+			norm(forward);
+			break;
+		case GLUT_RIGHT_BUTTON:
+			break;
+		case GLUT_MIDDLE_BUTTON:
+			break;
+		default:
+			break;
+		}
+
+		mouseX = x;
+		mouseY = y;
+	}
+   
 }
 
 void Camera::HandlePassiveMouseMotion( int x, int y)
 {
     // Copy the implementation of HandleMouseMotion into this function for a camera that does not require you to
     // click the button to move the view direction.
-}
-int Camera::GetGameStart()
-{
-	return gameStart;
 }

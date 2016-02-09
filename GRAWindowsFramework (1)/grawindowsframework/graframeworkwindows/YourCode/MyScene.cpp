@@ -23,7 +23,6 @@ void MyScene::Init()
 
 	//c = new Cube();
 //	AddObjectToScene(c);
-
 	KeyControl *keyControl = new KeyControl();
 	AddObjectToScene(keyControl);
 
@@ -36,20 +35,4 @@ void MyScene::Init()
  /*   Triangle *t = new Triangle();
     AddObjectToScene(t);*/
 }
-
-//void MyScene::HandleKey(int key, int state, int x, int y)
-//{
-//	if (state == 0)
-//	{
-//		switch (key)
-//		{
-//		case 'q':
-//		case 'Q':
-//			printf("Q\n");
-//			break;
-//		default:
-//			break;
-//		}
-//	}
-//}
 

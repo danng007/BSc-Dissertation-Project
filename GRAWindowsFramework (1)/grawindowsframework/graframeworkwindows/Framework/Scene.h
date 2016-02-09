@@ -20,6 +20,7 @@ You must not modify this.
 #include "StaticEngine.h"
 #include "Texture.h"
 #include "Camera.h"
+#include "Controller.h"
 #include <vector>
 
 class Object;
@@ -42,7 +43,7 @@ public:
     
     // This function will return a pointer to the Camera class
     static Camera* GetCamera() { return &camera; }
-    
+	static bool GetGameStart();
     
 protected:
 
@@ -68,9 +69,9 @@ protected:
 	void AddObjectToScene( Object *object );
  
 private:
-
+	
+	static bool gameStart;
 	static Texture texture;
     static Camera camera;
-    
 	std::vector<Object*> sceneObjs;
 };

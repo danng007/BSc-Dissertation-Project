@@ -1,6 +1,8 @@
 
 #pragma once
-
+#include <iostream>
+#include <fstream>
+using namespace std;
 class Camera
 {
 public:
@@ -34,13 +36,14 @@ public:
     
     // Called each frame just before objects are drawn to set camera position, orientation, projection.
     void SetUpCamera();
-	int gameStart = 1;
-	int GetGameStart();
 private:
-    
+	void ReadFile();
+	ifstream myfile;
+	static const int widthUnit = 8, heightUnit = 10; //widthUnit is height -.-
+	char buffer[widthUnit][heightUnit];
 	// Member variable to keep track of the position of the camera in world space
     float eye[3];
-    
+	float preEye[3];
     // Member variable to keep track of the viewDirection, forward, up and right vectors of the camera
     float vd[3];
     float forward[3];

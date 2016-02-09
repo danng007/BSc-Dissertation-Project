@@ -17,8 +17,9 @@ public:
 	void DrawSingleWall(int x, int y, float wallHeight, float z);
 	void DrawSingleFloor(int x, int y);
 	void DrawRoof(int x, int y);
-	void DrawSingleWindow(int x, int y, float wallHeight);
+	void DrawSingleWindow(int x, int y, float wallHeight, bool rowDirection);
 	void DrawWall(float posX, float posY, float posZ, float poiX, float poiY, float poiZ);
+	void DrawUnitWall(int x, int z, float wallHeight, float y, int xSize, int ySize);
 private:
 	bool lightChange = true;
 	KeyControl* controlKey;
@@ -29,6 +30,7 @@ private:
 	ifstream myfile;
 	float wallHeight;
 	int scale;
+	
 
 	
 };

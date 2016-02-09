@@ -2,7 +2,7 @@
 #include "Scene.h"
 
 //#include "MyScene.h"
-#define SIZE 20.0f
+#define SIZE 40.0f
 MapChange::MapChange(KeyControl* keyControl)
 {
 	controlKey = keyControl;
@@ -27,17 +27,17 @@ void MapChange::ReadFile()
 				cout << buffer[j][k];
 				k++;
 			}
-			k = 0;
+			k = 0; 
 			j++;
 			cout << endl;
 		}
 	}
-	cout << "Finish";
+	cout << "MapChange Read Finish\n";
 	myfile.close();
 }
 void MapChange::Draw()
 {
-	if (controlKey->GetGameStart())
+	if (Scene::GetGameStart())
 	{
 		glDisable(GL_LIGHTING);
 		glMatrixMode(GL_PROJECTION);
@@ -52,12 +52,12 @@ void MapChange::Draw()
 
 
 		glBegin(GL_QUADS);
-		for (int z = 0; z < heightUnit; z++)
+		for (int z = -3 ; z < heightUnit -3; z++) // add -3 to X and Y move 2D image to the middle of window
 		{
-			for (int x = 0; x < widthUnit; x++)
+			for (int x = -3; x < widthUnit-3; x++)
 			{
 
-				switch (buffer[x][z])
+				switch (buffer[x + 3][z + 3])
 				{
 				case '0':
 				{
@@ -122,4 +122,11 @@ void MapChange::Update(const double& deltatime)
 {
 
 	
+}
+void MapChange::HandleMouseClick(int button, int state, int x, int y)
+{
+	if ( state == 1) // state == 1 means only reaction when mouse up
+	{
+		printf("X is %d, Y is %d \n", x, y);
+	}
 }

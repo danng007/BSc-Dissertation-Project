@@ -19,7 +19,7 @@ Do not change this file. You may only add objects to the Scene using AddObjectsT
 
 Texture Scene::texture = Texture();
 Camera Scene::camera = Camera();
-
+bool Scene::gameStart = false;
 Scene::Scene( int argc, char **argv, const char *title, const int windowWidth, const int windowHeight ) : StaticEngine(argc, argv, title, windowWidth, windowHeight)
 {
 }
@@ -77,6 +77,11 @@ void Scene::HandleResize(int w, int h)
 
 void Scene::HandleKey( int key, int state, int x, int y )
 {
+	if (state == 0 && (key == 'o' || key == 'O'))
+	{
+		gameStart = !gameStart;
+		printf("o\n");
+	}
     camera.HandleKey(key, state, x, y);
 	for( Object *obj : sceneObjs )
          obj->HandleKey(key, state, x, y );
@@ -113,4 +118,9 @@ void Scene::Update( const double& deltatime )
 void Scene::AddObjectToScene( Object *object )
 {
     sceneObjs.push_back(object);
+}
+
+bool Scene::GetGameStart()
+{
+	return gameStart;
 }

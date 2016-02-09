@@ -11,14 +11,7 @@ Floor::Floor(KeyControl* keyControl)
 	scale = 10;
 	wallHeight = 100.0f;
 	ReadFile();
-	for (int i = 0; i < widthUnit; i++)
-	{
-		for (int j = 0; j < heightUnit; j++)
-		{
-			printf("%c", buffer[i][j]);
-		}
-		printf("\n");
-	}
+	
 	wallTexId = Scene::GetTexture("./wallPaper.bmp");
 	windowTexId = Scene::GetTexture("./window.bmp");
 	floorTexId = Scene::GetTexture("./floor.bmp");
@@ -54,7 +47,7 @@ void Floor::ReadFile()
 			cout << endl;
 		}
 	}
-	cout << "Finish";
+	cout << "Floor Read Finish\n";
 	myfile.close();
 }
 void Floor::DrawSingleFloor(int x, int z)
@@ -72,100 +65,173 @@ void Floor::DrawSingleFloor(int x, int z)
 	glVertex3f(x* SIZE, -10.0f, (z+1 )* SIZE);
 
 }
-void Floor::DrawSingleWall(int x, int z, float wallHeight, float y)
+void Floor::DrawSingleWall(int x, int z, float wallHeight, float y) // firstly, drawing normal floor, then drawing unit wall at the center of block, then extend the wall to their neighbours. 
 {
-	
+	//
+	//glColor3f(1.0f, 1.0f, 1.0f);//white
+	//glNormal3f(0.0, 1.0, 0.0);
+	//glTexCoord2d(0.0f, 0.0f);
+	//glVertex3f(x * SIZE, y, z *SIZE);
+	//glTexCoord2d(1.0f, 0.0f);
+	//glVertex3f((x + 1) * SIZE, y, z * SIZE);
+	//glTexCoord2d(1.0f, 1.0f);
+	//glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE);
+	//glTexCoord2d(0.0f, 1.0f);
+	//glVertex3f(x* SIZE, wallHeight, z * SIZE);
+	////front
+	//glNormal3f(0.0, 1.0, 0.0);
+	//glTexCoord2d(0.0f, 0.0f);
+	//glVertex3f(x * SIZE, y, z * SIZE + SIZE);
+	//glTexCoord2d(1.0f, 0.0f);
+	//glVertex3f((x + 1) * SIZE, y, z * SIZE + SIZE);
+	//glTexCoord2d(1.0f, 1.0f);
+	//glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE + SIZE);
+	//glTexCoord2d(0.0f, 1.0f);
+	//glVertex3f(x* SIZE, wallHeight, z * SIZE + SIZE);
+	////left
+	//glNormal3f(0.0, 1.0, 0.0);
+	//glTexCoord2d(0.0f, 0.0f);
+	//glVertex3f(x * SIZE, y, z * SIZE);
+	//glTexCoord2d(1.0f, 0.0f);
+	//glVertex3f(x * SIZE, y, z * SIZE + SIZE);
+	//glTexCoord2d(1.0f, 1.0f);
+	//glVertex3f(x * SIZE, wallHeight, z *SIZE + SIZE);
+	//glTexCoord2d(0.0f, 1.0f);
+	//glVertex3f(x * SIZE, wallHeight, z * SIZE);
+	////right
+	//glNormal3f(0.0, 1.0, 0.0);
+	//glTexCoord2d(0.0f, 0.0f);
+	//glVertex3f((x + 1) * SIZE, y, z * SIZE);
+	//glTexCoord2d(1.0f, 0.0f);
+	//glVertex3f((x + 1) * SIZE, y, z * SIZE + SIZE);
+	//glTexCoord2d(1.0f, 1.0f);
+	//glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE + SIZE);
+	//glTexCoord2d(0.0f, 1.0f);
+	//glVertex3f((x + 1)* SIZE, wallHeight, z * SIZE);
+	////bottom
+	//glVertex3f(x * SIZE, y, z *SIZE);
+	//glVertex3f((x + 1) * SIZE, y, z * SIZE);
+	//glVertex3f((x + 1) * SIZE, y, (z + 1) *SIZE);
+	//glVertex3f(x* SIZE, y, (z + 1)* SIZE);
+
+
+	//Unite center wall
 	glColor3f(1.0f, 1.0f, 1.0f);//white
-	glNormal3f(0.0, 1.0, 0.0);
-	glTexCoord2d(0.0f, 0.0f);
-	glVertex3f(x * SIZE, y, z *SIZE);
-	glTexCoord2d(1.0f, 0.0f);
-	glVertex3f((x + 1) * SIZE, y, z * SIZE);
-	glTexCoord2d(1.0f, 1.0f);
-	glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE);
-	glTexCoord2d(0.0f, 1.0f);
-	glVertex3f(x* SIZE, wallHeight, z * SIZE);
-	//front
-	glNormal3f(0.0, 1.0, 0.0);
-	glTexCoord2d(0.0f, 0.0f);
-	glVertex3f(x * SIZE, y, z * SIZE + SIZE);
-	glTexCoord2d(1.0f, 0.0f);
-	glVertex3f((x + 1) * SIZE, y, z * SIZE + SIZE);
-	glTexCoord2d(1.0f, 1.0f);
-	glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE + SIZE);
-	glTexCoord2d(0.0f, 1.0f);
-	glVertex3f(x* SIZE, wallHeight, z * SIZE + SIZE);
-	//left
-	glNormal3f(0.0, 1.0, 0.0);
-	glTexCoord2d(0.0f, 0.0f);
-	glVertex3f(x * SIZE, y, z * SIZE);
-	glTexCoord2d(1.0f, 0.0f);
-	glVertex3f(x * SIZE, y, z * SIZE + SIZE);
-	glTexCoord2d(1.0f, 1.0f);
-	glVertex3f(x * SIZE, wallHeight, z *SIZE + SIZE);
-	glTexCoord2d(0.0f, 1.0f);
-	glVertex3f(x * SIZE, wallHeight, z * SIZE);
-	//right
-	glNormal3f(0.0, 1.0, 0.0);
-	glTexCoord2d(0.0f, 0.0f);
-	glVertex3f((x + 1) * SIZE, y, z * SIZE);
-	glTexCoord2d(1.0f, 0.0f);
-	glVertex3f((x + 1) * SIZE, y, z * SIZE + SIZE);
-	glTexCoord2d(1.0f, 1.0f);
-	glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE + SIZE);
-	glTexCoord2d(0.0f, 1.0f);
-	glVertex3f((x + 1)* SIZE, wallHeight, z * SIZE);
+	DrawUnitWall(x, z, wallHeight, y, 1, 1);
 	//bottom
 	glVertex3f(x * SIZE, y, z *SIZE);
 	glVertex3f((x + 1) * SIZE, y, z * SIZE);
 	glVertex3f((x + 1) * SIZE, y, (z + 1) *SIZE);
 	glVertex3f(x* SIZE, y, (z + 1)* SIZE);
-	
+
+	//Extend wall:
+	if ((x - 1 >= 0 ) && buffer[x - 1][z] != '0')
+	{
+		DrawUnitWall(x, z, wallHeight, y, 0, 1);
+		
+	}
+	if ((x +1 < widthUnit) && buffer[x + 1][z] != '0')
+	{
+		DrawUnitWall(x, z, wallHeight, y, 2, 1);
+	}
+	if ((z + 1 < heightUnit) && buffer[x][z + 1] != '0')
+	{
+		DrawUnitWall(x, z, wallHeight, y, 1, 2);
+	}
+	if ((z - 1 >= 0) && buffer[x][z - 1] != '0')
+	{
+		DrawUnitWall(x, z, wallHeight, y, 1, 0);
+	}
 }
-void Floor::DrawSingleWindow(int x, int z, float wallHeight)
+void Floor::DrawSingleWindow(int x, int z, float wallHeight, bool rowDirection)
 {
 	
+	if (rowDirection) //True: it's on the sides row of text file
+	{
+		//back
+		glNormal3f(0.0, 1.0, 0.0);
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex3f(x * SIZE, -10.0f, z *SIZE + SIZE / 3);
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex3f((x + 1) * SIZE, -10.0f, z * SIZE + SIZE / 3);
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE + SIZE / 3);
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex3f(x* SIZE, wallHeight, z * SIZE + SIZE / 3);
+		//front
+		glNormal3f(0.0, 1.0, 0.0);
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex3f(x * SIZE, -10.0f, z * SIZE + 2 * SIZE / 3);
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex3f((x + 1) * SIZE, -10.0f, z * SIZE + 2 * SIZE / 3);
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE + 2 * SIZE / 3);
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex3f(x* SIZE, wallHeight, z * SIZE + 2 * SIZE / 3);
+		//left
+		glNormal3f(0.0, 1.0, 0.0);
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex3f(x * SIZE, -10.0f, z * SIZE + SIZE / 3);
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex3f(x * SIZE, -10.0f, z * SIZE + 2 * SIZE / 3);
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex3f(x * SIZE, wallHeight, z *SIZE + 2 * SIZE / 3);
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex3f(x * SIZE, wallHeight, z * SIZE + SIZE / 3);
+		//right
+		glNormal3f(0.0, 1.0, 0.0);
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex3f((x + 1) * SIZE, -10.0f, z * SIZE + SIZE / 3);
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex3f((x + 1) * SIZE, -10.0f, z * SIZE + 2 * SIZE / 3);
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE + 2 * SIZE / 3);
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex3f((x + 1)* SIZE, wallHeight, z * SIZE + SIZE / 3);
 	
-	//back
-	glNormal3f(0.0, 1.0, 0.0);
-	glTexCoord2d(0.0f, 0.0f);
-	glVertex3f(x * SIZE, -10.0f, z *SIZE);
-	glTexCoord2d(1.0f, 0.0f);
-	glVertex3f((x + 1) * SIZE, -10.0f, z * SIZE);
-	glTexCoord2d(1.0f, 1.0f);
-	glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE);
-	glTexCoord2d(0.0f, 1.0f);
-	glVertex3f(x* SIZE, wallHeight, z * SIZE);
-	//front
-	glNormal3f(0.0, 1.0, 0.0);
-	glTexCoord2d(0.0f, 0.0f);
-	glVertex3f(x * SIZE, -10.0f, z * SIZE + SIZE);
-	glTexCoord2d(1.0f, 0.0f);
-	glVertex3f((x + 1) * SIZE, -10.0f, z * SIZE + SIZE);
-	glTexCoord2d(1.0f, 1.0f);
-	glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE + SIZE);
-	glTexCoord2d(0.0f, 1.0f);
-	glVertex3f(x* SIZE, wallHeight, z * SIZE + SIZE);
-	//left
-	glNormal3f(0.0, 1.0, 0.0);
-	glTexCoord2d(0.0f, 0.0f);
-	glVertex3f(x * SIZE, -10.0f, z * SIZE);
-	glTexCoord2d(1.0f, 0.0f);
-	glVertex3f(x * SIZE, -10.0f, z * SIZE + SIZE);
-	glTexCoord2d(1.0f, 1.0f);
-	glVertex3f(x * SIZE, wallHeight, z *SIZE + SIZE);
-	glTexCoord2d(0.0f, 1.0f);
-	glVertex3f(x * SIZE, wallHeight, z * SIZE);
-	//right
-	glNormal3f(0.0, 1.0, 0.0);
-	glTexCoord2d(0.0f, 0.0f);
-	glVertex3f((x + 1) * SIZE, -10.0f, z * SIZE);
-	glTexCoord2d(1.0f, 0.0f);
-	glVertex3f((x + 1) * SIZE, -10.0f, z * SIZE + SIZE);
-	glTexCoord2d(1.0f, 1.0f);
-	glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE + SIZE);
-	glTexCoord2d(0.0f, 1.0f);
-	glVertex3f((x + 1)* SIZE, wallHeight, z * SIZE);
+	}
+	else //false: its on the bottom and top tow of the txt file
+	{
+		glNormal3f(0.0, 1.0, 0.0);
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex3f(x * SIZE + SIZE / 3, -10.0f, z *SIZE );
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex3f(x * SIZE + 2 * SIZE / 3, -10.0f, z * SIZE);
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex3f(x * SIZE + 2 * SIZE / 3, wallHeight, z *SIZE);
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex3f(x* SIZE + SIZE / 3, wallHeight, z * SIZE);
+		//front
+		glNormal3f(0.0, 1.0, 0.0);
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex3f(x * SIZE + SIZE / 3, -10.0f, z * SIZE + SIZE);
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex3f(x * SIZE + 2 * SIZE / 3, -10.0f, z * SIZE + SIZE);
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex3f(x * SIZE + 2 * SIZE / 3, wallHeight, z *SIZE + SIZE);
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex3f(x* SIZE + SIZE / 3, wallHeight, z * SIZE + SIZE);
+		//left
+		glNormal3f(0.0, 1.0, 0.0);
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex3f(x * SIZE + SIZE / 3, -10.0f, z * SIZE + SIZE);
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex3f(x * SIZE + SIZE / 3, -10.0f, z * SIZE + SIZE);
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex3f(x * SIZE + SIZE / 3, wallHeight, z *SIZE + SIZE);
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex3f(x * SIZE + SIZE / 3, wallHeight, z * SIZE + SIZE);
+		//right
+		glNormal3f(0.0, 1.0, 0.0);
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex3f(x * SIZE + 2 * SIZE / 3, -10.0f, z * SIZE + SIZE);
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex3f(x * SIZE + 2 * SIZE / 3, -10.0f, z * SIZE + SIZE);
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex3f(x * SIZE + 2 * SIZE / 3, wallHeight, z *SIZE + SIZE);
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex3f(x * SIZE + 2 * SIZE / 3, wallHeight, z * SIZE + SIZE);
+	}
 	//bottom
 	glVertex3f(x * SIZE, -10.0f, z *SIZE);
 	glVertex3f((x + 1) * SIZE, -10.0f, z * SIZE);
@@ -190,7 +256,7 @@ void Floor::DrawRoof(int x, int z)
 void Floor::Draw()
 {
 	//glBindTexture should at the outside of glBegin and glEnd;
-	if (!controlKey->GetGameStart()) //detect the game state, if game start then begin drawing
+	if (!Scene::GetGameStart()) //detect the game state, if game start then begin drawing
 	{
 		glPushMatrix();
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
@@ -239,8 +305,16 @@ void Floor::Draw()
 					glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
 					glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
 					glBegin(GL_QUADS);
-
-					DrawSingleWindow(x, z, wallHeight / 2);
+					if (buffer[x][z - 1] != '0' || buffer[x][z + 1] != '0')
+					{
+						
+						DrawSingleWindow(x, z, wallHeight / 2, true);
+					}
+					else
+					{
+						printf("FALSE case 2\n");
+						DrawSingleWindow(x, z, wallHeight / 2, false);
+					}
 					glEnd();
 					glBindTexture(GL_TEXTURE_2D, 0);
 					break;
@@ -255,7 +329,14 @@ void Floor::Draw()
 
 					glBindTexture(GL_TEXTURE_2D, doorTexId);
 					glBegin(GL_QUADS);
-					DrawSingleWindow(x, z, wallHeight / 2);
+					if (buffer[x][z - 1] != '0' || buffer[x][z + 1] != '0')
+					{
+						DrawSingleWindow(x, z, wallHeight / 2, true);
+					}
+					else
+					{
+						DrawSingleWindow(x, z, wallHeight / 2, false);
+					}
 					glEnd();
 					glBindTexture(GL_TEXTURE_2D, 0);
 					break;
@@ -296,4 +377,46 @@ void Floor::Update(const double& deltatime)
 	{
 		lightChange = true;
 	}
+}
+void Floor::DrawUnitWall(int x, int z, float wallHeight, float y, int xSize, int ySize)
+{
+	glNormal3f(0.0, 1.0, 0.0);
+	glTexCoord2d(0.0f, 0.0f);
+	glVertex3f(x * SIZE +  xSize * SIZE / 3, y, z *SIZE + ySize * SIZE / 3);
+	glTexCoord2d(1.0f, 0.0f);
+	glVertex3f(x * SIZE + xSize * SIZE / 3, y, z *SIZE + (1+ ySize) *  SIZE / 3);
+	glTexCoord2d(1.0f, 1.0f);
+	glVertex3f(x * SIZE + xSize * SIZE / 3, wallHeight, z *SIZE + (1 + ySize) *   SIZE / 3);
+	glTexCoord2d(0.0f, 1.0f);
+	glVertex3f(x * SIZE + xSize * SIZE / 3, wallHeight, z *SIZE + ySize * SIZE / 3);
+	//front
+	glNormal3f(0.0, 1.0, 0.0);
+	glTexCoord2d(0.0f, 0.0f);
+	glVertex3f(x * SIZE + xSize * SIZE / 3, y, z *SIZE + ySize * SIZE / 3);
+	glTexCoord2d(1.0f, 0.0f);
+	glVertex3f(x * SIZE + (1 + xSize) * SIZE / 3, y, z *SIZE + ySize * SIZE / 3);
+	glTexCoord2d(1.0f, 1.0f);
+	glVertex3f(x * SIZE + (1 + xSize) *SIZE / 3, wallHeight, z *SIZE + ySize * SIZE / 3);
+	glTexCoord2d(0.0f, 1.0f);
+	glVertex3f(x * SIZE + xSize *SIZE / 3, wallHeight, z *SIZE + ySize * SIZE / 3);
+	//left
+	glNormal3f(0.0, 1.0, 0.0);
+	glTexCoord2d(0.0f, 0.0f);
+	glVertex3f(x * SIZE + (1 + xSize) *SIZE / 3, y, z *SIZE + ySize * SIZE / 3);
+	glTexCoord2d(1.0f, 0.0f);
+	glVertex3f(x * SIZE + (1 + xSize) *SIZE / 3, y, z *SIZE + (1 + ySize) *   SIZE / 3);
+	glTexCoord2d(1.0f, 1.0f);
+	glVertex3f(x * SIZE + (1 + xSize) *SIZE / 3, wallHeight, z *SIZE + (1 + ySize) *   SIZE / 3);
+	glTexCoord2d(0.0f, 1.0f);
+	glVertex3f(x * SIZE + (1 + xSize) * SIZE / 3, wallHeight, z *SIZE + ySize * SIZE / 3);
+	//right
+	glNormal3f(0.0, 1.0, 0.0);
+	glTexCoord2d(0.0f, 0.0f);
+	glVertex3f(x * SIZE + xSize * SIZE / 3, y, z *SIZE + (1 + ySize) *   SIZE / 3);
+	glTexCoord2d(1.0f, 0.0f);
+	glVertex3f(x * SIZE + (1 + xSize) * SIZE / 3, y, z *SIZE + (1 + ySize) *   SIZE / 3);
+	glTexCoord2d(1.0f, 1.0f);
+	glVertex3f(x * SIZE + (1 + xSize) *SIZE / 3, wallHeight, z *SIZE + (1 + ySize) *   SIZE / 3);
+	glTexCoord2d(0.0f, 1.0f);
+	glVertex3f(x * SIZE + xSize * SIZE / 3, wallHeight, z *SIZE + (1 + ySize) *   SIZE / 3);
 }
