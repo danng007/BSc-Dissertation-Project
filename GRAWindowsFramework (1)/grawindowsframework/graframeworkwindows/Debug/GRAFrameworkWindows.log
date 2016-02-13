@@ -1,54 +1,9 @@
-﻿Build started 2016/2/9 22:43:01.
-     1>Project "C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         E:\VS\VC\bin\CL.exe /c /I"C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/include/" /I"C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\packages\freeglut.2.8.1.15\build\native\../..//build/native/include/" /I"C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\packages\glew.1.9.0.1\build\native\../..//build/native/include/" /I.\YourCode /I.\Framework /I..\freeglut\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D HAS_FREEGLUT /D HAS_GLEW /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Framework\Camera.cpp Framework\Main.cpp Framework\Scene.cpp Framework\StaticEngine.cpp Framework\Texture.cpp YourCode\BaseColor.cpp YourCode\Controller.cpp YourCode\Cube.cpp YourCode\Floor.cpp YourCode\KeyControl.cpp YourCode\MapChange.cpp YourCode\MyScene.cpp YourCode\Triangle.cpp
-         Triangle.cpp
-         MyScene.cpp
-         MapChange.cpp
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\mapchange.cpp(25): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\mapchange.cpp(20): warning C4101: 'length' : unreferenced local variable
-         KeyControl.cpp
-         Floor.cpp
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.cpp(40): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.cpp(33): warning C4101: 'length' : unreferenced local variable
-         Cube.cpp
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\cube.cpp(66): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\cube.cpp(67): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\cube.cpp(68): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\cube.cpp(69): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\cube.cpp(81): warning C4244: 'argument' : conversion from 'double' to 'GLsizei', possible loss of data
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\cube.cpp(91): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\cube.cpp(93): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\cube.cpp(95): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\cube.cpp(97): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
-         Controller.cpp
-         BaseColor.cpp
-         Texture.cpp
-         StaticEngine.cpp
-         Scene.cpp
-         Main.cpp
-         Camera.cpp
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\framework\camera.cpp(51): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\want\desktop\fyp\finalyearprojectgit\grawindowsframework (1)\grawindowsframework\graframeworkwindows\framework\camera.cpp(46): warning C4101: 'length' : unreferenced local variable
-         Generating Code...
-       Link:
-         E:\VS\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\Debug\GRAFrameworkWindows.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\freeglut\lib "C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\glew32.lib" "C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\glfw3dll.lib" "C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\freeglut.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\Debug\GRAFrameworkWindows.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\Debug\GRAFrameworkWindows.lib" /MACHINE:X86 Debug\Camera.obj
-         Debug\Main.obj
-         Debug\Scene.obj
-         Debug\StaticEngine.obj
-         Debug\Texture.obj
-         Debug\BaseColor.obj
-         Debug\Controller.obj
-         Debug\Cube.obj
-         Debug\Floor.obj
-         Debug\KeyControl.obj
-         Debug\MapChange.obj
-         Debug\MyScene.obj
-         Debug\Triangle.obj
-         LINK : C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\Debug\GRAFrameworkWindows.exe not found or not built by the last incremental link; performing full link
-         GRAFrameworkWindows.vcxproj -> C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\Debug\GRAFrameworkWindows.exe
-     1>Done Building Project "C:\Users\Want\Desktop\FYP\FinalYearProjectGit\GRAWindowsFramework (1)\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" (Build target(s)).
+﻿Build started 12/02/2016 15:18:10.
+     1>Project "Z:\FinalYearProject-master\GRAWindowsFramework (1)\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         GRAFrameworkWindows.vcxproj -> Z:\FinalYearProject-master\GRAWindowsFramework (1)\grawindowsframework\Debug\GRAFrameworkWindows.exe
+     1>Done Building Project "Z:\FinalYearProject-master\GRAWindowsFramework (1)\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:17.14
+Time Elapsed 00:00:01.32

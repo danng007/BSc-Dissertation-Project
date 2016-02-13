@@ -8,6 +8,7 @@ Use this as the starting point to your work. Include the header file for each ob
 #include "Floor.h"
 #include "KeyControl.h"
 #include "MapChange.h"
+
 // Constructor creates your CourseworkScene and initialises the base class Scene
 MyScene::MyScene( int argc, char **argv, const char *title, const int windowWidth, const int windowHeight ) : Scene(argc, argv, title, windowWidth, windowHeight)
 {
@@ -23,6 +24,8 @@ void MyScene::Init()
 
 	//c = new Cube();
 //	AddObjectToScene(c);
+
+
 	KeyControl *keyControl = new KeyControl();
 	AddObjectToScene(keyControl);
 
@@ -31,7 +34,10 @@ void MyScene::Init()
 
 	MapChange *mapChange = new MapChange(keyControl);
 	AddObjectToScene(mapChange);
-    // for example: create and add a new triangle to the scene
+
+
+	
+	// for example: create and add a new triangle to the scene
  /*   Triangle *t = new Triangle();
     AddObjectToScene(t);*/
 }

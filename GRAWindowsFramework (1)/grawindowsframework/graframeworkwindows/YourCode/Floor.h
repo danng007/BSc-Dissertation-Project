@@ -25,7 +25,7 @@ private:
 	KeyControl* controlKey;
 	float lightColour;
 	int floorTexId, windowTexId, wallTexId, ceilingTexId, doorTexId;
-	static const int widthUnit = 8, heightUnit = 10; //widthUnit is height -.-
+	static const int widthUnit = 10, heightUnit = 12; //widthUnit is height -.-
 	char buffer[widthUnit][heightUnit];
 	ifstream myfile;
 	float wallHeight;
