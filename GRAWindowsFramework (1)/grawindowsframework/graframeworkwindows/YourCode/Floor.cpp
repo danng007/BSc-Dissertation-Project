@@ -11,7 +11,7 @@ Floor::Floor(KeyControl* keyControl)
 	scale = 10;
 	wallHeight = 100.0f;
 	ReadFile();
-	
+	glEnable(GL_TEXTURE_2D);
 	wallTexId = Scene::GetTexture("./wallPaper.bmp");
 	windowTexId = Scene::GetTexture("./window.bmp");
 	floorTexId = Scene::GetTexture("./floor.bmp");
@@ -213,9 +213,6 @@ void Floor::Draw()
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glDisable(GL_CULL_FACE);
 		glTranslatef(-300.0f, 0.0f, -300.0f);
-
-		glEnable(GL_TEXTURE_2D);
-
 
 		for (int z = 0; z < heightUnit; z++)
 		{

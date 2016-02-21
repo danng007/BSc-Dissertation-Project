@@ -146,7 +146,7 @@ void Camera::Update( const double& deltaTime )
 		sub(eye, right, speed);
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
-		printf("x = %d, y = %d\n", x, y);
+		printf("Camera.cpp x = %d, y = %d\n", x, y);
 		if (buffer[x][y] != '0')
 		{
 			eye[0] = preEye[0];
@@ -163,7 +163,7 @@ void Camera::Update( const double& deltaTime )
 		add(eye, right, speed);
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
-		printf("x = %d, y = %d\n", x, y);
+		printf("Camera.cpp x = %d, y = %d\n", x, y);
 		if (buffer[x][y] != '0')
 		{
 			eye[0] = preEye[0];
@@ -181,7 +181,7 @@ void Camera::Update( const double& deltaTime )
         add(eye, forward, speed);
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
-		printf("x = %d, y = %d\n", x, y);
+		printf("Camera.cpp x = %d, y = %d\n", x, y);
 		if (buffer[x][y] != '0')
 		{
 			eye[0] = preEye[0];
@@ -198,7 +198,7 @@ void Camera::Update( const double& deltaTime )
 		sub(eye, forward, speed);
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
-		printf("x = %d, y = %d\n", x, y);
+		printf("Camera.cpp x = %d, y = %d\n", x, y);
 		if (buffer[x][y] != '0')
 		{
 			eye[0] = preEye[0];

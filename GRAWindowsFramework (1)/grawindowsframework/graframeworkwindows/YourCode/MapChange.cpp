@@ -2,11 +2,22 @@
 #include "Scene.h"
 
 //#include "MyScene.h"
-#define SIZE 40.0f
+#define SIZE 50.0f
 MapChange::MapChange(KeyControl* keyControl)
 {
 	controlKey = keyControl;
 	ReadFile();
+	xPos = -5;
+	zPos = -7;
+	colSize = Scene::GetWindowWidth() / (widthUnit - 2); // heng Full
+	rowSize = Scene::GetWindowHeight() / (heightUnit ); // shu  Give s size blank blocks at top
+	printf("colsize = %f,  rowSize = %f \n", colSize, rowSize);
+	glEnable(GL_TEXTURE_2D);
+	wallTexId = Scene::GetTexture("./wallPaper.bmp");
+	windowTexId = Scene::GetTexture("./window.bmp");
+	floorTexId = Scene::GetTexture("./floor.bmp");
+	ceilingTexId = Scene::GetTexture("./ceiling.bmp");
+	doorTexId = Scene::GetTexture("./door.bmp");
 }
 
 MapChange::~MapChange(void)
@@ -51,52 +62,80 @@ void MapChange::Draw()
 		glLoadIdentity();
 
 
-		glBegin(GL_QUADS);
-		for (int z = -3 ; z < heightUnit -3; z++) // add -3 to X and Y move 2D image to the middle of window
+		
+		for (int z = zPos ; z < heightUnit + zPos; z++) // add -3 to X and Y move 2D image to the middle of window
 		{
-			for (int x = -3; x < widthUnit-3; x++)
+			for (int x = xPos; x < widthUnit + xPos; x++)
 			{
 
-				switch (buffer[x + 3][z + 3])
+				switch (buffer[x - xPos][z - zPos])
 				{
 				case '0':
 				{
-					glColor3f(1.0f,0.0f,0.0f);
+					glBindTexture(GL_TEXTURE_2D, floorTexId);
+					glBegin(GL_QUADS);
 					glNormal3f(0.0f, 1.0f, 0.0f);
-					glVertex3f(x * SIZE, z *SIZE,-10.0f);
-					glVertex3f((x + 1) * SIZE, z * SIZE, -10.0f);
-					glVertex3f((x + 1) * SIZE, (z + 1) *SIZE,-10.0f);
-					glVertex3f(x* SIZE, (z + 1)* SIZE, -10.0f);
+					glTexCoord2d(0.0f, 0.0f);
+					glVertex3f(x * colSize, z *rowSize,-10.0f);
+					glTexCoord2d(1.0f, 0.0f);
+					glVertex3f((x + 1) * colSize, z * rowSize, -10.0f);
+					glTexCoord2d(1.0f, 1.0f);
+					glVertex3f((x + 1) * colSize, (z + 1) *rowSize, -10.0f);
+					glTexCoord2d(0.0f, 1.0f);
+					glVertex3f(x* colSize, (z + 1)* rowSize, -10.0f);
+					glEnd();
+					glBindTexture(GL_TEXTURE_2D, 0);
 					break;
 				}
 				case '1':
 				{
-					glColor3f(0.0f, 1.0f, 0.0f);
+					glBindTexture(GL_TEXTURE_2D, wallTexId);
+					glBegin(GL_QUADS);
 					glNormal3f(0.0f, 1.0f, 0.0f);
-					glVertex3f(x * SIZE, z *SIZE, -10.0f);
-					glVertex3f((x + 1) * SIZE, z * SIZE, -10.0f);
-					glVertex3f((x + 1) * SIZE, (z + 1) *SIZE, -10.0f);
-					glVertex3f(x* SIZE, (z + 1)* SIZE, -10.0f);
+					glTexCoord2d(0.0f, 0.0f);
+					glVertex3f(x * colSize, z *rowSize, -10.0f);
+					glTexCoord2d(1.0f, 0.0f);
+					glVertex3f((x + 1) * colSize, z * rowSize, -10.0f);
+					glTexCoord2d(1.0f, 1.0f);
+					glVertex3f((x + 1) * colSize, (z + 1) *rowSize, -10.0f);
+					glTexCoord2d(0.0f, 1.0f);
+					glVertex3f(x* colSize, (z + 1)* rowSize, -10.0f);
+					glEnd();
+					glBindTexture(GL_TEXTURE_2D, 0);
 					break;
 				}
 				case '2':
 				{
-					glColor3f(0.0f, 0.0f, 1.0f);
+					glBindTexture(GL_TEXTURE_2D, windowTexId);
+					glBegin(GL_QUADS);
 					glNormal3f(0.0f, 1.0f, 0.0f);
-					glVertex3f(x * SIZE, z *SIZE, -10.0f);
-					glVertex3f((x + 1) * SIZE, z * SIZE, -10.0f);
-					glVertex3f((x + 1) * SIZE, (z + 1) *SIZE, -10.0f);
-					glVertex3f(x* SIZE, (z + 1)* SIZE, -10.0f);
+					glTexCoord2d(0.0f, 0.0f);
+					glVertex3f(x * colSize, z *rowSize, -10.0f);
+					glTexCoord2d(1.0f, 0.0f);
+					glVertex3f((x + 1) * colSize, z * rowSize, -10.0f);
+					glTexCoord2d(1.0f, 1.0f);
+					glVertex3f((x + 1) * colSize, (z + 1) *rowSize, -10.0f);
+					glTexCoord2d(0.0f, 1.0f);
+					glVertex3f(x* colSize, (z + 1)* rowSize, -10.0f);
+					glEnd();
+					glBindTexture(GL_TEXTURE_2D, 0);
 					break;
 				}
 				case '3':
 				{
-					glColor3f(1.0f, 0.0f, 1.0f);
+					glBindTexture(GL_TEXTURE_2D, doorTexId);
+					glBegin(GL_QUADS);
 					glNormal3f(0.0f, 1.0f, 0.0f);
-					glVertex3f(x * SIZE, z *SIZE, -10.0f);
-					glVertex3f((x + 1) * SIZE, z * SIZE, -10.0f);
-					glVertex3f((x + 1) * SIZE, (z + 1) *SIZE, -10.0f);
-					glVertex3f(x* SIZE, (z + 1)* SIZE, -10.0f);
+					glTexCoord2d(0.0f, 0.0f);
+					glVertex3f(x * colSize, z *rowSize, -10.0f);
+					glTexCoord2d(1.0f, 0.0f);
+					glVertex3f((x + 1) * colSize, z * rowSize, -10.0f);
+					glTexCoord2d(1.0f, 1.0f);
+					glVertex3f((x + 1) * colSize, (z + 1) *rowSize, -10.0f);
+					glTexCoord2d(0.0f, 1.0f);
+					glVertex3f(x* colSize, (z + 1)* rowSize, -10.0f);
+					glEnd();
+					glBindTexture(GL_TEXTURE_2D, 0);
 					break;
 				}
 				default:
@@ -106,7 +145,7 @@ void MapChange::Draw()
 		}
 
 
-		glEnd();
+		
 
 
 		glPopMatrix();
