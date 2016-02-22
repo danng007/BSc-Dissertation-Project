@@ -3,8 +3,10 @@
 
 //#include "MyScene.h"
 #define SIZE 50.0f
-MapChange::MapChange(KeyControl* keyControl)
+MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight)
 {
+	widthUnit = mapWidth;
+	heightUnit = mapHeight;
 	controlKey = keyControl;
 	ReadFile();
 	xPos = -5;
@@ -56,14 +58,14 @@ void MapChange::Draw()
 		glLoadIdentity();
 		int width = Scene::GetWindowWidth();
 		int height = Scene::GetWindowHeight();
-		glOrtho(-width / 2, width / 2, -height / 2, height / 2, 1.0, 1000.0); //change to image view positino
+		glOrtho(-width / 2, width / 2, -height / 2, height / 2, 1.0, 1000.0); //change to image view position
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glLoadIdentity();
 
 
 		
-		for (int z = zPos ; z < heightUnit + zPos; z++) // add -3 to X and Y move 2D image to the middle of window
+		for (int z = zPos ; z < heightUnit + zPos; z++) // add modify value to X and Y, move 2D image to the middle of window
 		{
 			for (int x = xPos; x < widthUnit + xPos; x++)
 			{
@@ -143,11 +145,6 @@ void MapChange::Draw()
 				}
 			}
 		}
-
-
-		
-
-
 		glPopMatrix();
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();

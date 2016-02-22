@@ -3,9 +3,12 @@
 
 //#include "MyScene.h"
 #define SIZE 50.0f
-Floor::Floor(KeyControl* keyControl)
+Floor::Floor(KeyControl* keyControl, int mapWidth, int mapHeight)
 
 {
+	widthUnit = mapWidth;
+	heightUnit = mapHeight;
+	
 	controlKey = keyControl;
 	lightColour = 0.0f;
 	scale = 10;

@@ -8,7 +8,7 @@ using namespace std;
 class Floor : public Object
 {
 public:
-	Floor(KeyControl* keyControl);
+	Floor(KeyControl* keyControl, int mapWidth, int mapHeight);
 	~Floor(void);
 	void Update(const double& deltatime);
 	void ReadFile();
@@ -25,8 +25,9 @@ private:
 	KeyControl* controlKey;
 	float lightColour;
 	int floorTexId, windowTexId, wallTexId, ceilingTexId, doorTexId;
-	static const int widthUnit = 10, heightUnit = 12; //widthUnit is height -.-
-	char buffer[widthUnit][heightUnit];
+	
+	int widthUnit, heightUnit; //widthUnit is height -.-
+	char buffer[100][100];
 	ifstream myfile;
 	float wallHeight;
 	int scale;

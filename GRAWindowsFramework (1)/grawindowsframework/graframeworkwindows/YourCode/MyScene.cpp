@@ -21,7 +21,7 @@ void MyScene::Init()
 	glewInit();
     // set background colour
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
+	ReadFile();
 	//c = new Cube();
 //	AddObjectToScene(c);
 
@@ -29,10 +29,10 @@ void MyScene::Init()
 	KeyControl *keyControl = new KeyControl();
 	AddObjectToScene(keyControl);
 
-	Floor *f = new Floor(keyControl);
+	Floor *f = new Floor(keyControl, mapWidth, mapHeight);
 	AddObjectToScene(f);
 
-	MapChange *mapChange = new MapChange(keyControl);
+	MapChange *mapChange = new MapChange(keyControl, mapWidth, mapHeight);
 	AddObjectToScene(mapChange);
 
 
@@ -42,3 +42,24 @@ void MyScene::Init()
     AddObjectToScene(t);*/
 }
 
+void MyScene::ReadFile()
+{
+	int j = 0, k = 0;
+	int length;
+	myfile.open("./file.txt");      // open input file  
+	string s;
+	if (myfile.good()) {
+		while (getline(myfile, s)) {
+			for (int i = 0; i < s.size(); i++) {
+
+				k++;
+			}
+			mapHeight = k;
+			k = 0;
+			j++;
+		}
+	}
+	mapWidth = j;
+	printf( "MyScene Read Finish, mapWidth = %d, mapHeight = %d\n", mapWidth, mapHeight);
+	myfile.close();
+}

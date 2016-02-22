@@ -8,18 +8,18 @@ using namespace std;
 class MapChange : public Object
 {
 public:
-	MapChange(KeyControl* keyControl);
+	MapChange(KeyControl* keyControl, int mapWidth, int mapHeight);
 	~MapChange(void);
 	void Draw();
 	void Update(const double& deltatime);
 	void ReadFile();
 	void HandleMouseClick(int button, int state, int x, int y);
 private:
-	static const int widthUnit = 10, heightUnit = 12; //widthUnit is height -.-
+	int widthUnit, heightUnit; //widthUnit is height -.-
 	int xPos, zPos;
 	int floorTexId, windowTexId, wallTexId, ceilingTexId, doorTexId;
 	float rowSize, colSize;
-	char buffer[widthUnit][heightUnit];
+	char buffer[100][100];
 	ifstream myfile;
 	KeyControl* controlKey;
 
