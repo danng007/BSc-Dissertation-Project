@@ -5,12 +5,13 @@
 #define SIZE 50.0f
 MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight)
 {
+	newX = 100, newY = 100;
 	widthUnit = mapWidth;
 	heightUnit = mapHeight;
 	controlKey = keyControl;
 	ReadFile();
-	xPos = -5;
-	zPos = -7;
+	xPos = 0;
+	zPos = 0;
 	colSize = Scene::GetWindowWidth() / (widthUnit - 2); // heng Full
 	rowSize = Scene::GetWindowHeight() / (heightUnit ); // shu  Give s size blank blocks at top
 	printf("colsize = %f,  rowSize = %f \n", colSize, rowSize);
@@ -20,6 +21,7 @@ MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight)
 	floorTexId = Scene::GetTexture("./floor.bmp");
 	ceilingTexId = Scene::GetTexture("./ceiling.bmp");
 	doorTexId = Scene::GetTexture("./door.bmp");
+
 }
 
 MapChange::~MapChange(void)
@@ -62,7 +64,7 @@ void MapChange::Draw()
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glLoadIdentity();
-
+		glTranslatef(-480, -400, 0);
 
 		
 		for (int z = zPos ; z < heightUnit + zPos; z++) // add modify value to X and Y, move 2D image to the middle of window
@@ -75,69 +77,25 @@ void MapChange::Draw()
 				case '0':
 				{
 					glBindTexture(GL_TEXTURE_2D, floorTexId);
-					glBegin(GL_QUADS);
-					glNormal3f(0.0f, 1.0f, 0.0f);
-					glTexCoord2d(0.0f, 0.0f);
-					glVertex3f(x * colSize, z *rowSize,-10.0f);
-					glTexCoord2d(1.0f, 0.0f);
-					glVertex3f((x + 1) * colSize, z * rowSize, -10.0f);
-					glTexCoord2d(1.0f, 1.0f);
-					glVertex3f((x + 1) * colSize, (z + 1) *rowSize, -10.0f);
-					glTexCoord2d(0.0f, 1.0f);
-					glVertex3f(x* colSize, (z + 1)* rowSize, -10.0f);
-					glEnd();
-					glBindTexture(GL_TEXTURE_2D, 0);
+					DrawUnitBlock(x, z);
 					break;
 				}
 				case '1':
 				{
 					glBindTexture(GL_TEXTURE_2D, wallTexId);
-					glBegin(GL_QUADS);
-					glNormal3f(0.0f, 1.0f, 0.0f);
-					glTexCoord2d(0.0f, 0.0f);
-					glVertex3f(x * colSize, z *rowSize, -10.0f);
-					glTexCoord2d(1.0f, 0.0f);
-					glVertex3f((x + 1) * colSize, z * rowSize, -10.0f);
-					glTexCoord2d(1.0f, 1.0f);
-					glVertex3f((x + 1) * colSize, (z + 1) *rowSize, -10.0f);
-					glTexCoord2d(0.0f, 1.0f);
-					glVertex3f(x* colSize, (z + 1)* rowSize, -10.0f);
-					glEnd();
-					glBindTexture(GL_TEXTURE_2D, 0);
+					DrawUnitBlock(x, z);
 					break;
 				}
 				case '2':
 				{
 					glBindTexture(GL_TEXTURE_2D, windowTexId);
-					glBegin(GL_QUADS);
-					glNormal3f(0.0f, 1.0f, 0.0f);
-					glTexCoord2d(0.0f, 0.0f);
-					glVertex3f(x * colSize, z *rowSize, -10.0f);
-					glTexCoord2d(1.0f, 0.0f);
-					glVertex3f((x + 1) * colSize, z * rowSize, -10.0f);
-					glTexCoord2d(1.0f, 1.0f);
-					glVertex3f((x + 1) * colSize, (z + 1) *rowSize, -10.0f);
-					glTexCoord2d(0.0f, 1.0f);
-					glVertex3f(x* colSize, (z + 1)* rowSize, -10.0f);
-					glEnd();
-					glBindTexture(GL_TEXTURE_2D, 0);
+					DrawUnitBlock(x, z);
 					break;
 				}
 				case '3':
 				{
 					glBindTexture(GL_TEXTURE_2D, doorTexId);
-					glBegin(GL_QUADS);
-					glNormal3f(0.0f, 1.0f, 0.0f);
-					glTexCoord2d(0.0f, 0.0f);
-					glVertex3f(x * colSize, z *rowSize, -10.0f);
-					glTexCoord2d(1.0f, 0.0f);
-					glVertex3f((x + 1) * colSize, z * rowSize, -10.0f);
-					glTexCoord2d(1.0f, 1.0f);
-					glVertex3f((x + 1) * colSize, (z + 1) *rowSize, -10.0f);
-					glTexCoord2d(0.0f, 1.0f);
-					glVertex3f(x* colSize, (z + 1)* rowSize, -10.0f);
-					glEnd();
-					glBindTexture(GL_TEXTURE_2D, 0);
+					DrawUnitBlock(x, z);
 					break;
 				}
 				default:
@@ -161,8 +119,28 @@ void MapChange::Update(const double& deltatime)
 }
 void MapChange::HandleMouseClick(int button, int state, int x, int y)
 {
+	
 	if ( state == 1) // state == 1 means only reaction when mouse up
 	{
-		printf("X is %d, Y is %d \n", x, y);
+		newX = x / (int)colSize;
+		newY = y / (int)rowSize;
+		printf("X is %d, Y is %d \n", newX, newY);
 	}
+	
+}
+
+void MapChange::DrawUnitBlock(int x, int z)
+{
+	glBegin(GL_QUADS);
+	glNormal3f(0.0f, 1.0f, 0.0f);
+	glTexCoord2d(0.0f, 0.0f);
+	glVertex3f(x * colSize, z *rowSize, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
+	glVertex3f((x + 1) * colSize, z * rowSize, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
+	glVertex3f((x + 1) * colSize, (z + 1) *rowSize, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
+	glVertex3f(x* colSize, (z + 1)* rowSize, -10.0f);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
 }

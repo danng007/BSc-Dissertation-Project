@@ -19,6 +19,8 @@ private:
 	int xPos, zPos;
 	int floorTexId, windowTexId, wallTexId, ceilingTexId, doorTexId;
 	float rowSize, colSize;
+	void DrawUnitBlock(int x, int z);
+	int newX, newY;
 	char buffer[100][100];
 	ifstream myfile;
 	KeyControl* controlKey;
