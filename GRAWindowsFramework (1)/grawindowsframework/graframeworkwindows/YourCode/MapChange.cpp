@@ -6,6 +6,7 @@
 MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight)
 {
 	newX = 100, newY = 100;
+	blockX = 100, blockY = 100;
 	widthUnit = mapWidth;
 	heightUnit = mapHeight;
 	controlKey = keyControl;
@@ -21,6 +22,10 @@ MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight)
 	floorTexId = Scene::GetTexture("./floor.bmp");
 	ceilingTexId = Scene::GetTexture("./ceiling.bmp");
 	doorTexId = Scene::GetTexture("./door.bmp");
+	textures[0] = wallTexId;
+	textures[1] = windowTexId;
+	textures[2] = floorTexId;
+	textures[3] = doorTexId;
 
 }
 
@@ -103,7 +108,19 @@ void MapChange::Draw()
 				}
 			}
 		}
+		
+			
+		if (optionOpen)
+		{
+			glBindTexture(GL_TEXTURE_2D, ceilingTexId);
+			DrawUnitBlock(newX, newY);
+			DrawOptionPage();
+		}
+			
+
 		glPopMatrix();
+
+
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
 		glEnable(GL_LIGHTING);
@@ -114,17 +131,29 @@ void MapChange::Draw()
 }
 void MapChange::Update(const double& deltatime)
 {
-
+	
 	
 }
 void MapChange::HandleMouseClick(int button, int state, int x, int y)
 {
 	
 	if ( state == 1) // state == 1 means only reaction when mouse up
-	{
-		newX = x / (int)colSize;
-		newY = y / (int)rowSize;
-		printf("X is %d, Y is %d \n", newX, newY);
+	{ 
+		blockX = x / (int)colSize + 1;
+		blockY = heightUnit - y / (int)rowSize; // the whole file matrix rotate 90 degree in order to fits the screen more suitable, so the coordinate should be modified
+		if (!optionOpen && blockX >= 1 && blockX <= widthUnit - 2 && blockY >= 1 && blockY <= heightUnit - 2)
+		{
+			newX = blockX;
+			newY = blockY;
+			optionOpen = true;
+	
+		}
+		if (optionOpen)
+		{
+
+		}
+		printf("buffer[%d][%d] is %c \n", newX, newY, buffer[newX][newY]);
+		
 	}
 	
 }
@@ -143,4 +172,43 @@ void MapChange::DrawUnitBlock(int x, int z)
 	glVertex3f(x* colSize, (z + 1)* rowSize, -10.0f);
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void MapChange::DrawOptionPage()
+{
+	int x = 2, z = 4;
+	
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glBegin(GL_QUADS);
+	glNormal3f(0.0f, 1.0f, 0.0f);
+	glTexCoord2d(0.0f, 0.0f);
+	glVertex3f(x * colSize, z *rowSize, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
+	glVertex3f((x + 8) * colSize, z * rowSize, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
+	glVertex3f((x + 8) * colSize, (z + 3) *rowSize, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
+	glVertex3f(x * colSize, (z + 3)* rowSize, -10.0f);
+	glEnd(); //bottom page of option page
+	
+	for (int i = 0; i < 4; i++)
+	{
+		glBindTexture(GL_TEXTURE_2D, textures[i]);
+		glBegin(GL_QUADS);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex3f(x * colSize + 3, z *rowSize + 3, -10.0f);
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex3f((x + 2) * colSize - 3, z * rowSize + 3, -10.0f);
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex3f((x + 2) * colSize - 3, (z + 3) *rowSize - 3, -10.0f);
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex3f(x * colSize + 3, (z + 3)* rowSize - 3, -10.0f);
+		glEnd();
+		x += 2; // draw each option, reduce a little each size to make it look better.
+	}
+	
+	
+	
+	
 }

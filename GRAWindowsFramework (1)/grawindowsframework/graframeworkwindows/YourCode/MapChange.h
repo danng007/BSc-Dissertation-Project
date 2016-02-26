@@ -20,12 +20,13 @@ private:
 	int floorTexId, windowTexId, wallTexId, ceilingTexId, doorTexId;
 	float rowSize, colSize;
 	void DrawUnitBlock(int x, int z);
-	int newX, newY;
+	int newX, newY, blockX, blockY;
 	char buffer[100][100];
+	bool clicked = false, optionOpen = false;
 	ifstream myfile;
 	KeyControl* controlKey;
-
-
+	void DrawOptionPage();
+	int textures[100];
 
 };
 
