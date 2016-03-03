@@ -1,0 +1,31 @@
+﻿Build started 03/03/2016 16:57:55.
+     1>Project "Z:\FinalYearProject-master\GRAWindowsFramework (1)\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"Z:\FinalYearProject-master\GRAWindowsFramework (1)\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/include/" /I"Z:\FinalYearProject-master\GRAWindowsFramework (1)\grawindowsframework\packages\freeglut.2.8.1.15\build\native\../..//build/native/include/" /I"Z:\FinalYearProject-master\GRAWindowsFramework (1)\grawindowsframework\packages\glew.1.9.0.1\build\native\../..//build/native/include/" /I.\YourCode /I.\Framework /I..\freeglut\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D HAS_FREEGLUT /D HAS_GLEW /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt YourCode\Floor.cpp YourCode\MapGenerator.cpp YourCode\MyScene.cpp
+         MyScene.cpp
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.h(11): error C2061: syntax error : identifier 'KeyControl'
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.h(26): error C2143: syntax error : missing ';' before '*'
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.h(26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\myscene.cpp(35): error C2661: 'Floor::Floor' : no overloaded function takes 4 arguments
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\myscene.cpp(58): warning C4018: '<' : signed/unsigned mismatch
+         MapGenerator.cpp
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\mapgenerator.cpp(34): warning C4018: '<' : signed/unsigned mismatch
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\mapgenerator.cpp(29): warning C4101: 'length' : unreferenced local variable
+         Generating Code...
+         Compiling...
+         Floor.cpp
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.h(11): error C2061: syntax error : identifier 'KeyControl'
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.h(26): error C2143: syntax error : missing ';' before '*'
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.h(26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.cpp(6): error C2065: 'KeyControl' : undeclared identifier
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.cpp(6): error C2065: 'keyControl' : undeclared identifier
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.cpp(6): error C2062: type 'int' unexpected
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.cpp(8): error C2143: syntax error : missing ';' before '{'
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.cpp(8): error C2447: '{' : missing function header (old-style formal list?)
+     1>z:\finalyearproject-master\grawindowsframework (1)\grawindowsframework\graframeworkwindows\yourcode\floor.cpp(43): warning C4018: '<' : signed/unsigned mismatch
+         Generating Code...
+     1>Done Building Project "Z:\FinalYearProject-master\GRAWindowsFramework (1)\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:03.66
