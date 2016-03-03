@@ -3,12 +3,12 @@
 
 //#include "MyScene.h"
 #define SIZE 50.0f
-Floor::Floor(KeyControl* keyControl, int mapWidth, int mapHeight)
-
+Floor::Floor(KeyControl* keyControl, int mapWidth, int mapHeight, char buffer[][100]) // past 2D array. need past array points
+ 
 {
 	widthUnit = mapWidth;
 	heightUnit = mapHeight;
-	
+	bufferp = buffer;
 	controlKey = keyControl;
 	lightColour = 0.0f;
 	scale = 10;
@@ -41,8 +41,8 @@ void Floor::ReadFile()
 			// To prove that we have read in this line, print it backwards
 			// one character at a time
 			for (int i = 0; i < s.size(); i++) {
-				buffer[j][k] = s[i];
-				cout << buffer[j][k];
+				bufferp[j][k] = s[i];
+				cout << bufferp[j][k];
 				k++;
 			}
 			k = 0;
@@ -79,20 +79,20 @@ void Floor::DrawSingleWall(int x, int z, float wallHeight, float y) // firstly, 
 	//bottom : No bottom of wall is needed, as floor cover all bottom of room
 	
 	//Extend wall:
-	if ((x - 1 >= 0 ) && buffer[x - 1][z] != '0')
+	if ((x - 1 >= 0 ) && bufferp[x - 1][z] != '0')
 	{
 		DrawUnitWall(x, z, wallHeight, y, 0, 1);
 		
 	}
-	if ((x +1 < widthUnit) && buffer[x + 1][z] != '0')
+	if ((x +1 < widthUnit) && bufferp[x + 1][z] != '0')
 	{
 		DrawUnitWall(x, z, wallHeight, y, 2, 1);
 	}
-	if ((z + 1 < heightUnit) && buffer[x][z + 1] != '0')
+	if ((z + 1 < heightUnit) && bufferp[x][z + 1] != '0')
 	{
 		DrawUnitWall(x, z, wallHeight, y, 1, 2);
 	}
-	if ((z - 1 >= 0) && buffer[x][z - 1] != '0')
+	if ((z - 1 >= 0) && bufferp[x][z - 1] != '0')
 	{
 		DrawUnitWall(x, z, wallHeight, y, 1, 0);
 	}
@@ -226,7 +226,7 @@ void Floor::Draw()
 				DrawSingleFloor(x, z);
 				glEnd();
 				glBindTexture(GL_TEXTURE_2D, 0);
-				switch (buffer[x][z])
+				switch (bufferp[x][z])
 				{
 				case '0':
 				{
@@ -257,7 +257,7 @@ void Floor::Draw()
 					glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
 					glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
 					glBegin(GL_QUADS);
-					if (buffer[x][z - 1] != '0' && buffer[x][z + 1] != '0')
+					if (bufferp[x][z - 1] != '0' && bufferp[x][z + 1] != '0')
 					{
 						DrawSingleWindow(x, z, wallHeight / 2, true);
 					}
@@ -280,7 +280,7 @@ void Floor::Draw()
 
 					glBindTexture(GL_TEXTURE_2D, doorTexId);
 					glBegin(GL_QUADS);
-					if (buffer[x][z - 1] != '0' && buffer[x][z + 1] != '0')
+					if (bufferp[x][z - 1] != '0' && bufferp[x][z + 1] != '0')
 					{
 						DrawSingleWindow(x, z, wallHeight / 2, true);
 					}

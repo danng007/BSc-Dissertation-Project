@@ -40,7 +40,7 @@ private:
 	void ReadFile();
 	ifstream myfile;
 	static const int widthUnit = 8, heightUnit = 10; //widthUnit is height -.-
-	char buffer[widthUnit][heightUnit];
+	char buffer[100][100];
 	// Member variable to keep track of the position of the camera in world space
     float eye[3];
 	float preEye[3];

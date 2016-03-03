@@ -3,10 +3,12 @@
 
 //#include "MyScene.h"
 #define SIZE 50.0f
-MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight)
+MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight, char buffer[][100])
 {
+	bufferp = buffer;
 	newX = 100, newY = 100;
 	blockX = 100, blockY = 100;
+	optionBlockX = 100, optionBlockY = 100;
 	widthUnit = mapWidth;
 	heightUnit = mapHeight;
 	controlKey = keyControl;
@@ -22,9 +24,9 @@ MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight)
 	floorTexId = Scene::GetTexture("./floor.bmp");
 	ceilingTexId = Scene::GetTexture("./ceiling.bmp");
 	doorTexId = Scene::GetTexture("./door.bmp");
-	textures[0] = wallTexId;
-	textures[1] = windowTexId;
-	textures[2] = floorTexId;
+	textures[0] = floorTexId;
+	textures[1] = wallTexId;
+	textures[2] = windowTexId;
 	textures[3] = doorTexId;
 
 }
@@ -43,8 +45,8 @@ void MapChange::ReadFile()
 	if (myfile.good()) {
 		while (getline(myfile, s)) { 
 			for (int i = 0; i < s.size(); i++) {
-				buffer[j][k] = s[i];
-				cout << buffer[j][k];
+				bufferp[j][k] = s[i];
+				cout << bufferp[j][k];
 				k++;
 			}
 			k = 0; 
@@ -77,29 +79,29 @@ void MapChange::Draw()
 			for (int x = xPos; x < widthUnit + xPos; x++)
 			{
 
-				switch (buffer[x - xPos][z - zPos])
+				switch (bufferp[x - xPos][z - zPos])
 				{
 				case '0':
 				{
-					glBindTexture(GL_TEXTURE_2D, floorTexId);
+					glBindTexture(GL_TEXTURE_2D, textures[0]);
 					DrawUnitBlock(x, z);
 					break;
 				}
 				case '1':
 				{
-					glBindTexture(GL_TEXTURE_2D, wallTexId);
+					glBindTexture(GL_TEXTURE_2D, textures[1]);
 					DrawUnitBlock(x, z);
 					break;
 				}
 				case '2':
 				{
-					glBindTexture(GL_TEXTURE_2D, windowTexId);
+					glBindTexture(GL_TEXTURE_2D, textures[2]);
 					DrawUnitBlock(x, z);
 					break;
 				}
 				case '3':
 				{
-					glBindTexture(GL_TEXTURE_2D, doorTexId);
+					glBindTexture(GL_TEXTURE_2D, textures[3]);
 					DrawUnitBlock(x, z);
 					break;
 				}
@@ -136,26 +138,36 @@ void MapChange::Update(const double& deltatime)
 }
 void MapChange::HandleMouseClick(int button, int state, int x, int y)
 {
-	
-	if ( state == 1) // state == 1 means only reaction when mouse up
-	{ 
-		blockX = x / (int)colSize + 1;
-		blockY = heightUnit - y / (int)rowSize; // the whole file matrix rotate 90 degree in order to fits the screen more suitable, so the coordinate should be modified
-		if (!optionOpen && blockX >= 1 && blockX <= widthUnit - 2 && blockY >= 1 && blockY <= heightUnit - 2)
+	if (Scene::GetGameStart())
+	{
+
+
+		if (state == 1) // state == 1 means only reaction when mouse up
 		{
-			newX = blockX;
-			newY = blockY;
-			optionOpen = true;
-	
-		}
-		if (optionOpen)
-		{
+			blockX = x / (int)colSize + 1;
+			blockY = heightUnit - y / (int)rowSize; // the whole file matrix rotate 90 degree in order to fits the screen more suitable, so the coordinate should be modified
+			printf("bufferp[%d][%d] is %c \n", x, y, bufferp[blockX][blockY]);
+			if (optionOpen && x >= colSize && blockX <= widthUnit - 3 && y >= 7 * rowSize  && y <= 10 * rowSize)
+			{
+				int optionNum = 0;
+				optionNum = (x - colSize) / (8 * colSize / 4);
+				printf("option Choose %d\n", optionNum);
+				bufferp[newX][newY] = optionNum + 48;
+				optionOpen = false;
+			}
+			else
+			{
+				if (!optionOpen && blockX >= 1 && blockX <= widthUnit - 2 && blockY >= 1 && blockY <= heightUnit - 2)
+				{
+					printf("Outside option choose\n");
+					newX = blockX;
+					newY = blockY;
+					optionOpen = true;
+				}
+			}
 
 		}
-		printf("buffer[%d][%d] is %c \n", newX, newY, buffer[newX][newY]);
-		
 	}
-	
 }
 
 void MapChange::DrawUnitBlock(int x, int z)

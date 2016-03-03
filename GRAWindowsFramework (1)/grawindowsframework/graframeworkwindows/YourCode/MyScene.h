@@ -16,7 +16,7 @@ public:
 	void HandleMouseClick(int button, int state, int x, int y);
     MyScene( int argc, char **argv, const char *title, const int windowWidth, const int windowHeight );
 	// Destructor is called when the program ends
-    
+	char buffer[100][100];
 	~MyScene(){};
 	int mapWidth, mapHeight;
 	//Cube *c;

@@ -29,10 +29,12 @@ void MyScene::Init()
 	KeyControl *keyControl = new KeyControl();
 	AddObjectToScene(keyControl);
 
-	Floor *f = new Floor(keyControl, mapWidth, mapHeight);
+	Floor *f = new Floor(keyControl, mapWidth, mapHeight, buffer);
 	AddObjectToScene(f);
 
-	MapChange *mapChange = new MapChange(keyControl, mapWidth, mapHeight);
+	//char *[100]bufferp = buffer;
+
+	MapChange *mapChange = new MapChange(keyControl, mapWidth, mapHeight, buffer);
 	AddObjectToScene(mapChange);
 
 
@@ -51,7 +53,7 @@ void MyScene::ReadFile()
 	if (myfile.good()) {
 		while (getline(myfile, s)) {
 			for (int i = 0; i < s.size(); i++) {
-
+				buffer[j][k] = s[i];
 				k++;
 			}
 			mapHeight = k;
