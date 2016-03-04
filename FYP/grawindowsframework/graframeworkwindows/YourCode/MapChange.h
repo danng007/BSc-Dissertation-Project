@@ -13,7 +13,7 @@ public:
 	~MapChange(void);
 	void Draw();
 	void Update(const double& deltatime);
-	void ReadFile();
+	
 	void HandleMouseClick(int button, int state, int x, int y);
 private:
 

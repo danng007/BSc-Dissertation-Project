@@ -13,6 +13,7 @@ MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight, char b
 	heightUnit = mapHeight;
 	controlKey = keyControl;
 	generatorMap = mapGenerator;
+	
 	//ReadFile();
 	xPos = 0;
 	zPos = 0;
@@ -37,27 +38,7 @@ MapChange::~MapChange(void)
 	glDisable(GL_TEXTURE_2D);
 }
 
-void MapChange::ReadFile()
-{
-	int j = 0, k = 0;
-	int length;
-	myfile.open("./file.txt");      // open input file  
-	string s;
-	if (myfile.good()) {
-		while (getline(myfile, s)) { 
-			for (int i = 0; i < s.size(); i++) {
-				bufferp[j][k] = s[i];
-				cout << bufferp[j][k];
-				k++;
-			}
-			k = 0; 
-			j++;
-			cout << endl;
-		}
-	}
-	cout << "MapChange Read Finish\n";
-	myfile.close();
-}
+
 void MapChange::Draw()
 {
 	if (Scene::GetGameStart())
@@ -80,7 +61,7 @@ void MapChange::Draw()
 			for (int x = xPos; x < widthUnit + xPos; x++)
 			{
 
-				switch (   [x - xPos][z - zPos])
+				switch (generatorMap->getBufferChar(x - xPos, z - zPos))
 				{
 				case '0':
 				{
@@ -145,13 +126,13 @@ void MapChange::HandleMouseClick(int button, int state, int x, int y)
 		{
 			blockX = x / (int)colSize + 1;
 			blockY = heightUnit - y / (int)rowSize; // the whole file matrix rotate 90 degree in order to fits the screen more suitable, so the coordinate should be modified
-			printf("bufferp[%d][%d] is %c \n", x, y, bufferp[blockX][blockY]);
+			printf("bufferp[%d][%d] is %c \n", x, y, generatorMap->getBufferChar(blockX, blockY));
 			if (optionOpen && x >= colSize && blockX <= widthUnit - 3 && y >= 7 * rowSize  && y <= 10 * rowSize)
 			{
 				int optionNum = 0;
 				optionNum = (x - colSize) / (8 * colSize / 4);
 				printf("option Choose %d\n", optionNum);
-				bufferp[newX][newY] = optionNum + 48;
+				generatorMap->setBufferChar(newX, newY, optionNum + 48);
 				optionOpen = false;
 			}
 			else

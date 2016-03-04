@@ -32,7 +32,7 @@ void MyScene::Init()
 	MapGenerator *mapGenerator = new MapGenerator(keyControl, mapWidth, mapHeight);
 	AddObjectToScene(mapGenerator);
 
-	Floor *f = new Floor(keyControl, mapWidth, mapHeight, buffer);
+	Floor *f = new Floor(keyControl, mapWidth, mapHeight, buffer, mapGenerator);
 	AddObjectToScene(f);
 
 	//char *[100]bufferp = buffer;
