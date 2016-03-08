@@ -58,20 +58,20 @@ void Floor::DrawSingleWall(int x, int z, float wallHeight, float y) // firstly, 
 	//bottom : No bottom of wall is needed, as floor cover all bottom of room
 	
 	//Extend wall:
-	if ((x - 1 >= 0 ) && generatorMap->getBufferChar(x - 1, z) != '0')
+	if ((x - 1 >= 0 ) && generatorMap->GetBufferChar(x - 1, z) != '0')
 	{
 		DrawUnitWall(x, z, wallHeight, y, 0, 1);
 		
 	}
-	if ((x + 1 < widthUnit) && generatorMap->getBufferChar(x + 1, z) != '0')
+	if ((x + 1 < widthUnit) && generatorMap->GetBufferChar(x + 1, z) != '0')
 	{
 		DrawUnitWall(x, z, wallHeight, y, 2, 1);
 	}
-	if ((z + 1 < heightUnit) && generatorMap->getBufferChar(x, z + 1) != '0')
+	if ((z + 1 < heightUnit) && generatorMap->GetBufferChar(x, z + 1) != '0')
 	{
 		DrawUnitWall(x, z, wallHeight, y, 1, 2);
 	}
-	if ((z - 1 >= 0) && generatorMap->getBufferChar(x, z - 1) != '0')
+	if ((z - 1 >= 0) && generatorMap->GetBufferChar(x, z - 1) != '0')
 	{
 		DrawUnitWall(x, z, wallHeight, y, 1, 0);
 	}
@@ -205,7 +205,7 @@ void Floor::Draw()
 				DrawSingleFloor(x, z);
 				glEnd();
 				glBindTexture(GL_TEXTURE_2D, 0);
-				switch (generatorMap->getBufferChar(x, z))
+				switch (generatorMap->GetBufferChar(x, z))
 				{
 				case '0':
 				{
@@ -236,7 +236,7 @@ void Floor::Draw()
 					glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
 					glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
 					glBegin(GL_QUADS);
-					if (generatorMap->getBufferChar(x, z - 1) != '0' &&generatorMap->getBufferChar(x, z + 1) != '0')
+					if (generatorMap->GetBufferChar(x, z - 1) != '0' &&generatorMap->GetBufferChar(x, z + 1) != '0')
 					{
 						DrawSingleWindow(x, z, wallHeight / 2, true);
 					}
@@ -259,7 +259,7 @@ void Floor::Draw()
 
 					glBindTexture(GL_TEXTURE_2D, doorTexId);
 					glBegin(GL_QUADS);
-					if (generatorMap->getBufferChar(x, z - 1) != '0' && generatorMap->getBufferChar(x, z + 1) != '0')
+					if (generatorMap->GetBufferChar(x, z - 1) != '0' && generatorMap->GetBufferChar(x, z + 1) != '0')
 					{
 						DrawSingleWindow(x, z, wallHeight / 2, true);
 					}

@@ -16,9 +16,11 @@ public:
 	
 	void HandleMouseClick(int button, int state, int x, int y);
 private:
-
+	void DrawForSizeOne();
+	void DrawForSizeTwo();
+	void DrawForSizeThree();
 	//char (*bufferp)[100];
-	
+	int currentFile = 1;
 	int widthUnit, heightUnit; //widthUnit is height -.-
 	int xPos, zPos;
 	int floorTexId, windowTexId, wallTexId, ceilingTexId, doorTexId;

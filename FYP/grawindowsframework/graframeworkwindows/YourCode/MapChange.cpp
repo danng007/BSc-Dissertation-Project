@@ -9,16 +9,15 @@ MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight, char b
 	newX = 100, newY = 100;
 	blockX = 100, blockY = 100;
 	optionBlockX = 100, optionBlockY = 100;
-	widthUnit = mapWidth;
-	heightUnit = mapHeight;
+	
 	controlKey = keyControl;
 	generatorMap = mapGenerator;
-	
+	widthUnit = generatorMap->GetMapWidth();
+	heightUnit = generatorMap->GetMapHeight();
 	//ReadFile();
 	xPos = 0;
 	zPos = 0;
-	colSize = Scene::GetWindowWidth() / (widthUnit - 2); // heng Full
-	rowSize = Scene::GetWindowHeight() / (heightUnit ); // shu  Give s size blank blocks at top
+	
 	printf("colsize = %f,  rowSize = %f \n", colSize, rowSize);
 	glEnable(GL_TEXTURE_2D);
 	wallTexId = Scene::GetTexture("./wallPaper.bmp");
@@ -53,56 +52,54 @@ void MapChange::Draw()
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glLoadIdentity();
-		glTranslatef(-480, -400, 0);
+		currentFile = generatorMap->GetCurrentFileNumber();
+		widthUnit = generatorMap->GetMapWidth();
+		heightUnit = generatorMap->GetMapHeight();
 
 		
-		for (int z = zPos ; z < heightUnit + zPos; z++) // add modify value to X and Y, move 2D image to the middle of window
+
+		switch (currentFile)
 		{
-			for (int x = xPos; x < widthUnit + xPos; x++)
-			{
-
-				switch (generatorMap->getBufferChar(x - xPos, z - zPos))
-				{
-				case '0':
-				{
-					glBindTexture(GL_TEXTURE_2D, textures[0]);
-					DrawUnitBlock(x, z);
-					break;
-				}
-				case '1':
-				{
-					glBindTexture(GL_TEXTURE_2D, textures[1]);
-					DrawUnitBlock(x, z);
-					break;
-				}
-				case '2':
-				{
-					glBindTexture(GL_TEXTURE_2D, textures[2]);
-					DrawUnitBlock(x, z);
-					break;
-				}
-				case '3':
-				{
-					glBindTexture(GL_TEXTURE_2D, textures[3]);
-					DrawUnitBlock(x, z);
-					break;
-				}
-				default:
-					break;
-				}
-			}
-		}
-		
+		case 1:
 			
-		if (optionOpen)
-		{
-			glBindTexture(GL_TEXTURE_2D, ceilingTexId);
-			DrawUnitBlock(newX, newY);
-			DrawOptionPage();
+			DrawForSizeOne();
+			break;
+		case 2:
+		
+			DrawForSizeTwo();
+			break;
+		case 3:
+			DrawForSizeThree();
+			break;
+		default:
+			break;
 		}
 
 		glPopMatrix();
-
+		
+		/*
+		Draw the size change function button,
+		First quads is file1, second is file2, third is file3
+		*/
+		glPushMatrix();
+		glTranslatef(-400.0f, 233.0f, 0.0f);
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glBegin(GL_QUADS);
+		glVertex3f(0.0f, 0.0f, -10.0f);
+		glVertex3f(150.0f, 0.0f, -10.0f);
+		glVertex3f(150.0f, 136.0f, -10.0f);
+		glVertex3f(0.0f, 136.0f, -10.0f);
+		glEnd();
+		glColor3f(0.0f, 1.0f, 1.0f);
+		glBegin(GL_QUADS);
+		glVertex3f(150.0f, 0.0f, -10.0f);
+		glVertex3f(300.0f, 0.0f, -10.0f);
+		glVertex3f(300.0f, 136.0f, -10.0f);
+		glVertex3f(150.0f, 136.0f, -10.0f);
+		glEnd();
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glPopMatrix();
+		
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
 		glEnable(GL_LIGHTING);
@@ -121,32 +118,32 @@ void MapChange::HandleMouseClick(int button, int state, int x, int y)
 	if (Scene::GetGameStart())
 	{
 
-
-		if (state == 1) // state == 1 means only reaction when mouse up
+		if (state == 1 ) // state == 1 means only reaction when mouse up fileNum == 1 means the size is9 * 8
 		{
-			blockX = x / (int)colSize + 1;
-			blockY = heightUnit - y / (int)rowSize; // the whole file matrix rotate 90 degree in order to fits the screen more suitable, so the coordinate should be modified
-			printf("bufferp[%d][%d] is %c \n", x, y, generatorMap->getBufferChar(blockX, blockY));
-			if (optionOpen && x >= colSize && blockX <= widthUnit - 3 && y >= 7 * rowSize  && y <= 10 * rowSize)
-			{
-				int optionNum = 0;
-				optionNum = (x - colSize) / (8 * colSize / 4);
-				printf("option Choose %d\n", optionNum);
-				generatorMap->setBufferChar(newX, newY, optionNum + 48);
-				optionOpen = false;
-			}
-			else
-			{
-				if (!optionOpen && blockX >= 1 && blockX <= widthUnit - 2 && blockY >= 1 && blockY <= heightUnit - 2)
+			
+				blockX = x / (int)colSize + 1;
+				blockY = heightUnit - y / (int)rowSize; // the whole file matrix rotate 90 degree in order to fits the screen more suitable, so the coordinate should be modified
+				printf("bufferp[%d][%d] is %c \n", x, y, generatorMap->GetBufferChar(blockX, blockY));
+				if (optionOpen && x >= colSize && blockX <= widthUnit - 3 && y >= 7 * rowSize  && y <= 10 * rowSize)
 				{
-					printf("Outside option choose\n");
-					newX = blockX;
-					newY = blockY;
-					optionOpen = true;
+					int optionNum = 0;
+					optionNum = (x - colSize) / (8 * colSize / 4);
+					printf("option Choose %d\n", optionNum);
+					generatorMap->SetBufferChar(newX, newY, optionNum + 48);
+					optionOpen = false;
 				}
-			}
-
+				else
+				{
+					if (!optionOpen && blockX >= 1 && blockX <= widthUnit - 2 && blockY >= 1 && blockY <= heightUnit - 2)
+					{
+						printf("Outside option choose\n");
+						newX = blockX;
+						newY = blockY;
+						optionOpen = true;
+					}
+				}
 		}
+		
 	}
 }
 
@@ -164,6 +161,158 @@ void MapChange::DrawUnitBlock(int x, int z)
 	glVertex3f(x* colSize, (z + 1)* rowSize, -10.0f);
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
+}
+void MapChange::DrawForSizeOne()
+{
+	
+
+	colSize = Scene::GetWindowWidth() / 10; // heng Full
+	rowSize = Scene::GetWindowHeight() / 13; // shu  Give s size blank blocks at top
+	glTranslatef(-480, -403, 0);
+	
+	for (int z = zPos; z < heightUnit + zPos; z++) // add modify value to X and Y, move 2D image to the middle of window
+	{
+		for (int x = xPos; x < widthUnit + xPos; x++)
+		{
+
+			switch (generatorMap->GetBufferChar(x - xPos, z - zPos))
+			{
+			case '0':
+			{
+				glBindTexture(GL_TEXTURE_2D, textures[0]);
+				DrawUnitBlock(x, z);
+				break;
+			}
+			case '1':
+			{
+				glBindTexture(GL_TEXTURE_2D, textures[1]);
+				DrawUnitBlock(x, z);
+				break;
+			}
+			case '2':
+			{
+				glBindTexture(GL_TEXTURE_2D, textures[2]);
+				DrawUnitBlock(x, z);
+				break;
+			}
+			case '3':
+			{
+				glBindTexture(GL_TEXTURE_2D, textures[3]);
+				DrawUnitBlock(x, z);
+				break;
+			}
+			
+			default:
+				break;
+			}
+		}
+	}
+	if (optionOpen)
+	{
+		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
+		DrawUnitBlock(newX, newY);
+		DrawOptionPage();
+	}
+}
+
+void MapChange::DrawForSizeTwo()
+{
+
+	colSize = Scene::GetWindowWidth() / 7; // heng Full
+	rowSize = Scene::GetWindowHeight() / 10; // shu  Give s size blank blocks at top
+	glTranslatef(-513, -420, 0);
+	for (int z = zPos; z < heightUnit + zPos; z++) // add modify value to X and Y, move 2D image to the middle of window
+	{
+		for (int x = xPos; x < widthUnit + xPos; x++)
+		{
+
+			switch (generatorMap->GetBufferChar(x - xPos, z - zPos))
+			{
+			case '0':
+			{
+				glBindTexture(GL_TEXTURE_2D, textures[0]);
+				DrawUnitBlock(x, z);
+				break;
+			}
+			case '1':
+			{
+				glBindTexture(GL_TEXTURE_2D, textures[1]);
+				DrawUnitBlock(x, z);
+				break;
+			}
+			case '2':
+			{
+				glBindTexture(GL_TEXTURE_2D, textures[2]);
+				DrawUnitBlock(x, z);
+				break;
+			}
+			case '3':
+			{
+				glBindTexture(GL_TEXTURE_2D, textures[3]);
+				DrawUnitBlock(x, z);
+				break;
+			}
+			
+			default:
+				break;
+			}
+		}
+	}
+	if (optionOpen)
+	{
+		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
+		DrawUnitBlock(newX, newY);
+		DrawOptionPage();
+	}
+}
+void MapChange::DrawForSizeThree()
+{
+
+	colSize = Scene::GetWindowWidth() / (widthUnit - 2); // heng Full
+	rowSize = Scene::GetWindowHeight() / (heightUnit); // shu  Give s size blank blocks at top
+	glTranslatef(-480, -400, 0);
+	for (int z = zPos; z < heightUnit + zPos; z++) // add modify value to X and Y, move 2D image to the middle of window
+	{
+		for (int x = xPos; x < widthUnit + xPos; x++)
+		{
+
+			switch (generatorMap->GetBufferChar(x - xPos, z - zPos))
+			{
+			case '0':
+			{
+				glBindTexture(GL_TEXTURE_2D, textures[0]);
+				DrawUnitBlock(x, z);
+				break;
+			}
+			case '1':
+			{
+				glBindTexture(GL_TEXTURE_2D, textures[1]);
+				DrawUnitBlock(x, z);
+				break;
+			}
+			case '2':
+			{
+				glBindTexture(GL_TEXTURE_2D, textures[2]);
+				DrawUnitBlock(x, z);
+				break;
+			}
+			case '3':
+			{
+				glBindTexture(GL_TEXTURE_2D, textures[3]);
+				DrawUnitBlock(x, z);
+				break;
+			}
+			default:
+				break;
+			}
+		}
+	}
+	if (optionOpen)
+	{
+		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
+		DrawUnitBlock(newX, newY);
+		DrawOptionPage();
+	}
 }
 
 void MapChange::DrawOptionPage()
