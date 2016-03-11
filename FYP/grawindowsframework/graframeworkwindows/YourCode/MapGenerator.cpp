@@ -58,19 +58,24 @@ void MapGenerator::ReadFile()
 
 void MapGenerator::HandleMouseClick(int button, int state, int x, int y)
 {
-	if (Scene::GetGameStart() && x <= 150 && y <= 136 && state == 1 && currentFile != 1)
-	{
+	if (Scene::GetGameStart() && x <= 150 && y <= 120 && state == 1 && currentFile != 1)
+	{ 
 		fileString = "./file.txt";
 		currentFile = 1;
 		ReadFile();
 	}
-	if (Scene::GetGameStart() && x > 150 && x <= 300 && y <= 136 && state == 1 && currentFile != 2)
+	if (Scene::GetGameStart() && x > 150 && x <= 300 && y <= 100 && state == 1 && currentFile != 2)
 	{
 		fileString = "./file2.txt";
 		currentFile = 2;
 		ReadFile();
 	}
-
+	if (Scene::GetGameStart() && x > 300 && x <= 450 && y <= 100 && state == 1 && currentFile != 3)
+	{
+		fileString = "./file3.txt";
+		currentFile = 3;
+		ReadFile();
+	}
 }
 
 char MapGenerator::GetBufferChar(int x, int y)

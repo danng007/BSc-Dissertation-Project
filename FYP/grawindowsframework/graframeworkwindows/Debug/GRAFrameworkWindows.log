@@ -1,10 +1,12 @@
-﻿Build started 07/03/2016 17:01:33.
-     1>Project "Z:\FinalYearProject-master\FYP\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2016/3/11 8:18:26.
+     1>Project "C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"Z:\FinalYearProject-master\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/include/" /I"Z:\FinalYearProject-master\FYP\grawindowsframework\packages\freeglut.2.8.1.15\build\native\../..//build/native/include/" /I"Z:\FinalYearProject-master\FYP\grawindowsframework\packages\glew.1.9.0.1\build\native\../..//build/native/include/" /I.\YourCode /I.\Framework /I..\freeglut\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D HAS_FREEGLUT /D HAS_GLEW /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Framework\StaticEngine.cpp
-         StaticEngine.cpp
+         E:\VS\VC\bin\CL.exe /c /IC:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/include/ /IC:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\freeglut.2.8.1.15\build\native\../..//build/native/include/ /IC:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\glew.1.9.0.1\build\native\../..//build/native/include/ /I.\YourCode /I.\Framework /I..\freeglut\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D HAS_FREEGLUT /D HAS_GLEW /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt YourCode\Floor.cpp
+         Floor.cpp
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\floor.cpp(299): warning C4244: '+=' : conversion from 'const double' to 'float', possible loss of data
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\floor.cpp(303): warning C4244: '-=' : conversion from 'const double' to 'float', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Z:\FinalYearProject-master\FYP\grawindowsframework\Debug\GRAFrameworkWindows.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\freeglut\lib "Z:\FinalYearProject-master\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\glew32.lib" "Z:\FinalYearProject-master\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\glfw3dll.lib" "Z:\FinalYearProject-master\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\freeglut.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"Z:\FinalYearProject-master\FYP\grawindowsframework\Debug\GRAFrameworkWindows.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Z:\FinalYearProject-master\FYP\grawindowsframework\Debug\GRAFrameworkWindows.lib" /MACHINE:X86 Debug\Camera.obj
+         E:\VS\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\Debug\GRAFrameworkWindows.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\freeglut\lib C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\glew32.lib C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\glfw3dll.lib C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\Debug\GRAFrameworkWindows.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\Debug\GRAFrameworkWindows.lib" /MACHINE:X86 Debug\Camera.obj
          Debug\Main.obj
          Debug\Scene.obj
          Debug\StaticEngine.obj
@@ -18,9 +20,9 @@
          Debug\MapGenerator.obj
          Debug\MyScene.obj
          Debug\Triangle.obj
-         GRAFrameworkWindows.vcxproj -> Z:\FinalYearProject-master\FYP\grawindowsframework\Debug\GRAFrameworkWindows.exe
-     1>Done Building Project "Z:\FinalYearProject-master\FYP\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" (Build target(s)).
+         GRAFrameworkWindows.vcxproj -> C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\Debug\GRAFrameworkWindows.exe
+     1>Done Building Project "C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.93
+Time Elapsed 00:00:01.64

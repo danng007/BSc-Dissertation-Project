@@ -7,8 +7,8 @@ Floor::Floor(KeyControl* keyControl, int mapWidth, int mapHeight, char buffer[][
  
 {
 	generatorMap = mapGenerator;
-	widthUnit = mapWidth;
-	heightUnit = mapHeight;
+	widthUnit = mapGenerator->GetMapWidth();
+	heightUnit = mapGenerator->GetMapHeight();
 	//bufferp = buffer;
 	controlKey = keyControl;
 	lightColour = 0.0f;
@@ -191,6 +191,9 @@ void Floor::Draw()
 	//glBindTexture should at the outside of glBegin and glEnd;
 	if (!Scene::GetGameStart()) //detect the game state, if game start then begin drawing
 	{
+		widthUnit = generatorMap->GetMapWidth();
+		heightUnit = generatorMap->GetMapHeight();
+
 		glPushMatrix();
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glDisable(GL_CULL_FACE);
@@ -293,11 +296,11 @@ void Floor::Update(const double& deltatime)
 
 	if (lightChange)
 	{
-		lightColour += 0.005f;
+		lightColour += 0.1f * deltatime;
 	}
 	else
 	{
-		lightColour -= 0.005f;
+		lightColour -= 0.1f * deltatime;
 	}
 	if (lightColour >= 1.0f )
 	{

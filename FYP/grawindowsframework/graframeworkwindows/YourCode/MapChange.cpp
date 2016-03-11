@@ -17,7 +17,8 @@ MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight, char b
 	//ReadFile();
 	xPos = 0;
 	zPos = 0;
-	
+	width = Scene::GetWindowWidth();
+	height = Scene::GetWindowHeight();
 	printf("colsize = %f,  rowSize = %f \n", colSize, rowSize);
 	glEnable(GL_TEXTURE_2D);
 	wallTexId = Scene::GetTexture("./wallPaper.bmp");
@@ -46,8 +47,7 @@ void MapChange::Draw()
 		glMatrixMode(GL_PROJECTION);
 		glPushMatrix();
 		glLoadIdentity();
-		int width = Scene::GetWindowWidth();
-		int height = Scene::GetWindowHeight();
+		
 		glOrtho(-width / 2, width / 2, -height / 2, height / 2, 1.0, 1000.0); //change to image view position
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
@@ -75,31 +75,22 @@ void MapChange::Draw()
 			break;
 		}
 
-		glPopMatrix();
+		
 		
 		/*
 		Draw the size change function button,
 		First quads is file1, second is file2, third is file3
 		*/
-		glPushMatrix();
-		glTranslatef(-400.0f, 233.0f, 0.0f);
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glBegin(GL_QUADS);
-		glVertex3f(0.0f, 0.0f, -10.0f);
-		glVertex3f(150.0f, 0.0f, -10.0f);
-		glVertex3f(150.0f, 136.0f, -10.0f);
-		glVertex3f(0.0f, 136.0f, -10.0f);
-		glEnd();
-		glColor3f(0.0f, 1.0f, 1.0f);
-		glBegin(GL_QUADS);
-		glVertex3f(150.0f, 0.0f, -10.0f);
-		glVertex3f(300.0f, 0.0f, -10.0f);
-		glVertex3f(300.0f, 136.0f, -10.0f);
-		glVertex3f(150.0f, 136.0f, -10.0f);
-		glEnd();
-		glColor3f(1.0f, 1.0f, 1.0f);
-		glPopMatrix();
 		
+		glPopMatrix();
+		glPushMatrix();
+		if (optionOpen)
+		{
+			glTranslatef(-480.0f, -420.0f, 0.0f);
+		
+			DrawOptionPage();
+		}
+		glPopMatrix();
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
 		glEnable(GL_LIGHTING);
@@ -124,10 +115,11 @@ void MapChange::HandleMouseClick(int button, int state, int x, int y)
 				blockX = x / (int)colSize + 1;
 				blockY = heightUnit - y / (int)rowSize; // the whole file matrix rotate 90 degree in order to fits the screen more suitable, so the coordinate should be modified
 				printf("bufferp[%d][%d] is %c \n", x, y, generatorMap->GetBufferChar(blockX, blockY));
-				if (optionOpen && x >= colSize && blockX <= widthUnit - 3 && y >= 7 * rowSize  && y <= 10 * rowSize)
+				if (optionOpen && x >= 80 && blockX <= widthUnit - 3 && y >= 7 * 53  && y <= 10 * 53)
 				{
+				
 					int optionNum = 0;
-					optionNum = (x - colSize) / (8 * colSize / 4);
+					optionNum = (x - 80) / (8 * 80 / 4);
 					printf("option Choose %d\n", optionNum);
 					generatorMap->SetBufferChar(newX, newY, optionNum + 48);
 					optionOpen = false;
@@ -211,8 +203,39 @@ void MapChange::DrawForSizeOne()
 	{
 		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
 		DrawUnitBlock(newX, newY);
-		DrawOptionPage();
 	}
+
+	glTranslatef(80.0f, 635.0f, 0.0f);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glBegin(GL_QUADS); // Full horizontal Quads
+	glVertex3f(0.0f, 0.0f, -10.0f);
+	glVertex3f(800.0f, 0.0f, -10.0f);
+	glVertex3f(800.0f, 20.0f, -10.0f);
+	glVertex3f(0.0f, 20.0f, -10.0f);
+	glEnd();
+	glTranslatef(0.0f, 20.0f, 0.0f);
+	glColor3f(1.0f, 0.0f, 1.0f);
+	glBegin(GL_QUADS); // first file
+	glVertex3f(0.0f, 0.0f, -10.0f);
+	glVertex3f(150.0f, 0.0f, -10.0f);
+	glVertex3f(150.0f, 100.0f, -10.0f);
+	glVertex3f(0.0f, 100.0f, -10.0f);
+	glEnd();
+	glColor3f(0.0f, 1.0f, 1.0f);
+	glBegin(GL_QUADS); //second file
+	glVertex3f(150.0f, 0.0f, -10.0f);
+	glVertex3f(300.0f, 0.0f, -10.0f);
+	glVertex3f(300.0f, 100.0f, -10.0f);
+	glVertex3f(150.0f, 100.0f, -10.0f);
+	glEnd();
+	glColor3f(0.0f, 0.0f, 1.0f);
+	glBegin(GL_QUADS); //third file
+	glVertex3f(300.0f, 0.0f, -10.0f);
+	glVertex3f(450.0f, 0.0f, -10.0f);
+	glVertex3f(450.0f, 100.0f, -10.0f);
+	glVertex3f(300.0f, 100.0f, -10.0f);
+	glEnd();
+	glColor3f(1.0f, 1.0f, 1.0f);
 }
 
 void MapChange::DrawForSizeTwo()
@@ -262,8 +285,40 @@ void MapChange::DrawForSizeTwo()
 	{
 		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
 		DrawUnitBlock(newX, newY);
-		DrawOptionPage();
 	}
+
+	glTranslatef(113.0f, 630.0f, 0.0f);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glBegin(GL_QUADS);
+	glVertex3f(0.0f, 0.0f, -10.0f);
+	glVertex3f(800.0f, 0.0f, -10.0f);
+	glVertex3f(800.0f, 20.0f, -10.0f);
+	glVertex3f(0.0f, 20.0f, -10.0f);
+	glEnd();
+	glTranslatef(0.0f, 20.0f, 0.0f);
+	glColor3f(1.0f, 0.0f, 1.0f);
+	glBegin(GL_QUADS);
+	glVertex3f(0.0f, 0.0f, -10.0f);
+	glVertex3f(150.0f, 0.0f, -10.0f);
+	glVertex3f(150.0f, 150.0f, -10.0f);
+	glVertex3f(0.0f, 150.0f, -10.0f);
+	glEnd();
+	glColor3f(0.0f, 1.0f, 1.0f);
+	glBegin(GL_QUADS);
+	glVertex3f(150.0f, 0.0f, -10.0f);
+	glVertex3f(300.0f, 0.0f, -10.0f);
+	glVertex3f(300.0f, 150.0f, -10.0f);
+	glVertex3f(150.0f, 150.0f, -10.0f);
+	glEnd();
+	glColor3f(0.0f, 0.0f, 1.0f);
+	glBegin(GL_QUADS);
+	glVertex3f(300.0f, 0.0f, -10.0f);
+	glVertex3f(450.0f, 0.0f, -10.0f);
+	glVertex3f(450.0f, 150.0f, -10.0f);
+	glVertex3f(300.0f, 150.0f, -10.0f);
+	glEnd();
+	glColor3f(1.0f, 1.0f, 1.0f);
+	
 }
 void MapChange::DrawForSizeThree()
 {
@@ -311,8 +366,39 @@ void MapChange::DrawForSizeThree()
 	{
 		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
 		DrawUnitBlock(newX, newY);
-		DrawOptionPage();
 	}
+
+	glTranslatef(80.0f, 645.0f, 0.0f);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glBegin(GL_QUADS);
+	glVertex3f(0.0f, 0.0f, -10.0f);
+	glVertex3f(800.0f, 0.0f, -10.0f);
+	glVertex3f(800.0f, 20.0f, -10.0f);
+	glVertex3f(0.0f, 20.0f, -10.0f);
+	glEnd();
+	glTranslatef(0.0f, 20.0f, 0.0f);
+	glColor3f(1.0f, 0.0f, 1.0f);
+	glBegin(GL_QUADS);
+	glVertex3f(0.0f, 0.0f, -10.0f);
+	glVertex3f(150.0f, 0.0f, -10.0f);
+	glVertex3f(150.0f, 90.0f, -10.0f);
+	glVertex3f(0.0f, 90.0f, -10.0f);
+	glEnd();
+	glColor3f(0.0f, 1.0f, 1.0f);
+	glBegin(GL_QUADS);
+	glVertex3f(150.0f, 0.0f, -10.0f);
+	glVertex3f(300.0f, 0.0f, -10.0f);
+	glVertex3f(300.0f, 90.0f, -10.0f);
+	glVertex3f(150.0f, 90.0f, -10.0f);
+	glEnd();
+	glColor3f(0.0f, 0.0f, 1.0f);
+	glBegin(GL_QUADS);
+	glVertex3f(300.0f, 0.0f, -10.0f);
+	glVertex3f(450.0f, 0.0f, -10.0f);
+	glVertex3f(450.0f, 90.0f, -10.0f);
+	glVertex3f(300.0f, 90.0f, -10.0f);
+	glEnd();
+	glColor3f(1.0f, 1.0f, 1.0f);
 }
 
 void MapChange::DrawOptionPage()
@@ -323,13 +409,13 @@ void MapChange::DrawOptionPage()
 	glBegin(GL_QUADS);
 	glNormal3f(0.0f, 1.0f, 0.0f);
 	glTexCoord2d(0.0f, 0.0f);
-	glVertex3f(x * colSize, z *rowSize, -10.0f);
+	glVertex3f(150, 250, -10.0f);
 	glTexCoord2d(1.0f, 0.0f);
-	glVertex3f((x + 8) * colSize, z * rowSize, -10.0f);
+	glVertex3f(810, 250, -10.0f);
 	glTexCoord2d(1.0f, 1.0f);
-	glVertex3f((x + 8) * colSize, (z + 3) *rowSize, -10.0f);
+	glVertex3f(810, 400, -10.0f);
 	glTexCoord2d(0.0f, 1.0f);
-	glVertex3f(x * colSize, (z + 3)* rowSize, -10.0f);
+	glVertex3f(150, 400, -10.0f);
 	glEnd(); //bottom page of option page
 	
 	for (int i = 0; i < 4; i++)
@@ -338,13 +424,13 @@ void MapChange::DrawOptionPage()
 		glBegin(GL_QUADS);
 		glNormal3f(0.0f, 1.0f, 0.0f);
 		glTexCoord2d(0.0f, 0.0f);
-		glVertex3f(x * colSize + 3, z *rowSize + 3, -10.0f);
+		glVertex3f(x * 80 + 3, 260, -10.0f);
 		glTexCoord2d(1.0f, 0.0f);
-		glVertex3f((x + 2) * colSize - 3, z * rowSize + 3, -10.0f);
+		glVertex3f((x + 2) * 80 - 3, 260, -10.0f);
 		glTexCoord2d(1.0f, 1.0f);
-		glVertex3f((x + 2) * colSize - 3, (z + 3) *rowSize - 3, -10.0f);
+		glVertex3f((x + 2) * 80 - 3, 390, -10.0f);
 		glTexCoord2d(0.0f, 1.0f);
-		glVertex3f(x * colSize + 3, (z + 3)* rowSize - 3, -10.0f);
+		glVertex3f(x * 80 + 3, 390, -10.0f);
 		glEnd();
 		x += 2; // draw each option, reduce a little each size to make it look better.
 	}

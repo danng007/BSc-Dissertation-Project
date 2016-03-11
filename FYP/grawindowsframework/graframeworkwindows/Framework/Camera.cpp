@@ -132,7 +132,7 @@ void Camera::Update( const double& deltaTime )
     // 'jittery' feel to the camera.
     
     // variable to control how fast the camera moves in any one direction
-    float speed = 1.0f;
+    float speed = 50.0f * deltaTime;
     
     if( aKey )
     {

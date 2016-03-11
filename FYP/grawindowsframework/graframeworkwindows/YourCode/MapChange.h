@@ -16,6 +16,8 @@ public:
 	
 	void HandleMouseClick(int button, int state, int x, int y);
 private:
+	int width = 0;
+	int height = 0;
 	void DrawForSizeOne();
 	void DrawForSizeTwo();
 	void DrawForSizeThree();
