@@ -87,8 +87,8 @@ void MapChange::Draw()
 		if (optionOpen)
 		{
 			glTranslatef(-480.0f, -420.0f, 0.0f);
+			//printf("MapChange Draw drawOptionPage\n");
 		
-			DrawOptionPage();
 		}
 		glPopMatrix();
 		glMatrixMode(GL_PROJECTION);
@@ -113,9 +113,17 @@ void MapChange::HandleMouseClick(int button, int state, int x, int y)
 		{
 			
 				blockX = x / (int)colSize + 1;
-				blockY = heightUnit - y / (int)rowSize; // the whole file matrix rotate 90 degree in order to fits the screen more suitable, so the coordinate should be modified
-				printf("bufferp[%d][%d] is %c \n", x, y, generatorMap->GetBufferChar(blockX, blockY));
-				if (optionOpen && x >= 80 && blockX <= widthUnit - 3 && y >= 7 * 53  && y <= 10 * 53)
+				if (generatorMap->GetCurrentFileNumber() == 1 || generatorMap->GetCurrentFileNumber() == 3)
+				{
+					blockY = heightUnit - (y - 10) / (int)rowSize; //the file 1 and file 3 have 10 pixels' calculation problem. here is dirty solution.
+				}
+				else
+				{
+					blockY = heightUnit - y / (int)rowSize; // the whole file matrix rotate 90 degree in order to fits the screen more suitable, so the coordinate should be modified
+				}
+				
+				printf(" rowsize = %d, blockY = %d, bufferp[%d][%d] is %c \n", (int)rowSize,blockY,x, y, generatorMap->GetBufferChar(blockX, blockY));
+				if (optionOpen && x >= 80 && x <= 850 && y >= 360  && y <= 510)
 				{
 				
 					int optionNum = 0;
@@ -203,6 +211,9 @@ void MapChange::DrawForSizeOne()
 	{
 		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
 		DrawUnitBlock(newX, newY);
+		glTranslatef(0.0f, 3.0f, 0.0f);
+		DrawOptionPage();
+		glTranslatef(0.0f, -3.0f, 0.0f);
 	}
 
 	glTranslatef(80.0f, 635.0f, 0.0f);
@@ -285,6 +296,9 @@ void MapChange::DrawForSizeTwo()
 	{
 		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
 		DrawUnitBlock(newX, newY);
+		glTranslatef(33.0f, 20.0f, 0.0f);
+		DrawOptionPage();
+		glTranslatef(-33.0f, -20.0f, 0.0f);
 	}
 
 	glTranslatef(113.0f, 630.0f, 0.0f);
@@ -323,9 +337,9 @@ void MapChange::DrawForSizeTwo()
 void MapChange::DrawForSizeThree()
 {
 
-	colSize = Scene::GetWindowWidth() / (widthUnit - 2); // heng Full
-	rowSize = Scene::GetWindowHeight() / (heightUnit); // shu  Give s size blank blocks at top
-	glTranslatef(-480, -400, 0);
+	colSize = Scene::GetWindowWidth() / 10; // heng Full
+	rowSize = Scene::GetWindowHeight() / 16; // shu  Give s size blank blocks at top
+	glTranslatef(-480, -393, 0);
 	for (int z = zPos; z < heightUnit + zPos; z++) // add modify value to X and Y, move 2D image to the middle of window
 	{
 		for (int x = xPos; x < widthUnit + xPos; x++)
@@ -366,6 +380,7 @@ void MapChange::DrawForSizeThree()
 	{
 		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
 		DrawUnitBlock(newX, newY);
+		DrawOptionPage();
 	}
 
 	glTranslatef(80.0f, 645.0f, 0.0f);
