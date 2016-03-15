@@ -1,18 +1,10 @@
-﻿Build started 11/03/2016 15:16:13.
+﻿Build started 15/03/2016 14:08:58.
      1>Project "Z:\FinalYearProject-master\FYP\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"Z:\FinalYearProject-master\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/include/" /I"Z:\FinalYearProject-master\FYP\grawindowsframework\packages\freeglut.2.8.1.15\build\native\../..//build/native/include/" /I"Z:\FinalYearProject-master\FYP\grawindowsframework\packages\glew.1.9.0.1\build\native\../..//build/native/include/" /I.\YourCode /I.\Framework /I..\freeglut\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D HAS_FREEGLUT /D HAS_GLEW /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt YourCode\MapChange.cpp
-         MapChange.cpp
-     1>z:\finalyearproject-master\fyp\grawindowsframework\graframeworkwindows\yourcode\mapchange.cpp(169): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>z:\finalyearproject-master\fyp\grawindowsframework\graframeworkwindows\yourcode\mapchange.cpp(170): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>z:\finalyearproject-master\fyp\grawindowsframework\graframeworkwindows\yourcode\mapchange.cpp(255): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>z:\finalyearproject-master\fyp\grawindowsframework\graframeworkwindows\yourcode\mapchange.cpp(256): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>z:\finalyearproject-master\fyp\grawindowsframework\graframeworkwindows\yourcode\mapchange.cpp(340): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>z:\finalyearproject-master\fyp\grawindowsframework\graframeworkwindows\yourcode\mapchange.cpp(341): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
-     1>z:\finalyearproject-master\fyp\grawindowsframework\graframeworkwindows\yourcode\mapchange.cpp(442): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>z:\finalyearproject-master\fyp\grawindowsframework\graframeworkwindows\yourcode\mapchange.cpp(444): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>z:\finalyearproject-master\fyp\grawindowsframework\graframeworkwindows\yourcode\mapchange.cpp(446): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
-     1>z:\finalyearproject-master\fyp\grawindowsframework\graframeworkwindows\yourcode\mapchange.cpp(448): warning C4244: 'argument' : conversion from 'int' to 'GLfloat', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"Z:\FinalYearProject-master\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/include/" /I"Z:\FinalYearProject-master\FYP\grawindowsframework\packages\freeglut.2.8.1.15\build\native\../..//build/native/include/" /I"Z:\FinalYearProject-master\FYP\grawindowsframework\packages\glew.1.9.0.1\build\native\../..//build/native/include/" /I.\YourCode /I.\Framework /I..\freeglut\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D HAS_FREEGLUT /D HAS_GLEW /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt YourCode\MapGenerator.cpp
+         MapGenerator.cpp
+     1>z:\finalyearproject-master\fyp\grawindowsframework\graframeworkwindows\yourcode\mapgenerator.cpp(41): warning C4018: '<' : signed/unsigned mismatch
+     1>z:\finalyearproject-master\fyp\grawindowsframework\graframeworkwindows\yourcode\mapgenerator.cpp(36): warning C4101: 'length' : unreferenced local variable
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Z:\FinalYearProject-master\FYP\grawindowsframework\Debug\GRAFrameworkWindows.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\freeglut\lib "Z:\FinalYearProject-master\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\glew32.lib" "Z:\FinalYearProject-master\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\glfw3dll.lib" "Z:\FinalYearProject-master\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\freeglut.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"Z:\FinalYearProject-master\FYP\grawindowsframework\Debug\GRAFrameworkWindows.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Z:\FinalYearProject-master\FYP\grawindowsframework\Debug\GRAFrameworkWindows.lib" /MACHINE:X86 Debug\Camera.obj
          Debug\Main.obj
@@ -33,4 +25,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.29
+Time Elapsed 00:00:07.96

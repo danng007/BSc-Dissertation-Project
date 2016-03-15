@@ -56,7 +56,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\YourCode;.\Framework;..\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\psywt2\Downloads\glm-0.9.7.3;.\YourCode;.\Framework;..\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -100,6 +100,7 @@
     <ClInclude Include="YourCode\KeyControl.h" />
     <ClInclude Include="YourCode\MapChange.h" />
     <ClInclude Include="YourCode\MapGenerator.h" />
+    <ClInclude Include="YourCode\ModelLoader.h" />
     <ClInclude Include="YourCode\MyScene.h" />
     <ClInclude Include="YourCode\Triangle.h" />
   </ItemGroup>
@@ -116,6 +117,7 @@
     <ClCompile Include="YourCode\KeyControl.cpp" />
     <ClCompile Include="YourCode\MapChange.cpp" />
     <ClCompile Include="YourCode\MapGenerator.cpp" />
+    <ClCompile Include="YourCode\ModelLoader.cpp" />
     <ClCompile Include="YourCode\MyScene.cpp" />
     <ClCompile Include="YourCode\Triangle.cpp" />
   </ItemGroup>
