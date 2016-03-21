@@ -6,6 +6,9 @@
 #include "KeyControl.h"
 #include "MapGenerator.h"
 #include "MapGenerator.h"
+#include <glm\glm.hpp>
+#include "LoadModel.h"
+#include "ModelLoader.h"
 using namespace std;
 class Floor : public Object
 {
@@ -22,14 +25,22 @@ public:
 	void DrawSingleWindow(int x, int y, float wallHeight, bool rowDirection);
 	void DrawWall(float posX, float posY, float posZ, float poiX, float poiY, float poiZ);
 	void DrawUnitWall(int x, int z, float wallHeight, float y, int xSize, int ySize);
+	LoadModel thor;
+	LoadModel sponBob;
+	LoadModel sofa;
+	/*std::vector< glm::vec3 > vertices;
+	std::vector< glm::vec2 > uvs;
+	std::vector< glm::vec3 > normals;
+	*/
+
 private:
 	MapGenerator* generatorMap;
 	//char(*bufferp)[100];
 	bool lightChange = true;
 	KeyControl* controlKey;
 	float lightColour;
-	int floorTexId, windowTexId, wallTexId, ceilingTexId, doorTexId;
-	
+	int floorTexId, windowTexId, wallTexId, ceilingTexId, doorTexId, spongBobTexId;
+	/*GLuint vbo_points, vbo_normals, vbo_uvs;*/
 	int widthUnit, heightUnit; //widthUnit is height -.-
 	char buffer[100][100];
 	ifstream myfile;

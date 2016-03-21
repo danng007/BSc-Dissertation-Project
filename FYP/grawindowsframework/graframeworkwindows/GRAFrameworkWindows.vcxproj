@@ -56,7 +56,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\psywt2\Downloads\glm-0.9.7.3;.\YourCode;.\Framework;..\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\packages\glm;.\Framework;C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\glm;.\YourCode;..\freeglut\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -98,6 +98,7 @@
     <ClInclude Include="YourCode\Cube.h" />
     <ClInclude Include="YourCode\Floor.h" />
     <ClInclude Include="YourCode\KeyControl.h" />
+    <ClInclude Include="YourCode\LoadModel.h" />
     <ClInclude Include="YourCode\MapChange.h" />
     <ClInclude Include="YourCode\MapGenerator.h" />
     <ClInclude Include="YourCode\ModelLoader.h" />
@@ -115,6 +116,7 @@
     <ClCompile Include="YourCode\Cube.cpp" />
     <ClCompile Include="YourCode\Floor.cpp" />
     <ClCompile Include="YourCode\KeyControl.cpp" />
+    <ClCompile Include="YourCode\LoadModel.cpp" />
     <ClCompile Include="YourCode\MapChange.cpp" />
     <ClCompile Include="YourCode\MapGenerator.cpp" />
     <ClCompile Include="YourCode\ModelLoader.cpp" />

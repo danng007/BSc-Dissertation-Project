@@ -9,16 +9,16 @@ ModelLoader::~ModelLoader()
 
 }
 
-bool ModelLoader::loadOBJ(const char * path, std::vector < glm::vec3 > & vertices, std::vector < glm::vec2 > & uvs, std::vector < glm::vec3 > & normals)
+void ModelLoader::loadOBJ(const char * path, std::vector < glm::vec3 > &vertices, std::vector < glm::vec2 > &uvs, std::vector < glm::vec3 > &normals)
 {
 	std::vector< unsigned int > vertexIndices, uvIndices, normalIndices;
 	std::vector< glm::vec3 > modelVertices;
 	std::vector< glm::vec2 > modelUvs;
 	std::vector< glm::vec3 > modelNormals;
-	FILE * file = fopen(path, "r");
+	FILE * file = fopen(path, "rt");
 	if (file == NULL){
 		printf("Impossible to open the file !\n");
-		return false;
+		return;
 	}
 	while (true)
 	{
@@ -57,7 +57,7 @@ bool ModelLoader::loadOBJ(const char * path, std::vector < glm::vec3 > & vertice
 						int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
 						if (matches != 9){
 							printf("File can't be read by our simple parser : ( Try exporting with other options\n");
-							return false;
+							return;
 						}
 						vertexIndices.push_back(vertexIndex[0]);
 						vertexIndices.push_back(vertexIndex[1]);
@@ -73,10 +73,24 @@ bool ModelLoader::loadOBJ(const char * path, std::vector < glm::vec3 > & vertice
 			}
 		}
 	}
-	for (int i = 0; i < vertexIndices.size(); i++)
+	for (unsigned int i = 0; i < vertexIndices.size(); i++)
 	{
-		int vertexIndex = vertexIndices[i];
+		unsigned int vertexIndex = vertexIndices[i];
 		glm::vec3 vertex = modelVertices[vertexIndex - 1];
 		vertices.push_back(vertex);
 	}
+	for (unsigned int i = 0; i < uvIndices.size(); i++)
+	{
+		unsigned int uvIndex = uvIndices[i];
+		glm::vec2 theUvss = modelUvs[uvIndex - 1];
+		uvs.push_back(theUvss);
+	}	
+	for (unsigned int i = 0; i < normalIndices.size(); i++)
+	{
+		unsigned int normalIndex = normalIndices[i];
+		glm::vec3 theNormals = modelNormals[normalIndex - 1];
+		normals.push_back(theNormals);
+	}
+	
+	
 }
