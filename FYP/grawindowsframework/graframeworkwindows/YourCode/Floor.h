@@ -25,9 +25,10 @@ public:
 	void DrawSingleWindow(int x, int y, float wallHeight, bool rowDirection);
 	void DrawWall(float posX, float posY, float posZ, float poiX, float poiY, float poiZ);
 	void DrawUnitWall(int x, int z, float wallHeight, float y, int xSize, int ySize);
-	LoadModel thor;
+	LoadModel coffeeTable;
 	LoadModel sponBob;
-	LoadModel sofa;
+	LoadModel chair;
+	LoadModel  bed;
 	/*std::vector< glm::vec3 > vertices;
 	std::vector< glm::vec2 > uvs;
 	std::vector< glm::vec3 > normals;
@@ -39,7 +40,7 @@ private:
 	bool lightChange = true;
 	KeyControl* controlKey;
 	float lightColour;
-	int floorTexId, windowTexId, wallTexId, ceilingTexId, doorTexId, spongBobTexId;
+	int floorTexId, windowTexId, wallTexId, ceilingTexId, doorTexId, spongBobTexId, chairTexId, coffeeTableTexId, bedTexId;
 	/*GLuint vbo_points, vbo_normals, vbo_uvs;*/
 	int widthUnit, heightUnit; //widthUnit is height -.-
 	char buffer[100][100];

@@ -15,36 +15,10 @@ Floor::Floor(KeyControl* keyControl, int mapWidth, int mapHeight, char buffer[][
 	scale = 10; 
 	wallHeight = 100.0f;
 
-	thor.LoadOBJ("./thor.obj");
+	coffeeTable.LoadOBJ("./CoffeeTable.obj");
 	sponBob.LoadOBJ("./spongebob_bind.obj");
-	sofa.LoadOBJ("./BED.obj");
-//	ModelLoader  modelLoader;
-//	modelLoader.loadOBJ("./thor.obj", vertices, uvs, normals);
-//
-//	
-//	vbo_points = 0;
-//	glGenBuffers(1, &vbo_points);
-//	glBindBuffer(GL_ARRAY_BUFFER, vbo_points);
-//	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
-//
-//	//glEnableVertexAttribArray(0);
-//	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-//
-//	
-//	vbo_uvs = 0;
-//	glGenBuffers(1, &vbo_uvs);
-//	glBindBuffer(GL_ARRAY_BUFFER, vbo_uvs);
-//	glBufferData(GL_ARRAY_BUFFER, uvs.size()* sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
-//
-//	//glEnableVertexAttribArray(1);
-////	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-//
-//	vbo_normals = 0;
-//	glGenBuffers(1, &vbo_normals);
-//	glBindBuffer(GL_ARRAY_BUFFER, vbo_normals);
-//	glBufferData(GL_ARRAY_BUFFER, normals.size()* sizeof(glm::vec3), &normals[0], GL_STATIC_DRAW);
-	
-	
+	chair.LoadOBJ("./chair.obj");
+	bed.LoadOBJ("./bed.obj");
 
 	glEnable(GL_TEXTURE_2D);
 	wallTexId = Scene::GetTexture("./wallPaper.bmp");
@@ -53,6 +27,9 @@ Floor::Floor(KeyControl* keyControl, int mapWidth, int mapHeight, char buffer[][
 	ceilingTexId = Scene::GetTexture("./ceiling.bmp");
 	doorTexId = Scene::GetTexture("./door.bmp");
 	spongBobTexId = Scene::GetTexture("./BED.bmp");
+	chairTexId = Scene::GetTexture("./wood.bmp");
+	coffeeTableTexId = Scene::GetTexture("./CoffeeTable.bmp");
+	bedTexId = Scene::GetTexture("./BED.bmp");
 	glEnable(GL_LIGHTING); //Enable lighting
 	glEnable(GL_LIGHT0); //Enable light #0
 	glEnable(GL_NORMALIZE); //Automatically normalize normals
@@ -224,22 +201,7 @@ void Floor::Draw()
 	//glBindTexture should at the outside of glBegin and glEnd;
 	if (!Scene::GetGameStart()) //detect the game state, if game start then begin drawing
 	{
-		//glPushMatrix();
-		//glColor3f(1.0f, 0.0f, 0.0f);
-		//glScalef(1000000.0f, 1000000.0f, 10000000.f);
-		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_points);
-		//glDrawElements(GL_TRIANGLES, vertices.size(),    // count
-		//     GL_UNSIGNED_INT,   // type
-		//     (void*)0           // element array buffer offset
-		//	);
-		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_uvs);
-		//glDrawArrays(GL_TRIANGLES, 0, uvs.size()); 
-		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_normals);
-		//glDrawArrays(GL_TRIANGLES, 0, normals.size());
-		//glColor3f(1.0f, 1.0f, 1.0f);
-		//glPopMatrix();
-		//glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-	
+		
 		widthUnit = generatorMap->GetMapWidth();
 		heightUnit = generatorMap->GetMapHeight();
 		
@@ -248,7 +210,7 @@ void Floor::Draw()
 		glPushMatrix();
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glDisable(GL_CULL_FACE);
-		glTranslatef(-300.0f, -10.0f, -300.0f);
+		glTranslatef(-300.0f, -20.0f, -300.0f);
 		
 		
 		for (int z = 0; z < heightUnit; z++)
@@ -331,16 +293,44 @@ void Floor::Draw()
 				case 's':
 				{
 					glPushMatrix();
-					glBindTexture(GL_TEXTURE_2D, doorTexId);
+					glBindTexture(GL_TEXTURE_2D, chairTexId);
 					//glColor3f(1.0f, 0.0f, 0.0f);
 					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
-					glScalef(0.005f, 0.005f, 0.005f);
-					sofa.RenderModel();
+					glScalef(10.0f, 10.0f, 10.0f);
+					chair.RenderModel();
 					//glColor3f(1.0f, 1.0f, 1.0f);
 					glBindTexture(GL_TEXTURE_2D, 0);
 					glPopMatrix();
 					break;
 					
+				}
+				case 'b':
+				{
+					glPushMatrix();
+					glBindTexture(GL_TEXTURE_2D, chairTexId);
+					//glColor3f(1.0f, 0.0f, 0.0f);
+					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
+					glScalef(5.0f, 5.0f, 5.0f);
+					bed.RenderModel();
+					//glColor3f(1.0f, 1.0f, 1.0f);
+					glBindTexture(GL_TEXTURE_2D, 0);
+					glPopMatrix();
+					break;
+
+				}
+				case 'c':
+				{
+					glPushMatrix();
+					glBindTexture(GL_TEXTURE_2D, coffeeTableTexId);
+					//glColor3f(1.0f, 0.0f, 0.0f);
+					glTranslatef(x*SIZE + SIZE / 2, 0.0f, z*SIZE + SIZE / 2);
+					glScalef(15.0f, 15.0f, 15.0f);
+					coffeeTable.RenderModel();
+					//glColor3f(1.0f, 1.0f, 1.0f);
+					glBindTexture(GL_TEXTURE_2D, 0);
+					glPopMatrix();
+					break;
+
 				}
 				default:
 					break;
