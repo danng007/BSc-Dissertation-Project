@@ -1,10 +1,29 @@
-﻿Build started 2016/3/23 10:51:14.
+﻿Build started 2016/3/23 12:40:13.
      1>Project "C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         E:\VS\VC\bin\CL.exe /c /IC:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/include/ /IC:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\freeglut.2.8.1.15\build\native\../..//build/native/include/ /IC:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\glew.1.9.0.1\build\native\../..//build/native/include/ /I..\packages\glm /I.\Framework /IC:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\glm /I.\YourCode /I..\freeglut\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D HAS_FREEGLUT /D HAS_GLEW /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt YourCode\Floor.cpp
+         E:\VS\VC\bin\CL.exe /c /IC:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/include/ /IC:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\freeglut.2.8.1.15\build\native\../..//build/native/include/ /IC:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\glew.1.9.0.1\build\native\../..//build/native/include/ /I..\packages\glm /I.\Framework /IC:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\glm /I.\YourCode /I..\freeglut\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D HAS_FREEGLUT /D HAS_GLEW /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt YourCode\Floor.cpp YourCode\LoadModel.cpp YourCode\MyScene.cpp
+         LoadModel.cpp
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\loadmodel.cpp(97): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\loadmodel.cpp(116): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\loadmodel.cpp(119): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\loadmodel.cpp(129): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\loadmodel.cpp(130): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\loadmodel.cpp(131): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\loadmodel.cpp(133): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\loadmodel.cpp(134): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\loadmodel.cpp(135): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\loadmodel.cpp(137): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\loadmodel.cpp(138): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\loadmodel.cpp(139): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+         Generating Code...
+         Compiling...
+         MyScene.cpp
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\myscene.cpp(58): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\myscene.cpp(53): warning C4101: 'length' : unreferenced local variable
          Floor.cpp
      1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\floor.cpp(356): warning C4244: '+=' : conversion from 'const double' to 'float', possible loss of data
      1>c:\users\want\desktop\fyp\finalyearprojectgit\fyp\grawindowsframework\graframeworkwindows\yourcode\floor.cpp(360): warning C4244: '-=' : conversion from 'const double' to 'float', possible loss of data
+         Generating Code...
        Link:
          E:\VS\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\Debug\GRAFrameworkWindows.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\freeglut\lib C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\glew32.lib C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\glfw3dll.lib C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\packages\nupengl.core.0.1.0.1\build\native\../..//build/native/lib/Win32\freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\Debug\GRAFrameworkWindows.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\Debug\GRAFrameworkWindows.lib" /MACHINE:X86 Debug\Camera.obj
          Debug\Main.obj
@@ -27,4 +46,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.89
+Time Elapsed 00:00:05.24

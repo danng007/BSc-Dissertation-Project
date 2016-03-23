@@ -297,7 +297,7 @@ void Floor::Draw()
 					//glColor3f(1.0f, 0.0f, 0.0f);
 					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
 					glScalef(10.0f, 10.0f, 10.0f);
-					chair.RenderModel();
+					//chair.RenderModel();
 					//glColor3f(1.0f, 1.0f, 1.0f);
 					glBindTexture(GL_TEXTURE_2D, 0);
 					glPopMatrix();
@@ -311,7 +311,7 @@ void Floor::Draw()
 					//glColor3f(1.0f, 0.0f, 0.0f);
 					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
 					glScalef(5.0f, 5.0f, 5.0f);
-					bed.RenderModel();
+					//bed.RenderModel();
 					//glColor3f(1.0f, 1.0f, 1.0f);
 					glBindTexture(GL_TEXTURE_2D, 0);
 					glPopMatrix();
@@ -321,13 +321,13 @@ void Floor::Draw()
 				case 'c':
 				{
 					glPushMatrix();
-					glBindTexture(GL_TEXTURE_2D, coffeeTableTexId);
+					//glBindTexture(GL_TEXTURE_2D, coffeeTableTexId);
 					//glColor3f(1.0f, 0.0f, 0.0f);
 					glTranslatef(x*SIZE + SIZE / 2, 0.0f, z*SIZE + SIZE / 2);
 					glScalef(15.0f, 15.0f, 15.0f);
 					coffeeTable.RenderModel();
 					//glColor3f(1.0f, 1.0f, 1.0f);
-					glBindTexture(GL_TEXTURE_2D, 0);
+					//glBindTexture(GL_TEXTURE_2D, 0);
 					glPopMatrix();
 					break;
 
