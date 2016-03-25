@@ -15,10 +15,15 @@ Floor::Floor(KeyControl* keyControl, int mapWidth, int mapHeight, char buffer[][
 	scale = 10; 
 	wallHeight = 100.0f;
 
-	coffeeTable.LoadOBJ("./CoffeeTable.obj");
+	coffeeTable.LoadOBJ("./Resources/models/CoffeeTable.obj");
 	sponBob.LoadOBJ("./spongebob_bind.obj");
-	chair.LoadOBJ("./chair.obj");
-	bed.LoadOBJ("./bed.obj");
+	chair.LoadOBJ("./Resources/models/chair.obj");
+	bed.LoadOBJ("./Resources/models/gtaBed.obj");
+	sofa.LoadOBJ("./Resources/models/Sofa.obj");
+	toilet.LoadOBJ("./Resources/models/Toilet.obj");
+	refrigerator.LoadOBJ("./Resources/models/Refrigerator.obj");
+	television.LoadOBJ("./Resources/models/television.obj");
+	wardrobe.LoadOBJ("./Resources/models/Wardrobe.obj");
 
 	glEnable(GL_TEXTURE_2D);
 	wallTexId = Scene::GetTexture("./wallPaper.bmp");
@@ -292,28 +297,23 @@ void Floor::Draw()
 				}
 				case 's':
 				{
+					
 					glPushMatrix();
-					glBindTexture(GL_TEXTURE_2D, chairTexId);
-					//glColor3f(1.0f, 0.0f, 0.0f);
 					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
-					glScalef(10.0f, 10.0f, 10.0f);
-					//chair.RenderModel();
-					//glColor3f(1.0f, 1.0f, 1.0f);
-					glBindTexture(GL_TEXTURE_2D, 0);
+					glScalef(20.0f, 20.0f, 20.0f);
+					sofa.RenderModel();
 					glPopMatrix();
 					break;
-					
 				}
 				case 'b':
 				{
 					glPushMatrix();
-					glBindTexture(GL_TEXTURE_2D, chairTexId);
+					
 					//glColor3f(1.0f, 0.0f, 0.0f);
 					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
-					glScalef(5.0f, 5.0f, 5.0f);
-					//bed.RenderModel();
+					glScalef(3.0f, 3.0f, 3.0f);
+					bed.RenderModel();
 					//glColor3f(1.0f, 1.0f, 1.0f);
-					glBindTexture(GL_TEXTURE_2D, 0);
 					glPopMatrix();
 					break;
 
@@ -321,16 +321,66 @@ void Floor::Draw()
 				case 'c':
 				{
 					glPushMatrix();
-					//glBindTexture(GL_TEXTURE_2D, coffeeTableTexId);
-					//glColor3f(1.0f, 0.0f, 0.0f);
+					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
+					glScalef(10.0f, 10.0f, 10.0f);
+					chair.RenderModel();
+
+					glPopMatrix();
+					break;
+				}
+				case 't':
+				{
+
+					glPushMatrix();
 					glTranslatef(x*SIZE + SIZE / 2, 0.0f, z*SIZE + SIZE / 2);
 					glScalef(15.0f, 15.0f, 15.0f);
 					coffeeTable.RenderModel();
-					//glColor3f(1.0f, 1.0f, 1.0f);
-					//glBindTexture(GL_TEXTURE_2D, 0);
 					glPopMatrix();
 					break;
+				}
+				case 'w':
+				{
+					glPushMatrix();
 
+					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
+					glScalef(10.0f, 10.0f, 10.0f);
+					toilet.RenderModel();
+					
+					glPopMatrix();
+					break;
+				}
+				case 'r':
+				{
+					glPushMatrix();
+
+					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
+					glScalef(5.0f, 5.0f, 5.0f);
+					refrigerator.RenderModel();
+
+					glPopMatrix();
+					break;
+				}
+				case 'v':
+				{
+					glPushMatrix();
+
+					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
+					glScalef(8.0f, 8.0f, 8.0f);
+					television.RenderModel();
+
+					glPopMatrix();
+					break;
+				}
+				case 'a':
+				{
+					glPushMatrix();
+
+					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
+					glScalef(3.0f, 3.0f, 3.0f);
+					//wardrobe.RenderModel();
+
+					glPopMatrix();
+					break;
 				}
 				default:
 					break;

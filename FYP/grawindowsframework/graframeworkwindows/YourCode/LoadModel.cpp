@@ -96,7 +96,7 @@ void LoadModel::LoadOBJ(const char * path)
 		
 		for (int i = 0; i < m_pic.M.size(); i++)
 		{
-			filePath = "./" + m_pic.M[i].filePath + ".bmp";
+			filePath = "./Resources/models/" + m_pic.M[i].filePath + ".bmp";
 			filePaths[i] = filePath;
 			textIDs[i] = Scene::GetTexture(filePaths[i]);
 		}
@@ -104,13 +104,13 @@ void LoadModel::LoadOBJ(const char * path)
 }
 void LoadModel::RenderModel()
 {
+	outCounter = 0;
 	counter = 0;
 	if (m_pic.M.size() > 0)
 	{
-		//filePath = "./" + m_pic.M[counter].filePath + ".bmp";
-		//textID = Scene::GetTexture(filePath);
+
 		glBindTexture(GL_TEXTURE_2D, textIDs[counter]);
-		
+	
 	}
 	
 		for (int i = 0; i<m_pic.F.size(); i++)
@@ -120,9 +120,8 @@ void LoadModel::RenderModel()
 			{
 				counter++;
 				outCounter = 0;
-				//filePath = "./" + m_pic.M[counter].filePath + ".bmp";
-				//textID = Scene::GetTexture(filePath);
 				glBindTexture(GL_TEXTURE_2D, textIDs[counter]);
+				//printf("%s\n", filePaths[counter].c_str());
 
 			}
 			glBegin(GL_TRIANGLES);                            // 绘制三角形GL_TRIANGLES;GL_LINE_LOOP;GL_LINES;GL_POINTS
