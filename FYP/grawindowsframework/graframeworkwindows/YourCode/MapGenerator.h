@@ -18,6 +18,7 @@ public:
 	int GetCurrentFileNumber();
 	int GetMapWidth();
 	int GetMapHeight();
+	char (*GetBuffer())[100];
 private:
 	ifstream myfile;
 	int lastj = 0, lastk = 0, mapWidth = 0, mapHeight = 0;

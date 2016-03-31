@@ -16,7 +16,6 @@ Floor::Floor(KeyControl* keyControl, int mapWidth, int mapHeight, char buffer[][
 	wallHeight = 100.0f;
 
 	coffeeTable.LoadOBJ("./Resources/models/CoffeeTable.obj");
-	sponBob.LoadOBJ("./spongebob_bind.obj");
 	chair.LoadOBJ("./Resources/models/chair.obj");
 	bed.LoadOBJ("./Resources/models/gtaBed.obj");
 	sofa.LoadOBJ("./Resources/models/Sofa.obj");
@@ -24,6 +23,8 @@ Floor::Floor(KeyControl* keyControl, int mapWidth, int mapHeight, char buffer[][
 	refrigerator.LoadOBJ("./Resources/models/Refrigerator.obj");
 	television.LoadOBJ("./Resources/models/television.obj");
 	wardrobe.LoadOBJ("./Resources/models/Wardrobe.obj");
+	bookCase.LoadOBJ("./Resources/models/Chest.obj");
+	washingMachine.LoadOBJ("./Resources/models/KitchenTable.obj");
 
 	glEnable(GL_TEXTURE_2D);
 	wallTexId = Scene::GetTexture("./wallPaper.bmp");
@@ -72,20 +73,20 @@ void Floor::DrawSingleWall(int x, int z, float wallHeight, float y) // firstly, 
 	//bottom : No bottom of wall is needed, as floor cover all bottom of room
 	
 	//Extend wall:
-	if ((x - 1 >= 0 ) && generatorMap->GetBufferChar(x - 1, z) != '0')
+	if ((x - 1 >= 0) && (generatorMap->GetBufferChar(x - 1, z) == 'b' || generatorMap->GetBufferChar(x - 1, z) == 'c' || generatorMap->GetBufferChar(x - 1, z) == 'd'))
 	{
 		DrawUnitWall(x, z, wallHeight, y, 0, 1);
 		
 	}
-	if ((x + 1 < widthUnit) && generatorMap->GetBufferChar(x + 1, z) != '0')
+	if ((x + 1 < widthUnit) && (generatorMap->GetBufferChar(x + 1, z) == 'b' || generatorMap->GetBufferChar(x + 1, z) == 'c' || generatorMap->GetBufferChar(x + 1, z) == 'd'))
 	{
 		DrawUnitWall(x, z, wallHeight, y, 2, 1);
 	}
-	if ((z + 1 < heightUnit) && generatorMap->GetBufferChar(x, z + 1) != '0')
+	if ((z + 1 < heightUnit) && (generatorMap->GetBufferChar(x, z + 1) == 'b' || generatorMap->GetBufferChar(x, z + 1) == 'c' || generatorMap->GetBufferChar(x, z + 1) == 'd'))
 	{
 		DrawUnitWall(x, z, wallHeight, y, 1, 2);
 	}
-	if ((z - 1 >= 0) && generatorMap->GetBufferChar(x, z - 1) != '0')
+	if ((z - 1 >= 0) && (generatorMap->GetBufferChar(x, z - 1) == 'b' || generatorMap->GetBufferChar(x, z - 1) == 'c' || generatorMap->GetBufferChar(x, z - 1) == 'd'))
 	{
 		DrawUnitWall(x, z, wallHeight, y, 1, 0);
 	}
@@ -229,12 +230,12 @@ void Floor::Draw()
 				glBindTexture(GL_TEXTURE_2D, 0);
 				switch (generatorMap->GetBufferChar(x, z))
 				{
-				case '0':
+				case 'a':
 				{
 					
 					break;
 				}
-				case '1':
+				case 'b': //Drawing all need to judge the units around it, so that 'a' used to fill the blank and make sure stack overflow won't happen
 				{
 					glBindTexture(GL_TEXTURE_2D, wallTexId);
 					glBegin(GL_QUADS);
@@ -243,7 +244,7 @@ void Floor::Draw()
 					glBindTexture(GL_TEXTURE_2D, 0);
 					break;
 				}
-				case '2':
+				case 'c':
 				{
 					
 					glBindTexture(GL_TEXTURE_2D, wallTexId);
@@ -271,7 +272,7 @@ void Floor::Draw()
 					glBindTexture(GL_TEXTURE_2D, 0);
 					break;
 				}
-				case '3':
+				case 'd':
 				{
 
 					glBindTexture(GL_TEXTURE_2D, wallTexId);
@@ -295,7 +296,7 @@ void Floor::Draw()
 					break;
 					
 				}
-				case 's':
+				case 'e':
 				{
 					
 					glPushMatrix();
@@ -305,20 +306,17 @@ void Floor::Draw()
 					glPopMatrix();
 					break;
 				}
-				case 'b':
+				case 'f':
 				{
 					glPushMatrix();
-					
-					//glColor3f(1.0f, 0.0f, 0.0f);
 					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
 					glScalef(3.0f, 3.0f, 3.0f);
 					bed.RenderModel();
-					//glColor3f(1.0f, 1.0f, 1.0f);
 					glPopMatrix();
 					break;
 
 				}
-				case 'c':
+				case 'g':
 				{
 					glPushMatrix();
 					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
@@ -328,7 +326,7 @@ void Floor::Draw()
 					glPopMatrix();
 					break;
 				}
-				case 't':
+				case 'h':
 				{
 
 					glPushMatrix();
@@ -338,7 +336,7 @@ void Floor::Draw()
 					glPopMatrix();
 					break;
 				}
-				case 'w':
+				case 'i':
 				{
 					glPushMatrix();
 
@@ -349,7 +347,7 @@ void Floor::Draw()
 					glPopMatrix();
 					break;
 				}
-				case 'r':
+				case 'j':
 				{
 					glPushMatrix();
 
@@ -360,7 +358,7 @@ void Floor::Draw()
 					glPopMatrix();
 					break;
 				}
-				case 'v':
+				case 'k':
 				{
 					glPushMatrix();
 
@@ -371,14 +369,30 @@ void Floor::Draw()
 					glPopMatrix();
 					break;
 				}
-				case 'a':
+				case 'l':
 				{
 					glPushMatrix();
-
 					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
-					glScalef(3.0f, 3.0f, 3.0f);
-					//wardrobe.RenderModel();
-
+					glScalef(5.0f, 5.0f, 5.0f);
+					wardrobe.RenderModel();
+					glPopMatrix();
+					break;
+				}
+				case 'm':
+				{
+					glPushMatrix();
+					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
+					glScalef(7.0f, 7.0f, 7.0f);
+					bookCase.RenderModel();
+					glPopMatrix();
+					break;
+				}
+				case 'n':
+				{
+					glPushMatrix();
+					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
+					glScalef(6.0f, 6.0f, 6.0f);
+					washingMachine.RenderModel();
 					glPopMatrix();
 					break;
 				}

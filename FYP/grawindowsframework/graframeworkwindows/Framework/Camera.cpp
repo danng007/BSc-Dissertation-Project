@@ -10,7 +10,10 @@ You may change the implementation of these functions to improve the quality of t
 
 Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), currentButton(0), mouseX(0), mouseY(0)
 {
-	ReadFile();
+	
+	/*ReadFile1();
+	ReadFile2();
+	ReadFile3();*/
     // set the camera position to start at (0,0,0)
     eye[0] = 0.0f;
     eye[1] = 0.0f;
@@ -35,32 +38,75 @@ Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), currentButton(0), mouseX(
     up[0] = 0.0f;
     up[1] = 1.0f;
     up[2] = 0.0f;
+
+	//fileNumber = *file1;
 }
 
 Camera::~Camera()
 {
 }
-void Camera::ReadFile()
-{
-	int j = 0, k = 0;
-	int length;
-	myfile.open("./file.txt");      // open input file  
-	string s;
-	if (myfile.good()) {
-		while (getline(myfile, s)) {
-			for (int i = 0; i < s.size(); i++) {
-				buffer[j][k] = s[i];
-				cout << buffer[j][k];
-				k++;
-			}
-			k = 0;
-			j++;
-			cout << endl;
-		}
-	}
-	cout << "Camera Read Finish\n";
-	myfile.close();
-}
+
+//
+//void Camera::ReadFile1()
+//{
+//	int j = 0, k = 0;
+//	int length;
+//	myfile.open("./file.txt");      // open input file  
+//	string s;
+//	if (myfile.good()) {
+//		while (getline(myfile, s)) {
+//			for (int i = 0; i < s.size(); i++) {
+//				file1[j][k] = s[i];
+//				cout << file1[j][k];
+//				k++;
+//			}
+//			k = 0;
+//			j++;
+//			cout << endl;
+//		}
+//	}
+//	cout << "Camera Read file1 Finish\n";
+//	myfile.close();
+//}
+//void Camera::ReadFile2()
+//{
+//	int j = 0, k = 0;
+//	int length;
+//	myfile.open("./file2.txt");      // open input file  
+//	string s;
+//	if (myfile.good()) {
+//		while (getline(myfile, s)) {
+//			for (int i = 0; i < s.size(); i++) {
+//				file2[j][k] = s[i];
+//				k++;
+//			}
+//			k = 0;
+//			j++;
+//		}
+//	}
+//	cout << "Camera Read file2 Finish\n";
+//	myfile.close();
+//}
+//
+//void Camera::ReadFile3()
+//{
+//	int j = 0, k = 0;
+//	int length;
+//	myfile.open("./file3.txt");      // open input file  
+//	string s;
+//	if (myfile.good()) {
+//		while (getline(myfile, s)) {
+//			for (int i = 0; i < s.size(); i++) {
+//				file3[j][k] = s[i];
+//				k++;
+//			}
+//			k = 0;
+//			j++;
+//		}
+//	}
+//	cout << "Camera Read file3 Finish\n";
+//	myfile.close();
+//}
 
 
 void Camera::GetEyePosition( float &x, float &y, float &z) const
@@ -133,7 +179,7 @@ void Camera::Update( const double& deltaTime )
     
     // variable to control how fast the camera moves in any one direction
     float speed = 50.0f * deltaTime;
-    
+	
     if( aKey )
     {
       
@@ -146,8 +192,7 @@ void Camera::Update( const double& deltaTime )
 		sub(eye, right, speed);
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
-		printf("Camera.cpp x = %d, y = %d  %c\n ", x, y,buffer[x][y]);
-		if (buffer[x][y] != '0')
+		if (file[x][y] == 'b' || file[x][y] == 'c')
 		{
 			eye[0] = preEye[0];
 			eye[1] = preEye[1];
@@ -164,7 +209,7 @@ void Camera::Update( const double& deltaTime )
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
 		printf("Camera.cpp x = %d, y = %d\n", x, y);
-		if (buffer[x][y] != '0')
+		if (file[x][y] == 'b' || file[x][y] == 'c')
 		{
 			eye[0] = preEye[0];
 			eye[1] = preEye[1];
@@ -182,7 +227,7 @@ void Camera::Update( const double& deltaTime )
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
 		printf("Camera.cpp x = %d, y = %d\n", x, y);
-		if (buffer[x][y] != '0')
+		if (file[x][y] == 'b' || file[x][y] == 'c')
 		{
 			eye[0] = preEye[0];
 			eye[1] = preEye[1];
@@ -199,7 +244,7 @@ void Camera::Update( const double& deltaTime )
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
 		printf("Camera.cpp x = %d, y = %d\n", x, y);
-		if (buffer[x][y] != '0')
+		if (file[x][y] == 'b' || file[x][y] == 'c')
 		{
 			eye[0] = preEye[0];
 			eye[1] = preEye[1];
@@ -318,8 +363,18 @@ void Camera::HandleMouseMotion( int x, int y )
    
 }
 
+void Camera::GetBuffer(char buffer[][100])
+{
+	file = buffer;
+}
+
 void Camera::HandlePassiveMouseMotion( int x, int y)
 {
     // Copy the implementation of HandleMouseMotion into this function for a camera that does not require you to
     // click the button to move the view direction.
 }
+
+//void Camera::GetMapGenerator(MapGenerator mapGenerator)
+//{
+//	generatorMap = mapGenerator;
+//}

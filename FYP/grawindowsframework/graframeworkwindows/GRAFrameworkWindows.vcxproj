@@ -103,6 +103,7 @@
     <ClInclude Include="YourCode\MapGenerator.h" />
     <ClInclude Include="YourCode\ModelLoader.h" />
     <ClInclude Include="YourCode\MyScene.h" />
+    <ClInclude Include="YourCode\Sky.h" />
     <ClInclude Include="YourCode\Triangle.h" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +122,7 @@
     <ClCompile Include="YourCode\MapGenerator.cpp" />
     <ClCompile Include="YourCode\ModelLoader.cpp" />
     <ClCompile Include="YourCode\MyScene.cpp" />
+    <ClCompile Include="YourCode\Sky.cpp" />
     <ClCompile Include="YourCode\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>

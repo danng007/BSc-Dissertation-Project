@@ -149,9 +149,10 @@ void StaticEngine::DrawFunc()
 
 void StaticEngine::ResizeFunc(int w, int h)
 {
-    StaticEngine::windowWidth = w;
+	glutReshapeWindow(800, 700); //fixed the windows size;
+   /* StaticEngine::windowWidth = w;
     StaticEngine::windowHeight = h;
-    current->HandleResize(w,h);
+    current->HandleResize(w,h);*/
 }
 
 void StaticEngine::KeyDownFunc(unsigned char key, int x, int y)

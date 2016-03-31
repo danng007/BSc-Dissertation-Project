@@ -29,7 +29,7 @@ void MapGenerator::ReadFile()
 	{
 		for (int m = 0; m < lastk; m++)
 		{
-			buffer[i][m] = 'a';
+			buffer[i][m] = '0';
 		}
 	}
 	int j = 0, k = 0;
@@ -99,4 +99,9 @@ int MapGenerator::GetMapHeight()
 int MapGenerator::GetMapWidth()
 {
 	return mapWidth;
+}
+char(*MapGenerator::GetBuffer())[100]
+{
+	
+	return buffer;
 }

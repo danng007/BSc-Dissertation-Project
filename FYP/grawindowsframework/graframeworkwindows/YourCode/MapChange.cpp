@@ -21,16 +21,38 @@ MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight, char b
 	height = Scene::GetWindowHeight();
 	printf("colsize = %f,  rowSize = %f \n", colSize, rowSize);
 	glEnable(GL_TEXTURE_2D);
-	wallTexId = Scene::GetTexture("./wallPaper.bmp");
-	windowTexId = Scene::GetTexture("./window.bmp");
-	floorTexId = Scene::GetTexture("./floor.bmp");
-	ceilingTexId = Scene::GetTexture("./ceiling.bmp");
-	doorTexId = Scene::GetTexture("./door.bmp");
+	wallTexId = Scene::GetTexture("./Resources/textures/wallPaper.bmp");
+	windowTexId = Scene::GetTexture("./Resources/textures/window.bmp");
+	floorTexId = Scene::GetTexture("./Resources/textures/floor.bmp");
+	ceilingTexId = Scene::GetTexture("./Resources/textures/ceiling.bmp");
+	doorTexId = Scene::GetTexture("./Resources/textures/door.bmp");
+	coffeeTableId = Scene::GetTexture("./Resources/textures/Table.bmp");
+	chairId = Scene::GetTexture("./Resources/textures/Chair.bmp");
+	bedId = Scene::GetTexture("./Resources/textures/Bed.bmp");
+	sofaId = Scene::GetTexture("./Resources/textures/Sofa.bmp");
+	toiletId = Scene::GetTexture("./Resources/textures/Toilet.bmp");
+	refrigeratorId = Scene::GetTexture("./Resources/textures/Refrigerator.bmp");
+	televisionId = Scene::GetTexture("./Resources/textures/TV.bmp");
+	bookCaseId = Scene::GetTexture("./Resources/textures/BookCase.bmp");
+	wardrobeId = Scene::GetTexture("./Resources/textures/Wardrobe.bmp");
+	kitchenTableId = Scene::GetTexture("./Resources/textures/KitchenTablee.bmp");
+	
+
 	textures[0] = floorTexId;
 	textures[1] = wallTexId;
 	textures[2] = windowTexId;
 	textures[3] = doorTexId;
-
+	textures[4] = sofaId;
+	textures[5] = bedId;
+	textures[6] = chairId;
+	textures[7] = coffeeTableId;
+	textures[8] = toiletId;
+	textures[9] = refrigeratorId;
+	textures[10] = televisionId;
+	textures[11] = wardrobeId;
+	textures[12] = bookCaseId;
+	textures[13] = kitchenTableId;
+	printf("text 13: %d\n",textures[13]);
 }
 
 MapChange::~MapChange(void)
@@ -56,8 +78,6 @@ void MapChange::Draw()
 		widthUnit = generatorMap->GetMapWidth();
 		heightUnit = generatorMap->GetMapHeight();
 
-		
-
 		switch (currentFile)
 		{
 		case 1:
@@ -74,7 +94,6 @@ void MapChange::Draw()
 		default:
 			break;
 		}
-
 		
 		
 		/*
@@ -86,9 +105,7 @@ void MapChange::Draw()
 		glPushMatrix();
 		if (optionOpen)
 		{
-			glTranslatef(-480.0f, -420.0f, 0.0f);
-			//printf("MapChange Draw drawOptionPage\n");
-		
+			glTranslatef(-480.0f, -420.0f, 0.0f);	
 		}
 		glPopMatrix();
 		glMatrixMode(GL_PROJECTION);
@@ -123,13 +140,21 @@ void MapChange::HandleMouseClick(int button, int state, int x, int y)
 				}
 				
 				printf(" rowsize = %d, blockY = %d, bufferp[%d][%d] is %c \n", (int)rowSize,blockY,x, y, generatorMap->GetBufferChar(blockX, blockY));
-				if (optionOpen && x >= 80 && x <= 850 && y >= 360  && y <= 510)
+				if (optionOpen && x >= 80 && x <= 725 && y >= 360  && y <= 635)
 				{
 				
 					int optionNum = 0;
-					optionNum = (x - 80) / (8 * 80 / 4);
-					printf("option Choose %d\n", optionNum);
-					generatorMap->SetBufferChar(newX, newY, optionNum + 48);
+					if (y <= 490)
+					{
+						optionNum = (x - 70) / 93; // choosing level one
+					}
+					else
+					{
+						optionNum = (x - 70) / 93 + 7;
+					}
+					
+					printf("test = %d\n", optionNum);
+					generatorMap->SetBufferChar(newX, newY, optionNum + 97);
 					optionOpen = false;
 				}
 				else
@@ -174,46 +199,24 @@ void MapChange::DrawForSizeOne()
 	{
 		for (int x = xPos; x < widthUnit + xPos; x++)
 		{
-
-			switch (generatorMap->GetBufferChar(x - xPos, z - zPos))
+			caseNumber = (int)(generatorMap->GetBufferChar(x - xPos, z - zPos)) - 97;
+			if (caseNumber >= 0 && caseNumber <= 13)
 			{
-			case '0':
-			{
-				glBindTexture(GL_TEXTURE_2D, textures[0]);
+				//printf("caseNumber = %d \n",caseNumber);
+				glBindTexture(GL_TEXTURE_2D, textures[caseNumber]);
 				DrawUnitBlock(x, z);
-				break;
 			}
-			case '1':
-			{
-				glBindTexture(GL_TEXTURE_2D, textures[1]);
-				DrawUnitBlock(x, z);
-				break;
-			}
-			case '2':
-			{
-				glBindTexture(GL_TEXTURE_2D, textures[2]);
-				DrawUnitBlock(x, z);
-				break;
-			}
-			case '3':
-			{
-				glBindTexture(GL_TEXTURE_2D, textures[3]);
-				DrawUnitBlock(x, z);
-				break;
-			}
-			
-			default:
-				break;
-			}
+	
 		}
 	}
 	if (optionOpen)
 	{
 		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
 		DrawUnitBlock(newX, newY);
+		glPushMatrix();
 		glTranslatef(0.0f, 3.0f, 0.0f);
 		DrawOptionPage();
-		glTranslatef(0.0f, -3.0f, 0.0f);
+		glPopMatrix();
 	}
 
 	glTranslatef(80.0f, 635.0f, 0.0f);
@@ -259,37 +262,14 @@ void MapChange::DrawForSizeTwo()
 	{
 		for (int x = xPos; x < widthUnit + xPos; x++)
 		{
+			caseNumber = (int)(generatorMap->GetBufferChar(x - xPos, z - zPos)) - 97;
+			if (caseNumber >= 0 && caseNumber <= 12)
+			{
+				//printf("caseNumber = %d \n",caseNumber);
+				glBindTexture(GL_TEXTURE_2D, textures[caseNumber]);
+				DrawUnitBlock(x, z);
+			}
 
-			switch (generatorMap->GetBufferChar(x - xPos, z - zPos))
-			{
-			case '0':
-			{
-				glBindTexture(GL_TEXTURE_2D, textures[0]);
-				DrawUnitBlock(x, z);
-				break;
-			}
-			case '1':
-			{
-				glBindTexture(GL_TEXTURE_2D, textures[1]);
-				DrawUnitBlock(x, z);
-				break;
-			}
-			case '2':
-			{
-				glBindTexture(GL_TEXTURE_2D, textures[2]);
-				DrawUnitBlock(x, z);
-				break;
-			}
-			case '3':
-			{
-				glBindTexture(GL_TEXTURE_2D, textures[3]);
-				DrawUnitBlock(x, z);
-				break;
-			}
-			
-			default:
-				break;
-			}
 		}
 	}
 	if (optionOpen)
@@ -344,36 +324,14 @@ void MapChange::DrawForSizeThree()
 	{
 		for (int x = xPos; x < widthUnit + xPos; x++)
 		{
+			caseNumber = (int)(generatorMap->GetBufferChar(x - xPos, z - zPos)) - 97;
+			if (caseNumber >= 0 && caseNumber <= 12)
+			{
+				//printf("caseNumber = %d \n",caseNumber);
+				glBindTexture(GL_TEXTURE_2D, textures[caseNumber]);
+				DrawUnitBlock(x, z);
+			}
 
-			switch (generatorMap->GetBufferChar(x - xPos, z - zPos))
-			{
-			case '0':
-			{
-				glBindTexture(GL_TEXTURE_2D, textures[0]);
-				DrawUnitBlock(x, z);
-				break;
-			}
-			case '1':
-			{
-				glBindTexture(GL_TEXTURE_2D, textures[1]);
-				DrawUnitBlock(x, z);
-				break;
-			}
-			case '2':
-			{
-				glBindTexture(GL_TEXTURE_2D, textures[2]);
-				DrawUnitBlock(x, z);
-				break;
-			}
-			case '3':
-			{
-				glBindTexture(GL_TEXTURE_2D, textures[3]);
-				DrawUnitBlock(x, z);
-				break;
-			}
-			default:
-				break;
-			}
 		}
 	}
 	if (optionOpen)
@@ -420,34 +378,52 @@ void MapChange::DrawOptionPage()
 {
 	int x = 2, z = 4;
 	
-	glColor3f(1.0f, 1.0f, 1.0f);
+	glColor3f(1.0f, 0.0f, 1.0f);
 	glBegin(GL_QUADS);
 	glNormal3f(0.0f, 1.0f, 0.0f);
 	glTexCoord2d(0.0f, 0.0f);
-	glVertex3f(150, 250, -10.0f);
+	glVertex3f(150, 110, -10.0f);
 	glTexCoord2d(1.0f, 0.0f);
-	glVertex3f(810, 250, -10.0f);
+	glVertex3f(810, 110, -10.0f);
 	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(810, 400, -10.0f);
 	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(150, 400, -10.0f);
 	glEnd(); //bottom page of option page
-	
-	for (int i = 0; i < 4; i++)
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glTranslatef(150.0f, 0.0f, 0.0f);
+	for (int i = 0; i < 7; i++)
 	{
 		glBindTexture(GL_TEXTURE_2D, textures[i]);
 		glBegin(GL_QUADS);
 		glNormal3f(0.0f, 1.0f, 0.0f);
 		glTexCoord2d(0.0f, 0.0f);
-		glVertex3f(x * 80 + 3, 260, -10.0f);
+		glVertex3f(i * 94 + 3, 260, -10.0f);
 		glTexCoord2d(1.0f, 0.0f);
-		glVertex3f((x + 2) * 80 - 3, 260, -10.0f);
+		glVertex3f((i + 1) * 94 - 3, 260, -10.0f);
 		glTexCoord2d(1.0f, 1.0f);
-		glVertex3f((x + 2) * 80 - 3, 390, -10.0f);
+		glVertex3f((i + 1) * 94 - 3, 390, -10.0f);
 		glTexCoord2d(0.0f, 1.0f);
-		glVertex3f(x * 80 + 3, 390, -10.0f);
+		glVertex3f(i * 94 + 3, 390, -10.0f);
 		glEnd();
-		x += 2; // draw each option, reduce a little each size to make it look better.
+	}
+	glTranslatef(0.0f, -140.0f, 0.0f);
+	int j = 0;
+	for (int i = 7; i < 14; i++)
+	{
+		glBindTexture(GL_TEXTURE_2D, textures[i]);
+		glBegin(GL_QUADS);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex3f(j * 94 + 3, 260, -10.0f);
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex3f((j + 1) * 94 - 3, 260, -10.0f);
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex3f((j + 1) * 94 - 3, 390, -10.0f);
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex3f(j * 94 + 3, 390, -10.0f);
+		glEnd();
+		j++;
 	}
 	
 	

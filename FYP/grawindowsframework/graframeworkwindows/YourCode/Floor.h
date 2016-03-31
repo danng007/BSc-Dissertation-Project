@@ -34,6 +34,8 @@ public:
 	LoadModel refrigerator;
 	LoadModel television;
 	LoadModel wardrobe;
+	LoadModel bookCase;
+	LoadModel washingMachine;
 	/*std::vector< glm::vec3 > vertices;
 	std::vector< glm::vec2 > uvs;
 	std::vector< glm::vec3 > normals;
