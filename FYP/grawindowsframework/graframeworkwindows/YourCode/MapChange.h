@@ -25,7 +25,7 @@ private:
 	int currentFile = 1;
 	int widthUnit, heightUnit; //widthUnit is height -.-
 	int xPos, zPos;
-	int floorTexId, windowTexId, wallTexId, ceilingTexId, doorTexId, coffeeTableId, chairId, bedId, sofaId, toiletId, refrigeratorId, televisionId, bookCaseId, wardrobeId, kitchenTableId;
+	int logoId, smallSizeId, mediumSizeId, largeSizeId, horizonId, questionMarkId, floorTexId, windowTexId, wallTexId, ceilingTexId, doorTexId, coffeeTableId, chairId, bedId, sofaId, toiletId, refrigeratorId, televisionId, bookCaseId, wardrobeId, kitchenTableId;
 	float rowSize, colSize;
 	void DrawUnitBlock(int x, int z);
 	int newX, newY, blockX, blockY, optionBlockX, optionBlockY;

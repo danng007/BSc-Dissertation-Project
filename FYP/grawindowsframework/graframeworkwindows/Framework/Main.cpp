@@ -21,7 +21,7 @@ int main(int argc, char * argv[])
 	MyScene *scene = NULL;
 
 	// Create an instance of the castle engine
-	scene = new MyScene(argc, argv, "G53GRA", (const int)800, (const int)700);
+	scene = new MyScene(argc, argv, "3D Interior Decoration", (const int)800, (const int)700);
     
 	// Start the engine running
 	scene->Run();

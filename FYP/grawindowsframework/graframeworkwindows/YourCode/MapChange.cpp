@@ -36,7 +36,12 @@ MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight, char b
 	bookCaseId = Scene::GetTexture("./Resources/textures/BookCase.bmp");
 	wardrobeId = Scene::GetTexture("./Resources/textures/Wardrobe.bmp");
 	kitchenTableId = Scene::GetTexture("./Resources/textures/KitchenTablee.bmp");
-	
+	questionMarkId = Scene::GetTexture("./Resources/textures/QuestionMark.bmp");
+	horizonId = Scene::GetTexture("./Resources/textures/horizon.bmp");
+	smallSizeId = Scene::GetTexture("./Resources/textures/SmallSize.bmp");
+	mediumSizeId = Scene::GetTexture("./Resources/textures/MediumSize.bmp");
+	largeSizeId = Scene::GetTexture("./Resources/textures/LargeSize.bmp");
+	logoId = Scene::GetTexture("./Resources/textures/Logo.bmp");
 
 	textures[0] = floorTexId;
 	textures[1] = wallTexId;
@@ -52,7 +57,7 @@ MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight, char b
 	textures[11] = wardrobeId;
 	textures[12] = bookCaseId;
 	textures[13] = kitchenTableId;
-	printf("text 13: %d\n",textures[13]);
+
 }
 
 MapChange::~MapChange(void)
@@ -101,12 +106,6 @@ void MapChange::Draw()
 		First quads is file1, second is file2, third is file3
 		*/
 		
-		glPopMatrix();
-		glPushMatrix();
-		if (optionOpen)
-		{
-			glTranslatef(-480.0f, -420.0f, 0.0f);	
-		}
 		glPopMatrix();
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -175,7 +174,7 @@ void MapChange::HandleMouseClick(int button, int state, int x, int y)
 void MapChange::DrawUnitBlock(int x, int z)
 {
 	glBegin(GL_QUADS);
-	glNormal3f(0.0f, 1.0f, 0.0f);
+	glNormal3f(0.0f, 0.0f, 1.0f);
 	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(x * colSize, z *rowSize, -10.0f);
 	glTexCoord2d(1.0f, 0.0f);
@@ -211,8 +210,9 @@ void MapChange::DrawForSizeOne()
 	}
 	if (optionOpen)
 	{
-		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
+		glBindTexture(GL_TEXTURE_2D, questionMarkId);
 		DrawUnitBlock(newX, newY);
+		glBindTexture(GL_TEXTURE_2D, 0);
 		glPushMatrix();
 		glTranslatef(0.0f, 3.0f, 0.0f);
 		DrawOptionPage();
@@ -220,36 +220,67 @@ void MapChange::DrawForSizeOne()
 	}
 
 	glTranslatef(80.0f, 635.0f, 0.0f);
-	glColor3f(1.0f, 0.0f, 0.0f);
+	glBindTexture(GL_TEXTURE_2D, horizonId);
 	glBegin(GL_QUADS); // Full horizontal Quads
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f(800.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(800.0f, 20.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(0.0f, 20.0f, -10.0f);
 	glEnd();
 	glTranslatef(0.0f, 20.0f, 0.0f);
-	glColor3f(1.0f, 0.0f, 1.0f);
+
+	glBindTexture(GL_TEXTURE_2D, mediumSizeId);
 	glBegin(GL_QUADS); // first file
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f(150.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(150.0f, 100.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(0.0f, 100.0f, -10.0f);
 	glEnd();
-	glColor3f(0.0f, 1.0f, 1.0f);
+
+	glBindTexture(GL_TEXTURE_2D, smallSizeId);
 	glBegin(GL_QUADS); //second file
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(150.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f(300.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(300.0f, 100.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(150.0f, 100.0f, -10.0f);
 	glEnd();
-	glColor3f(0.0f, 0.0f, 1.0f);
+
+	glBindTexture(GL_TEXTURE_2D, largeSizeId);
 	glBegin(GL_QUADS); //third file
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(300.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f(450.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(450.0f, 100.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(300.0f, 100.0f, -10.0f);
 	glEnd();
-	glColor3f(1.0f, 1.0f, 1.0f);
+
+	glBindTexture(GL_TEXTURE_2D, logoId);
+	glBegin(GL_QUADS); //logo
+	glTexCoord2d(0.0f, 0.0f);
+	glVertex3f(450.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
+	glVertex3f(800.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
+	glVertex3f(800.0f, 100.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
+	glVertex3f(450.0f, 100.0f, -10.0f);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void MapChange::DrawForSizeTwo()
@@ -274,7 +305,7 @@ void MapChange::DrawForSizeTwo()
 	}
 	if (optionOpen)
 	{
-		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
+		glBindTexture(GL_TEXTURE_2D, questionMarkId);
 		DrawUnitBlock(newX, newY);
 		glTranslatef(33.0f, 20.0f, 0.0f);
 		DrawOptionPage();
@@ -282,36 +313,66 @@ void MapChange::DrawForSizeTwo()
 	}
 
 	glTranslatef(113.0f, 630.0f, 0.0f);
-	glColor3f(1.0f, 0.0f, 0.0f);
+	glBindTexture(GL_TEXTURE_2D, horizonId);
 	glBegin(GL_QUADS);
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f(800.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(800.0f, 20.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(0.0f, 20.0f, -10.0f);
 	glEnd();
 	glTranslatef(0.0f, 20.0f, 0.0f);
-	glColor3f(1.0f, 0.0f, 1.0f);
-	glBegin(GL_QUADS);
+	glBindTexture(GL_TEXTURE_2D, mediumSizeId);
+	glBegin(GL_QUADS); // first file
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f(150.0f, 0.0f, -10.0f);
-	glVertex3f(150.0f, 150.0f, -10.0f);
-	glVertex3f(0.0f, 150.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
+	glVertex3f(150.0f, 150.0, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
+	glVertex3f(0.0f, 150.0, -10.0f);
 	glEnd();
-	glColor3f(0.0f, 1.0f, 1.0f);
-	glBegin(GL_QUADS);
+	
+	glBindTexture(GL_TEXTURE_2D, smallSizeId);
+	glBegin(GL_QUADS); //second file
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(150.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f(300.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(300.0f, 150.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(150.0f, 150.0f, -10.0f);
 	glEnd();
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glBegin(GL_QUADS);
+	
+	glBindTexture(GL_TEXTURE_2D, largeSizeId);
+	glBegin(GL_QUADS); //third file
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(300.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f(450.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(450.0f, 150.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(300.0f, 150.0f, -10.0f);
 	glEnd();
-	glColor3f(1.0f, 1.0f, 1.0f);
+
+	glBindTexture(GL_TEXTURE_2D, logoId);
+	glBegin(GL_QUADS); //logo
+	glTexCoord2d(0.0f, 0.0f);
+	glVertex3f(450.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
+	glVertex3f(800.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
+	glVertex3f(800.0f, 150.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
+	glVertex3f(450.0f, 150.0f, -10.0f);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
 	
 }
 void MapChange::DrawForSizeThree()
@@ -336,42 +397,73 @@ void MapChange::DrawForSizeThree()
 	}
 	if (optionOpen)
 	{
-		glBindTexture(GL_TEXTURE_2D, ceilingTexId);
+		glBindTexture(GL_TEXTURE_2D, questionMarkId);
 		DrawUnitBlock(newX, newY);
 		DrawOptionPage();
 	}
 
 	glTranslatef(80.0f, 645.0f, 0.0f);
-	glColor3f(1.0f, 0.0f, 0.0f);
+	glBindTexture(GL_TEXTURE_2D, horizonId);
 	glBegin(GL_QUADS);
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f(800.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(800.0f, 20.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(0.0f, 20.0f, -10.0f);
 	glEnd();
 	glTranslatef(0.0f, 20.0f, 0.0f);
-	glColor3f(1.0f, 0.0f, 1.0f);
-	glBegin(GL_QUADS);
+
+	glBindTexture(GL_TEXTURE_2D, mediumSizeId);
+	glBegin(GL_QUADS); // first file
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f(150.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(150.0f, 90.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(0.0f, 90.0f, -10.0f);
 	glEnd();
-	glColor3f(0.0f, 1.0f, 1.0f);
-	glBegin(GL_QUADS);
+
+	glBindTexture(GL_TEXTURE_2D, smallSizeId);
+	glBegin(GL_QUADS); //second file
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(150.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f(300.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(300.0f, 90.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(150.0f, 90.0f, -10.0f);
 	glEnd();
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glBegin(GL_QUADS);
+
+	glBindTexture(GL_TEXTURE_2D, largeSizeId);
+	glBegin(GL_QUADS); //third file
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(300.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f(450.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(450.0f, 90.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(300.0f, 90.0f, -10.0f);
 	glEnd();
-	glColor3f(1.0f, 1.0f, 1.0f);
+
+	glBindTexture(GL_TEXTURE_2D, logoId);
+	glBegin(GL_QUADS); //logo
+	glTexCoord2d(0.0f, 0.0f);
+	glVertex3f(450.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 0.0f);
+	glVertex3f(800.0f, 0.0f, -10.0f);
+	glTexCoord2d(1.0f, 1.0f);
+	glVertex3f(800.0f, 90.0f, -10.0f);
+	glTexCoord2d(0.0f, 1.0f);
+	glVertex3f(450.0f, 90.0f, -10.0f);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void MapChange::DrawOptionPage()

@@ -300,7 +300,7 @@ void Floor::Draw()
 				{
 					
 					glPushMatrix();
-					glTranslatef(x*SIZE + SIZE / 2, -8.0f, z*SIZE + SIZE / 2);
+					glTranslatef(x*SIZE, -8.0f, z*SIZE + SIZE / 2);
 					glScalef(20.0f, 20.0f, 20.0f);
 					sofa.RenderModel();
 					glPopMatrix();
