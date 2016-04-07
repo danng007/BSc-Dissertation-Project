@@ -78,10 +78,10 @@ void Scene::HandleResize(int w, int h)
 
 void Scene::HandleKey( int key, int state, int x, int y )
 {
-	if (state == 0 && (key == ' '))
+	if (state == 0 && (key == 'o' || key == 'O'))
 	{
 		gameStart = !gameStart;
-		printf("scence space\n");
+		printf("o\n");
 	}
     camera.HandleKey(key, state, x, y);
 	for( Object *obj : sceneObjs )

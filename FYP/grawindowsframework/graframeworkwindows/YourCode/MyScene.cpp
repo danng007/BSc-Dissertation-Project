@@ -20,24 +20,22 @@ void MyScene::Init()
 {
 
 	glewInit();
-    // set background colour
+   
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	ReadFile();
-	//c = new Cube();
-//	AddObjectToScene(c);
-
 
 	KeyControl *keyControl = new KeyControl();
 	AddObjectToScene(keyControl);
 
+	Camera * currentCamera = GetCamera();
 
-	MapGenerator *mapGenerator = new MapGenerator(keyControl, mapWidth, mapHeight);
+	MapGenerator *mapGenerator = new MapGenerator(keyControl, mapWidth, mapHeight, currentCamera);
 	AddObjectToScene(mapGenerator);
 
 	Floor *f = new Floor(keyControl, mapWidth, mapHeight, buffer, mapGenerator);
 	AddObjectToScene(f);
 
-	//char *[100]bufferp = buffer;
+
 
 	MapChange *mapChange = new MapChange(keyControl, mapWidth, mapHeight, buffer, mapGenerator);
 	AddObjectToScene(mapChange);
@@ -45,8 +43,8 @@ void MyScene::Init()
 	Sky *sky = new Sky();
 	AddObjectToScene(sky);
 
-	Camera * currentCamera = GetCamera();
-	currentCamera->GetBuffer(mapGenerator->GetBuffer());
+
+
 	// for example: create and add a new triangle to the scene
   
 }

@@ -46,68 +46,6 @@ Camera::~Camera()
 {
 }
 
-//
-//void Camera::ReadFile1()
-//{
-//	int j = 0, k = 0;
-//	int length;
-//	myfile.open("./file.txt");      // open input file  
-//	string s;
-//	if (myfile.good()) {
-//		while (getline(myfile, s)) {
-//			for (int i = 0; i < s.size(); i++) {
-//				file1[j][k] = s[i];
-//				cout << file1[j][k];
-//				k++;
-//			}
-//			k = 0;
-//			j++;
-//			cout << endl;
-//		}
-//	}
-//	cout << "Camera Read file1 Finish\n";
-//	myfile.close();
-//}
-//void Camera::ReadFile2()
-//{
-//	int j = 0, k = 0;
-//	int length;
-//	myfile.open("./file2.txt");      // open input file  
-//	string s;
-//	if (myfile.good()) {
-//		while (getline(myfile, s)) {
-//			for (int i = 0; i < s.size(); i++) {
-//				file2[j][k] = s[i];
-//				k++;
-//			}
-//			k = 0;
-//			j++;
-//		}
-//	}
-//	cout << "Camera Read file2 Finish\n";
-//	myfile.close();
-//}
-//
-//void Camera::ReadFile3()
-//{
-//	int j = 0, k = 0;
-//	int length;
-//	myfile.open("./file3.txt");      // open input file  
-//	string s;
-//	if (myfile.good()) {
-//		while (getline(myfile, s)) {
-//			for (int i = 0; i < s.size(); i++) {
-//				file3[j][k] = s[i];
-//				k++;
-//			}
-//			k = 0;
-//			j++;
-//		}
-//	}
-//	cout << "Camera Read file3 Finish\n";
-//	myfile.close();
-//}
-
 
 void Camera::GetEyePosition( float &x, float &y, float &z) const
 {
@@ -179,7 +117,15 @@ void Camera::Update( const double& deltaTime )
     
     // variable to control how fast the camera moves in any one direction
     float speed = 50.0f * deltaTime;
-	
+	int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
+	int y = ((int)eye[2] + 300) / 50;
+	if (file[x][y] == 'b' || file[x][y] == 'c')
+	{
+		preEye[0] = eye[0];
+		preEye[1] = eye[1];
+		preEye[2] = eye[2];
+		sub(eye, forward, speed);
+	} //Judge if current eye in wall or window, if yes, move forward one step.
     if( aKey )
     {
       
@@ -192,6 +138,7 @@ void Camera::Update( const double& deltaTime )
 		sub(eye, right, speed);
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
+		printf("Camera.cpp x = %d, y = %d C= %c\n", x, y, file[x][y]);
 		if (file[x][y] == 'b' || file[x][y] == 'c')
 		{
 			eye[0] = preEye[0];
@@ -208,7 +155,7 @@ void Camera::Update( const double& deltaTime )
 		add(eye, right, speed);
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
-		printf("Camera.cpp x = %d, y = %d\n", x, y);
+		printf("Camera.cpp x = %d, y = %d C= %c\n", x, y, file[x][y]);
 		if (file[x][y] == 'b' || file[x][y] == 'c')
 		{
 			eye[0] = preEye[0];
@@ -226,7 +173,7 @@ void Camera::Update( const double& deltaTime )
         add(eye, forward, speed);
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
-		printf("Camera.cpp x = %d, y = %d\n", x, y);
+		printf("Camera.cpp x = %d, y = %d C= %c\n", x, y, file[x][y]);
 		if (file[x][y] == 'b' || file[x][y] == 'c')
 		{
 			eye[0] = preEye[0];
@@ -243,7 +190,7 @@ void Camera::Update( const double& deltaTime )
 		sub(eye, forward, speed);
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
-		printf("Camera.cpp x = %d, y = %d\n", x, y);
+		printf("Camera.cpp x = %d, y = %d C= %c\n", x, y, file[x][y]);
 		if (file[x][y] == 'b' || file[x][y] == 'c')
 		{
 			eye[0] = preEye[0];

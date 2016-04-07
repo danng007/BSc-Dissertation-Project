@@ -66,7 +66,6 @@ void Floor::DrawSingleWall(int x, int z, float wallHeight, float y) // firstly, 
 {
 	
 
-
 	//Unite center wall
 	glColor3f(1.0f, 1.0f, 1.0f);//white
 	DrawUnitWall(x, z, wallHeight, y, 1, 1);
@@ -76,7 +75,6 @@ void Floor::DrawSingleWall(int x, int z, float wallHeight, float y) // firstly, 
 	if ((x - 1 >= 0) && (generatorMap->GetBufferChar(x - 1, z) == 'b' || generatorMap->GetBufferChar(x - 1, z) == 'c' || generatorMap->GetBufferChar(x - 1, z) == 'd'))
 	{
 		DrawUnitWall(x, z, wallHeight, y, 0, 1);
-		
 	}
 	if ((x + 1 < widthUnit) && (generatorMap->GetBufferChar(x + 1, z) == 'b' || generatorMap->GetBufferChar(x + 1, z) == 'c' || generatorMap->GetBufferChar(x + 1, z) == 'd'))
 	{

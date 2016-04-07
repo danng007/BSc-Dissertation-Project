@@ -218,7 +218,7 @@ void MapChange::DrawForSizeOne()
 		DrawOptionPage();
 		glPopMatrix();
 	}
-
+	glPushMatrix();
 	glTranslatef(80.0f, 635.0f, 0.0f);
 	glBindTexture(GL_TEXTURE_2D, horizonId);
 	glBegin(GL_QUADS); // Full horizontal Quads
@@ -281,6 +281,7 @@ void MapChange::DrawForSizeOne()
 	glVertex3f(450.0f, 100.0f, -10.0f);
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
+	glPopMatrix();
 }
 
 void MapChange::DrawForSizeTwo()
@@ -312,7 +313,7 @@ void MapChange::DrawForSizeTwo()
 		DrawOptionPage();
 		glPopMatrix();
 	}
-
+	glPushMatrix();
 	glTranslatef(113.0f, 630.0f, 0.0f);
 	glBindTexture(GL_TEXTURE_2D, horizonId);
 	glBegin(GL_QUADS);
@@ -374,7 +375,7 @@ void MapChange::DrawForSizeTwo()
 	glVertex3f(450.0f, 150.0f, -10.0f);
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
-	
+	glPopMatrix();
 }
 void MapChange::DrawForSizeThree()
 {
@@ -404,7 +405,7 @@ void MapChange::DrawForSizeThree()
 		DrawOptionPage();
 		glPopMatrix();
 	}
-
+	glPushMatrix();
 	glTranslatef(80.0f, 645.0f, 0.0f);
 	glBindTexture(GL_TEXTURE_2D, horizonId);
 	glBegin(GL_QUADS);
@@ -467,6 +468,7 @@ void MapChange::DrawForSizeThree()
 	glVertex3f(450.0f, 90.0f, -10.0f);
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
+	glPopMatrix();
 }
 
 void MapChange::DrawOptionPage()
@@ -486,6 +488,8 @@ void MapChange::DrawOptionPage()
 	glVertex3f(150, 400, -10.0f);
 	glEnd(); //bottom page of option page
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	
 	glTranslatef(150.0f, 0.0f, 0.0f);
 	for (int i = 0; i < 7; i++)
 	{
