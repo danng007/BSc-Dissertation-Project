@@ -307,9 +307,10 @@ void MapChange::DrawForSizeTwo()
 	{
 		glBindTexture(GL_TEXTURE_2D, questionMarkId);
 		DrawUnitBlock(newX, newY);
+		glPushMatrix();
 		glTranslatef(33.0f, 20.0f, 0.0f);
 		DrawOptionPage();
-		glTranslatef(-33.0f, -20.0f, 0.0f);
+		glPopMatrix();
 	}
 
 	glTranslatef(113.0f, 630.0f, 0.0f);
@@ -399,7 +400,9 @@ void MapChange::DrawForSizeThree()
 	{
 		glBindTexture(GL_TEXTURE_2D, questionMarkId);
 		DrawUnitBlock(newX, newY);
+		glPushMatrix();
 		DrawOptionPage();
+		glPopMatrix();
 	}
 
 	glTranslatef(80.0f, 645.0f, 0.0f);
@@ -469,8 +472,8 @@ void MapChange::DrawForSizeThree()
 void MapChange::DrawOptionPage()
 {
 	int x = 2, z = 4;
+	glBindTexture(GL_TEXTURE_2D, ceilingTexId);
 	
-	glColor3f(1.0f, 0.0f, 1.0f);
 	glBegin(GL_QUADS);
 	glNormal3f(0.0f, 1.0f, 0.0f);
 	glTexCoord2d(0.0f, 0.0f);
@@ -482,7 +485,7 @@ void MapChange::DrawOptionPage()
 	glTexCoord2d(0.0f, 1.0f);
 	glVertex3f(150, 400, -10.0f);
 	glEnd(); //bottom page of option page
-	glColor3f(1.0f, 1.0f, 1.0f);
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glTranslatef(150.0f, 0.0f, 0.0f);
 	for (int i = 0; i < 7; i++)
 	{
@@ -517,8 +520,6 @@ void MapChange::DrawOptionPage()
 		glEnd();
 		j++;
 	}
-	
-	
 	
 	
 }

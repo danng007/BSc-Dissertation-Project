@@ -16,10 +16,10 @@ void LoadModel::LoadOBJ(const char * path)
 
 		ifstream ifs(path);//cube bunny Eight
 		string s;
-		Mian *f;
+		Face *f;
 		POINT3 *v;
-		FaXiangLiang *vn;
-		WenLi    *vt;
+		Normals *vn;
+		Texture    *vt;
 		Material *mp;
 		while (getline(ifs, s))
 		{
@@ -29,7 +29,7 @@ void LoadModel::LoadOBJ(const char * path)
 				if (s[1] == 't')
 				{//vt 
 					istringstream in(s);
-					vt = new WenLi();
+					vt = new Texture();
 					string head;
 					in >> head >> vt->TU >> vt->TV;
 					m_pic.VT.push_back(*vt);
@@ -37,7 +37,7 @@ void LoadModel::LoadOBJ(const char * path)
 				else if (s[1] == 'n')
 				{//vn
 					istringstream in(s);
-					vn = new FaXiangLiang();
+					vn = new Normals();
 					string head;
 					in >> head >> vn->NX >> vn->NY >> vn->NZ;
 					m_pic.VN.push_back(*vn);
@@ -67,7 +67,7 @@ void LoadModel::LoadOBJ(const char * path)
 					if (s[k] == '/')s[k] = ' ';
 				}
 				istringstream in(s);
-				f = new Mian();
+				f = new Face();
 				string head;
 				in >> head;
 				int i = 0;

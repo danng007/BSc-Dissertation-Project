@@ -14,7 +14,7 @@ void KeyControl::HandleKey(int key, int state, int x, int y)
 	if (state == 0 && key == 'q')
 	{
 		gameStart = !gameStart;
-		printf("Q\n");
+		printf("KeyControlQ\n");
 	}
 }
 
