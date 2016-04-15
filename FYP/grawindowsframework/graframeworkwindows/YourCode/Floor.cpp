@@ -298,8 +298,8 @@ void Floor::Draw()
 				{
 					
 					glPushMatrix();
-					glTranslatef(x*SIZE, -8.0f, z*SIZE + SIZE / 2);
-					glScalef(20.0f, 20.0f, 20.0f);
+					glTranslatef((x - 2)*SIZE, -8.0f, z *SIZE + SIZE / 2);
+					glScalef(35.0f, 35.0f, 35.0f);
 					sofa.RenderModel();
 					glPopMatrix();
 					break;
@@ -415,11 +415,11 @@ void Floor::Update(const double& deltatime)
 
 	if (lightChange)
 	{
-		lightColour += 0.1f * deltatime;
+		lightColour += 1.0f * deltatime;
 	}
 	else
 	{
-		lightColour -= 0.1f * deltatime;
+		lightColour -= 1.1f * deltatime;
 	}
 	if (lightColour >= 1.0f )
 	{

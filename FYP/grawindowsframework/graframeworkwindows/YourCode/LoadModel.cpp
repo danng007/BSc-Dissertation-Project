@@ -108,21 +108,18 @@ void LoadModel::RenderModel()
 	counter = 0;
 	if (m_pic.M.size() > 0)
 	{
-
 		glBindTexture(GL_TEXTURE_2D, textIDs[counter]);
 	
 	}
-	
 		for (int i = 0; i<m_pic.F.size(); i++)
 		{
-			
 			if (outCounter == faceCounter[counter] && counter + 1 < m_pic.M.size())
 			{
 				counter++;
 				outCounter = 0;
 				glBindTexture(GL_TEXTURE_2D, textIDs[counter]);
 			}
-			glBegin(GL_TRIANGLES);                            // 绘制三角形GL_TRIANGLES;GL_LINE_LOOP;GL_LINES;GL_POINTS
+			glBegin(GL_TRIANGLES);                           
 			if (m_pic.VT.size() != 0)glTexCoord2f(m_pic.VT[m_pic.F[i].T[0]].TU, m_pic.VT[m_pic.F[i].T[0]].TV);  //textures   
 			if (m_pic.VN.size() != 0)glNormal3f(m_pic.VN[m_pic.F[i].N[0]].NX, m_pic.VN[m_pic.F[i].N[0]].NY, m_pic.VN[m_pic.F[i].N[0]].NZ);//f vectore
 			glVertex3f(m_pic.V[m_pic.F[i].V[0]].X / YU, m_pic.V[m_pic.F[i].V[0]].Y / YU, m_pic.V[m_pic.F[i].V[0]].Z / YU);        // vertices 
@@ -136,7 +133,6 @@ void LoadModel::RenderModel()
 			glVertex3f(m_pic.V[m_pic.F[i].V[2]].X / YU, m_pic.V[m_pic.F[i].V[2]].Y / YU, m_pic.V[m_pic.F[i].V[2]].Z / YU);  
 			glEnd();
 			outCounter++;
-
 		}
 		
 	glBindTexture(GL_TEXTURE_2D, 0);

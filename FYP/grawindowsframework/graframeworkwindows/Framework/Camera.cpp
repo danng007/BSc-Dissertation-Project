@@ -92,7 +92,8 @@ void Camera::SetUpCamera()
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 	// orthographic projection
-    //glOrtho(-windowWidth/2, windowWidth/2, -windowHeight/2, windowHeight/2, 1.0, 1000.0);	
+   // glOrtho(-windowWidth/2, windowWidth/2, -windowHeight/2, windowHeight/2, 1.0, 1000.0);	
+	
 	gluPerspective(60.0, (GLdouble)windowWidth / (GLdouble)windowHeight, 1.0, 100000); //Normal view (First person view)
     // clear the old model view matrix by loading the identity matrix
     glMatrixMode(GL_MODELVIEW);
@@ -135,15 +136,14 @@ void Camera::Update( const double& deltaTime )
 		preEye[0] = eye[0];
 		preEye[1] = eye[1];
 		preEye[2] = eye[2]; 
-		sub(eye, right, speed);
+		sub(eye, right, speed);//move in right direction
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
-		printf("Camera.cpp x = %d, y = %d C= %c\n", x, y, file[x][y]);
 		if (file[x][y] == 'b' || file[x][y] == 'c')
 		{
 			eye[0] = preEye[0];
 			eye[1] = preEye[1];
-			eye[2] = preEye[2];
+			eye[2] = preEye[2];//withdraw this move
 		}
     }
     

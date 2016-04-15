@@ -295,7 +295,7 @@ void MapChange::DrawForSizeTwo()
 		for (int x = xPos; x < widthUnit + xPos; x++)
 		{
 			caseNumber = (int)(generatorMap->GetBufferChar(x - xPos, z - zPos)) - 97;
-			if (caseNumber >= 0 && caseNumber <= 12)
+			if (caseNumber >= 0 && caseNumber <= 13)
 			{
 				//printf("caseNumber = %d \n",caseNumber);
 				glBindTexture(GL_TEXTURE_2D, textures[caseNumber]);
@@ -388,9 +388,8 @@ void MapChange::DrawForSizeThree()
 		for (int x = xPos; x < widthUnit + xPos; x++)
 		{
 			caseNumber = (int)(generatorMap->GetBufferChar(x - xPos, z - zPos)) - 97;
-			if (caseNumber >= 0 && caseNumber <= 12)
+			if (caseNumber >= 0 && caseNumber <= 13)
 			{
-				//printf("caseNumber = %d \n",caseNumber);
 				glBindTexture(GL_TEXTURE_2D, textures[caseNumber]);
 				DrawUnitBlock(x, z);
 			}
