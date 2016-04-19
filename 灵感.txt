@@ -1,3 +1,0 @@
-1.对比用stl 与 change state 3D->2D 来转换画面 的方法的区别
-2.2D区域： 鼠标坐标确定区域， 点击之后输入or选择。 problem：如何做到OpenGL与普通的点击输入功能的交互？especially 输入及改变输入的显示。
-3.未来功能：自动导入模型or图片。 Oculus 替换camera？

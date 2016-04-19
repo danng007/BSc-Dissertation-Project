@@ -1,3 +1,0 @@
-ResizeFunc() <---StaticEngine.  Window size change setting.
-
-camera speed -> using speed * deealtaTime will fix the update speed problem.

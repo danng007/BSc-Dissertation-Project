@@ -16,7 +16,9 @@ void Sky::Draw()
 {
 	if (!Scene::GetGameStart())
 	{
+		
 		glPushMatrix();
+		glTranslatef(0.0f, 9909.0f, 0.0f);
 		glScalef(10000.0f, 10000.0f, 10000.0f);
 		//NEAR
 		glBindTexture(GL_TEXTURE_2D, textures[0]);
@@ -64,3 +66,4 @@ void Sky::DrawSurface()
 	glVertex3f(1, 1, 1);
 	glEnd();
 }
+

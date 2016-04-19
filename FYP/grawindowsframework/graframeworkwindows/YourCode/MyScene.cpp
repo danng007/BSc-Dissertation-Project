@@ -4,9 +4,7 @@ Use this as the starting point to your work. Include the header file for each ob
 */
 
 #include "MyScene.h"
-#include "Triangle.h"
 #include "Floor.h"
-#include "KeyControl.h"
 #include "MapChange.h"
 #include "MapGenerator.h"
 #include "Sky.h"
@@ -22,51 +20,21 @@ void MyScene::Init()
 	glewInit();
    
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	ReadFile();
-
-	KeyControl *keyControl = new KeyControl();
-	AddObjectToScene(keyControl);
 
 	Camera * currentCamera = GetCamera();
 
-	MapGenerator *mapGenerator = new MapGenerator(keyControl, mapWidth, mapHeight, currentCamera);
+	MapGenerator *mapGenerator = new MapGenerator( mapWidth, mapHeight, currentCamera);
 	AddObjectToScene(mapGenerator);
 
-	Floor *f = new Floor(keyControl, mapWidth, mapHeight, buffer, mapGenerator);
+	Floor *f = new Floor( mapWidth, mapHeight, buffer, mapGenerator);
 	AddObjectToScene(f);
 
-
-
-	MapChange *mapChange = new MapChange(keyControl, mapWidth, mapHeight, buffer, mapGenerator);
+	MapChange *mapChange = new MapChange( mapWidth, mapHeight, buffer, mapGenerator);
 	AddObjectToScene(mapChange);
 
 	Sky *sky = new Sky();
 	AddObjectToScene(sky);
 
-
-
-	// for example: create and add a new triangle to the scene
   
 }
 
-void MyScene::ReadFile()
-{
-	int j = 0, k = 0;
-	int length;
-	myfile.open("./file.txt");      // open input file  
-	string s;
-	if (myfile.good()) {
-		while (getline(myfile, s)) {
-			for (int i = 0; i < s.size(); i++) {
-				buffer[j][k] = s[i];
-				k++;
-			}
-			mapHeight = k;
-			k = 0;
-			j++;
-		}
-	}
-	mapWidth = j;
-	printf( "MyScene Read Finish, mapWidth = %d, mapHeight = %d\n", mapWidth, mapHeight);
-	myfile.close();
-}

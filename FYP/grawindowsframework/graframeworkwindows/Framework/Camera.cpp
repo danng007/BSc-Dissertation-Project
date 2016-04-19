@@ -11,9 +11,7 @@ You may change the implementation of these functions to improve the quality of t
 Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), currentButton(0), mouseX(0), mouseY(0)
 {
 	
-	/*ReadFile1();
-	ReadFile2();
-	ReadFile3();*/
+
     // set the camera position to start at (0,0,0)
     eye[0] = 0.0f;
     eye[1] = 0.0f;
@@ -39,7 +37,7 @@ Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), currentButton(0), mouseX(
     up[1] = 1.0f;
     up[2] = 0.0f;
 
-	//fileNumber = *file1;
+
 }
 
 Camera::~Camera()
@@ -155,7 +153,7 @@ void Camera::Update( const double& deltaTime )
 		add(eye, right, speed);
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
-		printf("Camera.cpp x = %d, y = %d C= %c\n", x, y, file[x][y]);
+	
 		if (file[x][y] == 'b' || file[x][y] == 'c')
 		{
 			eye[0] = preEye[0];
@@ -173,7 +171,7 @@ void Camera::Update( const double& deltaTime )
         add(eye, forward, speed);
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
-		printf("Camera.cpp x = %d, y = %d C= %c\n", x, y, file[x][y]);
+		
 		if (file[x][y] == 'b' || file[x][y] == 'c')
 		{
 			eye[0] = preEye[0];
@@ -190,7 +188,7 @@ void Camera::Update( const double& deltaTime )
 		sub(eye, forward, speed);
 		int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 		int y = ((int)eye[2] + 300) / 50;
-		printf("Camera.cpp x = %d, y = %d C= %c\n", x, y, file[x][y]);
+	
 		if (file[x][y] == 'b' || file[x][y] == 'c')
 		{
 			eye[0] = preEye[0];
@@ -206,32 +204,26 @@ void Camera::HandleKey( int key, int state, int x, int y )
     // toggle booleans to remember which key was pressed/released ready for the update function
 	if (!Scene::GetGameStart())
 	{
-		//int x = ((int)eye[0] + 300 )/ 50; // translate the current position to map file position
-		//int y = ((int)eye[2] + 300) / 50;
+
 		switch (key) {
 		case 'A':
 		case 'a':
-		/*	printf("Move Left x = %f  y = %f  z = %f\n", eye[0], eye[1], eye[2]);
-			printf("x= %d, y= %d, block = %c\n",x,y, buffer[x][y]);*/
+
 			aKey = state;
 			break;
 		case 'D':
-		case 'd':/*
-			printf("Move Right x = %f  y = %f  z = %f\n", eye[0], eye[1], eye[2]);
-			printf("x= %d, y= %d, block = %c\n", x, y, buffer[x][y]);*/
+		case 'd':
 			dKey = state;
 			break;
 		case 'W':
 		case 'w':
-	/*		printf("Move Forward x = %f  y = %f  z = %f\n", eye[0], eye[1], eye[2]);
-			printf("x= %d, y= %d, block = %c\n", x, y, buffer[x][y]);*/
+
 			wKey = state;
 			break;
 		case 'S':
 		case 's':
-		/*	printf("Move Back x = %f  y = %f  z = %f\n", eye[0], eye[1], eye[2]);
-			printf("x= %d, y= %d, block = %c\n", x, y, buffer[x][y]);
-		*/	sKey = state;
+
+		sKey = state;
 			break;
 		default:
 			break;

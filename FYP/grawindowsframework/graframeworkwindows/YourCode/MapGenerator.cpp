@@ -1,18 +1,16 @@
 #include "MapGenerator.h"
 #include "Scene.h"
 
-//#include "MyScene.h"
+
 #define SIZE 50.0f
 /*
 Room size:
-1 block as 2.5m2
-file: 9*8 (11*10 with walls) -> 180m2
-file2: 6*5 (8 * 7 with walls)-> 75m2
-file3: 12*8 (14 * 10 with walls)-> 240m2
-reference: uk regular house size...
+file: 9*8 (11*10 with walls)
+file2: 6*5 (8 * 7 with walls)
+file3: 12*8 (14 * 10 with walls)
 */
 
-MapGenerator::MapGenerator(KeyControl* keyControl, int mapWidth, int mapHeight, Camera* camera)
+MapGenerator::MapGenerator( int mapWidth, int mapHeight, Camera* camera)
 {
 	currentCamera = camera;
 	fileString = "./file.txt";
@@ -45,7 +43,6 @@ void MapGenerator::ReadFile(char buffer[][100], int* mapWidth, int* mapHeight)
 		while (getline(myfile, s)) {
 			for (int i = 0; i < s.size(); i++) {
 				buffer[j][k] = s[i];
-				cout << buffer[j][k];
 				k++;
 			}
 			lastk = k;
@@ -53,40 +50,32 @@ void MapGenerator::ReadFile(char buffer[][100], int* mapWidth, int* mapHeight)
 			k = 0;
 			lastj = j;
 			j++;
-			cout << endl;
 		}
 	}
 	*mapWidth = j;
-	cout << "mapGenerator read finish\n";
 	myfile.close();
 }
 
-void MapGenerator::HandleMouseClick(int button, int state, int x, int y)
+void MapGenerator::HandleMouseClick(int button, int state, int x, int y) //Detect based on mouse coordinate
 {
 	if (Scene::GetGameStart() && x <= 150 && y <= 120 && state == 1 && currentFile != 1)
 	{ 
-		
 		currentFile = 1;
-		currentCamera->GetBuffer(buffer1);
-
+		currentCamera->GetBuffer(buffer1); //Each time file changed, pass the different pointer to camera. Update the collision detection envirionment.
 	}
 	if (Scene::GetGameStart() && x > 150 && x <= 300 && y <= 100 && state == 1 && currentFile != 2)
 	{
-		
 		currentFile = 2;
 		currentCamera->GetBuffer(buffer2);
-	
 	}
 	if (Scene::GetGameStart() && x > 300 && x <= 450 && y <= 100 && state == 1 && currentFile != 3)
 	{
-		
 		currentFile = 3;
 		currentCamera->GetBuffer(buffer3);
-		
 	}
 }
 
-char MapGenerator::GetBufferChar(int x, int y)
+char MapGenerator::GetBufferChar(int x, int y) //map string get function
 {
 	char c;
 	switch (currentFile)
@@ -106,7 +95,7 @@ char MapGenerator::GetBufferChar(int x, int y)
 	return c;
 }
 
-void MapGenerator::SetBufferChar(int x, int y, char c)
+void MapGenerator::SetBufferChar(int x, int y, char c) //map string set function
 {
 	switch (currentFile)
 	{
@@ -124,11 +113,12 @@ void MapGenerator::SetBufferChar(int x, int y, char c)
 	}
 }
 
-int MapGenerator::GetCurrentFileNumber()
+int MapGenerator::GetCurrentFileNumber() //Return the reference number of current map
 {
 	return currentFile;
 }
-int MapGenerator::GetMapHeight()
+
+int MapGenerator::GetMapHeight() //Return the height of current map
 {
 	switch (currentFile)
 	{
@@ -145,7 +135,7 @@ int MapGenerator::GetMapHeight()
 		break;
 	}
 }
-int MapGenerator::GetMapWidth()
+int MapGenerator::GetMapWidth() //Return the width of current map
 {
 	switch (currentFile)
 	{
@@ -162,9 +152,8 @@ int MapGenerator::GetMapWidth()
 		break;
 	}
 }
-char(*MapGenerator::GetBuffer())[100]
+char(*MapGenerator::GetBuffer())[100] // Get the whole map string
 {
-	
 	switch (currentFile)
 	{
 	case 1:

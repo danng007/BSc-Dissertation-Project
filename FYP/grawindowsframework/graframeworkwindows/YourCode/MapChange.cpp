@@ -3,14 +3,13 @@
 
 //#include "MyScene.h"
 #define SIZE 50.0f
-MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight, char buffer[][100], MapGenerator* mapGenerator)
+MapChange::MapChange(int mapWidth, int mapHeight, char buffer[][100], MapGenerator* mapGenerator)
 {
 	//bufferp = buffer;
 	newX = 100, newY = 100;
 	blockX = 100, blockY = 100;
 	optionBlockX = 100, optionBlockY = 100;
 	
-	controlKey = keyControl;
 	generatorMap = mapGenerator;
 	widthUnit = generatorMap->GetMapWidth();
 	heightUnit = generatorMap->GetMapHeight();
@@ -19,44 +18,8 @@ MapChange::MapChange(KeyControl* keyControl, int mapWidth, int mapHeight, char b
 	zPos = 0;
 	width = Scene::GetWindowWidth();
 	height = Scene::GetWindowHeight();
-	printf("colsize = %f,  rowSize = %f \n", colSize, rowSize);
 	glEnable(GL_TEXTURE_2D);
-	wallTexId = Scene::GetTexture("./Resources/textures/wallPaper.bmp");
-	windowTexId = Scene::GetTexture("./Resources/textures/window.bmp");
-	floorTexId = Scene::GetTexture("./Resources/textures/floor.bmp");
-	ceilingTexId = Scene::GetTexture("./Resources/textures/ceiling.bmp");
-	doorTexId = Scene::GetTexture("./Resources/textures/door.bmp");
-	coffeeTableId = Scene::GetTexture("./Resources/textures/Table.bmp");
-	chairId = Scene::GetTexture("./Resources/textures/Chair.bmp");
-	bedId = Scene::GetTexture("./Resources/textures/Bed.bmp");
-	sofaId = Scene::GetTexture("./Resources/textures/Sofa.bmp");
-	toiletId = Scene::GetTexture("./Resources/textures/Toilet.bmp");
-	refrigeratorId = Scene::GetTexture("./Resources/textures/Refrigerator.bmp");
-	televisionId = Scene::GetTexture("./Resources/textures/TV.bmp");
-	bookCaseId = Scene::GetTexture("./Resources/textures/BookCase.bmp");
-	wardrobeId = Scene::GetTexture("./Resources/textures/Wardrobe.bmp");
-	kitchenTableId = Scene::GetTexture("./Resources/textures/KitchenTablee.bmp");
-	questionMarkId = Scene::GetTexture("./Resources/textures/QuestionMark.bmp");
-	horizonId = Scene::GetTexture("./Resources/textures/horizon.bmp");
-	smallSizeId = Scene::GetTexture("./Resources/textures/SmallSize.bmp");
-	mediumSizeId = Scene::GetTexture("./Resources/textures/MediumSize.bmp");
-	largeSizeId = Scene::GetTexture("./Resources/textures/LargeSize.bmp");
-	logoId = Scene::GetTexture("./Resources/textures/Logo.bmp");
-
-	textures[0] = floorTexId;
-	textures[1] = wallTexId;
-	textures[2] = windowTexId;
-	textures[3] = doorTexId;
-	textures[4] = sofaId;
-	textures[5] = bedId;
-	textures[6] = chairId;
-	textures[7] = coffeeTableId;
-	textures[8] = toiletId;
-	textures[9] = refrigeratorId;
-	textures[10] = televisionId;
-	textures[11] = wardrobeId;
-	textures[12] = bookCaseId;
-	textures[13] = kitchenTableId;
+	LoadTexture();
 
 }
 
@@ -74,7 +37,6 @@ void MapChange::Draw()
 		glMatrixMode(GL_PROJECTION);
 		glPushMatrix();
 		glLoadIdentity();
-		
 		glOrtho(-width / 2, width / 2, -height / 2, height / 2, 1.0, 1000.0); //change to image view position
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
@@ -83,10 +45,9 @@ void MapChange::Draw()
 		widthUnit = generatorMap->GetMapWidth();
 		heightUnit = generatorMap->GetMapHeight();
 
-		switch (currentFile)
+		switch (currentFile) //Each size get different layout, so that draw in different function
 		{
 		case 1:
-			
 			DrawForSizeOne();
 			break;
 		case 2:
@@ -100,12 +61,7 @@ void MapChange::Draw()
 			break;
 		}
 		
-		
-		/*
-		Draw the size change function button,
-		First quads is file1, second is file2, third is file3
-		*/
-		
+
 		glPopMatrix();
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -115,11 +71,7 @@ void MapChange::Draw()
 	}
 	
 }
-void MapChange::Update(const double& deltatime)
-{
-	
-	
-}
+
 void MapChange::HandleMouseClick(int button, int state, int x, int y)
 {
 	if (Scene::GetGameStart())
@@ -131,14 +83,13 @@ void MapChange::HandleMouseClick(int button, int state, int x, int y)
 				blockX = x / (int)colSize + 1;
 				if (generatorMap->GetCurrentFileNumber() == 1 || generatorMap->GetCurrentFileNumber() == 3)
 				{
-					blockY = heightUnit - (y - 10) / (int)rowSize; //the file 1 and file 3 have 10 pixels' calculation problem. here is dirty solution.
+					blockY = heightUnit - (y - 10) / (int)rowSize; 
 				}
 				else
 				{
 					blockY = heightUnit - y / (int)rowSize; // the whole file matrix rotate 90 degree in order to fits the screen more suitable, so the coordinate should be modified
 				}
 				
-				printf(" rowsize = %d, blockY = %d, bufferp[%d][%d] is %c \n", (int)rowSize,blockY,x, y, generatorMap->GetBufferChar(blockX, blockY));
 				if (optionOpen && x >= 80 && x <= 725 && y >= 360  && y <= 635)
 				{
 				
@@ -151,8 +102,7 @@ void MapChange::HandleMouseClick(int button, int state, int x, int y)
 					{
 						optionNum = (x - 70) / 93 + 7;
 					}
-					
-					printf("test = %d\n", optionNum);
+
 					generatorMap->SetBufferChar(newX, newY, optionNum + 97);
 					optionOpen = false;
 				}
@@ -160,7 +110,6 @@ void MapChange::HandleMouseClick(int button, int state, int x, int y)
 				{
 					if (!optionOpen && blockX >= 1 && blockX <= widthUnit - 2 && blockY >= 1 && blockY <= heightUnit - 2)
 					{
-						printf("Outside option choose\n");
 						newX = blockX;
 						newY = blockY;
 						optionOpen = true;
@@ -190,8 +139,8 @@ void MapChange::DrawForSizeOne()
 {
 	
 
-	colSize = Scene::GetWindowWidth() / 10; // heng Full
-	rowSize = Scene::GetWindowHeight() / 13; // shu  Give s size blank blocks at top
+	colSize = Scene::GetWindowWidth() / 10; // calculate width unit
+	rowSize = Scene::GetWindowHeight() / 13; //calculate height unit
 	glTranslatef(-480, -403, 0);
 	
 	for (int z = zPos; z < heightUnit + zPos; z++) // add modify value to X and Y, move 2D image to the middle of window
@@ -201,7 +150,6 @@ void MapChange::DrawForSizeOne()
 			caseNumber = (int)(generatorMap->GetBufferChar(x - xPos, z - zPos)) - 97;
 			if (caseNumber >= 0 && caseNumber <= 13)
 			{
-				//printf("caseNumber = %d \n",caseNumber);
 				glBindTexture(GL_TEXTURE_2D, textures[caseNumber]);
 				DrawUnitBlock(x, z);
 			}
@@ -287,8 +235,8 @@ void MapChange::DrawForSizeOne()
 void MapChange::DrawForSizeTwo()
 {
 
-	colSize = Scene::GetWindowWidth() / 7; // heng Full
-	rowSize = Scene::GetWindowHeight() / 10; // shu  Give s size blank blocks at top
+	colSize = Scene::GetWindowWidth() / 7; 
+	rowSize = Scene::GetWindowHeight() / 10; 
 	glTranslatef(-513, -420, 0);
 	for (int z = zPos; z < heightUnit + zPos; z++) // add modify value to X and Y, move 2D image to the middle of window
 	{
@@ -380,8 +328,8 @@ void MapChange::DrawForSizeTwo()
 void MapChange::DrawForSizeThree()
 {
 
-	colSize = Scene::GetWindowWidth() / 10; // heng Full
-	rowSize = Scene::GetWindowHeight() / 16; // shu  Give s size blank blocks at top
+	colSize = Scene::GetWindowWidth() / 10; 
+	rowSize = Scene::GetWindowHeight() / 16; 
 	glTranslatef(-480, -393, 0);
 	for (int z = zPos; z < heightUnit + zPos; z++) // add modify value to X and Y, move 2D image to the middle of window
 	{
@@ -490,7 +438,7 @@ void MapChange::DrawOptionPage()
 
 	
 	glTranslatef(150.0f, 0.0f, 0.0f);
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 7; i++) //First line's seven options
 	{
 		glBindTexture(GL_TEXTURE_2D, textures[i]);
 		glBegin(GL_QUADS);
@@ -507,7 +455,7 @@ void MapChange::DrawOptionPage()
 	}
 	glTranslatef(0.0f, -140.0f, 0.0f);
 	int j = 0;
-	for (int i = 7; i < 14; i++)
+	for (int i = 7; i < 14; i++) //second line's seven options
 	{
 		glBindTexture(GL_TEXTURE_2D, textures[i]);
 		glBegin(GL_QUADS);
@@ -525,4 +473,44 @@ void MapChange::DrawOptionPage()
 	}
 	
 	
+}
+
+void MapChange::LoadTexture()
+{
+	wallTexId = Scene::GetTexture("./Resources/textures/wallPaper.bmp");
+	windowTexId = Scene::GetTexture("./Resources/textures/window.bmp");
+	floorTexId = Scene::GetTexture("./Resources/textures/floor.bmp");
+	ceilingTexId = Scene::GetTexture("./Resources/textures/ceiling.bmp");
+	doorTexId = Scene::GetTexture("./Resources/textures/door.bmp");
+	coffeeTableId = Scene::GetTexture("./Resources/textures/Table.bmp");
+	chairId = Scene::GetTexture("./Resources/textures/Chair.bmp");
+	bedId = Scene::GetTexture("./Resources/textures/Bed.bmp");
+	sofaId = Scene::GetTexture("./Resources/textures/Sofa.bmp");
+	toiletId = Scene::GetTexture("./Resources/textures/Toilet.bmp");
+	refrigeratorId = Scene::GetTexture("./Resources/textures/Refrigerator.bmp");
+	televisionId = Scene::GetTexture("./Resources/textures/TV.bmp");
+	bookCaseId = Scene::GetTexture("./Resources/textures/BookCase.bmp");
+	wardrobeId = Scene::GetTexture("./Resources/textures/Wardrobe.bmp");
+	kitchenTableId = Scene::GetTexture("./Resources/textures/KitchenTable.bmp");
+	questionMarkId = Scene::GetTexture("./Resources/textures/QuestionMark.bmp");
+	horizonId = Scene::GetTexture("./Resources/textures/horizon.bmp");
+	smallSizeId = Scene::GetTexture("./Resources/textures/SmallSize.bmp");
+	mediumSizeId = Scene::GetTexture("./Resources/textures/MediumSize.bmp");
+	largeSizeId = Scene::GetTexture("./Resources/textures/LargeSize.bmp");
+	logoId = Scene::GetTexture("./Resources/textures/Logo.bmp");
+
+	textures[0] = floorTexId;
+	textures[1] = wallTexId;
+	textures[2] = windowTexId;
+	textures[3] = doorTexId;
+	textures[4] = sofaId;
+	textures[5] = bedId;
+	textures[6] = chairId;
+	textures[7] = coffeeTableId;
+	textures[8] = toiletId;
+	textures[9] = refrigeratorId;
+	textures[10] = televisionId;
+	textures[11] = wardrobeId;
+	textures[12] = bookCaseId;
+	textures[13] = kitchenTableId;
 }

@@ -4,20 +4,20 @@
 #include <iostream>
 #include <fstream>
 #include "MapGenerator.h"
-#include "KeyControl.h"
 using namespace std;
 class MapChange : public Object
 {
 public:
-	MapChange(KeyControl* keyControl, int mapWidth, int mapHeight, char buffer[][100], MapGenerator* mapGenerator);
+	MapChange( int mapWidth, int mapHeight, char buffer[][100], MapGenerator* mapGenerator);
 	~MapChange(void);
 	void Draw();
-	void Update(const double& deltatime);
+
 	
 	void HandleMouseClick(int button, int state, int x, int y);
 private:
 	int width = 0;
 	int height = 0;
+	void LoadTexture();
 	void DrawForSizeOne();
 	void DrawForSizeTwo();
 	void DrawForSizeThree();
@@ -33,7 +33,6 @@ private:
 	int caseNumber = 0;
 	bool clicked = false, optionOpen = false;
 	ifstream myfile;
-	KeyControl* controlKey;
 	MapGenerator* generatorMap;
 	void DrawOptionPage();
 	int textures[100];

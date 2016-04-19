@@ -30,7 +30,7 @@ void LoadModel::LoadOBJ(const char * path)
 				{//vt 
 					istringstream in(s);
 					vt = new Texture();
-					string head;
+					string head; //ignore first word
 					in >> head >> vt->TU >> vt->TV;
 					m_pic.VT.push_back(*vt);
 				}
@@ -58,13 +58,13 @@ void LoadModel::LoadOBJ(const char * path)
 				string head;
 				in >> head >> mp->filePath;
 				m_pic.M.push_back(*mp);
-				counter++;
-				faceCounter[counter] = 0;
+				counter++; //count number of faces
+				faceCounter[counter] = 0; //initialise
 			}
 			else if (s[0] == 'f'){//f 
 				faceCounter[counter] ++;
 				for (int k = s.size() - 1; k >= 0; k--){
-					if (s[k] == '/')s[k] = ' ';
+					if (s[k] == '/')s[k] = ' '; //divide string by '/'
 				}
 				istringstream in(s);
 				f = new Face();
@@ -96,7 +96,7 @@ void LoadModel::LoadOBJ(const char * path)
 		
 		for (int i = 0; i < m_pic.M.size(); i++)
 		{
-			filePath = "./Resources/models/" + m_pic.M[i].filePath + ".bmp";
+			filePath = "./Resources/models/" + m_pic.M[i].filePath + ".bmp"; // combine into full file address
 			filePaths[i] = filePath;
 			textIDs[i] = Scene::GetTexture(filePaths[i]);
 		}

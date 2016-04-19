@@ -39,9 +39,6 @@
     <ClInclude Include="YourCode\CourseworkScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="YourCode\Triangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\VectorMaths.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -51,25 +48,10 @@
     <ClInclude Include="YourCode\Floor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="YourCode\Cube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="YourCode\BaseColor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="YourCode\KeyControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="YourCode\MapChange.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="YourCode\Controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="YourCode\MapGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="YourCode\ModelLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="YourCode\LoadModel.h">
@@ -95,34 +77,16 @@
     <ClCompile Include="Framework\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="YourCode\Triangle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="YourCode\MyScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="YourCode\Floor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="YourCode\Cube.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="YourCode\BaseColor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="YourCode\KeyControl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="YourCode\MapChange.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="YourCode\Controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="YourCode\MapGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="YourCode\ModelLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="YourCode\LoadModel.cpp">

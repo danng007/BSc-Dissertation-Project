@@ -3,13 +3,12 @@
 #include "Object.h"
 #include <iostream>
 #include <fstream>
-#include "KeyControl.h"
 
 using namespace std;
 class MapGenerator : public Object
 {
 public:
-	MapGenerator(KeyControl* keyControl, int mapWidth, int mapHeight, Camera* camera);
+	MapGenerator( int mapWidth, int mapHeight, Camera* camera);
 	~MapGenerator(void);
 	void ReadFile(char buffer[][100], int* mapWidth, int* mapHeight);
 	void HandleMouseClick(int button, int state, int x, int y);
