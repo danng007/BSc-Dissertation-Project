@@ -46,7 +46,7 @@ void Sky::Draw()
 		//DOWN
 		glBindTexture(GL_TEXTURE_2D, textures[2]);
 		glRotatef(180, 1, 0, 0);
-		DrawSurface();
+		DrawDownSurface();
 		glBindTexture(GL_TEXTURE_2D, 0);
 		
 		glPopMatrix();
@@ -67,3 +67,16 @@ void Sky::DrawSurface()
 	glEnd();
 }
 
+void Sky::DrawDownSurface()
+{
+	glBegin(GL_QUADS);
+	glTexCoord2d(0.0f, 0.0f);
+	glVertex3f(1, -1, 1);
+	glTexCoord2d(50.0f, 0.0f);
+	glVertex3f(-1, -1, 1);
+	glTexCoord2d(50.0f, 50.0f);
+	glVertex3f(-1, 1, 1);
+	glTexCoord2d(0.0f, 50.0);
+	glVertex3f(1, 1, 1);
+	glEnd();
+}

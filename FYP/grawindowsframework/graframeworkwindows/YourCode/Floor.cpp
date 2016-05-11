@@ -7,9 +7,9 @@ Floor::Floor(int mapWidth, int mapHeight, char buffer[][100], MapGenerator* mapG
 {
 	generatorMap = mapGenerator;
 	widthUnit = mapGenerator->GetMapWidth();
-	heightUnit = mapGenerator->GetMapHeight();  
+	heightUnit = mapGenerator->GetMapHeight();
 	lightColour = 0.0f;
-	scale = 10; 
+	scale = 10;
 	wallHeight = 100.0f;
 	glEnable(GL_TEXTURE_2D);
 	LoadTexture();
@@ -27,26 +27,26 @@ Floor::~Floor(void)
 void Floor::DrawSingleFloor(int x, int z)
 {
 
-	glNormal3f(0.0f,1.0f,0.0f);
-	glTexCoord2d(0.0f,0.0f);
+	glNormal3f(0.0f, 1.0f, 0.0f);
+	glTexCoord2d(0.0f, 0.0f);
 	glVertex3f(x * SIZE, -9.9f, z *SIZE);
 	glTexCoord2d(1.0f, 0.0f);
 	glVertex3f((x + 1) * SIZE, -9.9f, z * SIZE);
 	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f((x + 1) * SIZE, -9.9f, (z + 1) *SIZE);
 	glTexCoord2d(0.0f, 1.0f);
-	glVertex3f(x* SIZE, -9.9f, (z+1 )* SIZE);
+	glVertex3f(x* SIZE, -9.9f, (z + 1)* SIZE);
 
 }
 void Floor::DrawSingleWall(int x, int z, float wallHeight, float y) // firstly, drawing normal floor, then drawing unit wall at the center of block, then extend the wall to their neighbours. 
 {
-	
+
 
 	//Unite center wall
 	glColor3f(1.0f, 1.0f, 1.0f);//white
 	DrawUnitWall(x, z, wallHeight, y, 1, 1);
 	//bottom : No bottom of wall is needed, as floor cover all bottom of room
-	
+
 	//Extend wall:
 	if ((x - 1 >= 0) && (generatorMap->GetBufferChar(x - 1, z) == 'b' || generatorMap->GetBufferChar(x - 1, z) == 'c' || generatorMap->GetBufferChar(x - 1, z) == 'd'))
 	{
@@ -67,7 +67,7 @@ void Floor::DrawSingleWall(int x, int z, float wallHeight, float y) // firstly, 
 }
 void Floor::DrawSingleWindow(int x, int z, float wallHeight, bool rowDirection)
 {
-	
+
 	if (!rowDirection) //Draw verticle wall
 	{
 		//back
@@ -110,19 +110,19 @@ void Floor::DrawSingleWindow(int x, int z, float wallHeight, bool rowDirection)
 		glVertex3f((x + 1) * SIZE, wallHeight, z *SIZE + 2 * SIZE / 3);
 		glTexCoord2d(0.0f, 1.0f);
 		glVertex3f((x + 1)* SIZE, wallHeight, z * SIZE + SIZE / 3);
-	
+
 	}
 	else //Draw horizon wall
 	{
 		glNormal3f(0.0, 1.0, 0.0);
 		glTexCoord2d(0.0f, 0.0f);
-		glVertex3f(x * SIZE + SIZE / 3, -10.0f, z *SIZE );
+		glVertex3f(x * SIZE + SIZE / 3, -10.0f, z *SIZE);
 		glTexCoord2d(1.0f, 0.0f);
-		glVertex3f(x * SIZE + 2 * SIZE / 3, -10.0f, z * SIZE );
+		glVertex3f(x * SIZE + 2 * SIZE / 3, -10.0f, z * SIZE);
 		glTexCoord2d(1.0f, 1.0f);
-		glVertex3f(x * SIZE + 2 * SIZE / 3, wallHeight, z *SIZE );
+		glVertex3f(x * SIZE + 2 * SIZE / 3, wallHeight, z *SIZE);
 		glTexCoord2d(0.0f, 1.0f);
-		glVertex3f(x* SIZE + SIZE / 3, wallHeight, z * SIZE );
+		glVertex3f(x* SIZE + SIZE / 3, wallHeight, z * SIZE);
 		//front
 		glNormal3f(0.0, 1.0, 0.0);
 		glTexCoord2d(0.0f, 0.0f);
@@ -130,36 +130,36 @@ void Floor::DrawSingleWindow(int x, int z, float wallHeight, bool rowDirection)
 		glTexCoord2d(1.0f, 0.0f);
 		glVertex3f(x * SIZE + 2 * SIZE / 3, -10.0f, (z + 1) * SIZE);
 		glTexCoord2d(1.0f, 1.0f);
-		glVertex3f(x * SIZE + 2 * SIZE / 3, wallHeight, (z + 1)*SIZE );
+		glVertex3f(x * SIZE + 2 * SIZE / 3, wallHeight, (z + 1)*SIZE);
 		glTexCoord2d(0.0f, 1.0f);
-		glVertex3f(x* SIZE + SIZE / 3, wallHeight, (z + 1)* SIZE );
+		glVertex3f(x* SIZE + SIZE / 3, wallHeight, (z + 1)* SIZE);
 		//left
 		glNormal3f(0.0, 1.0, 0.0);
 		glTexCoord2d(0.0f, 0.0f);
-		glVertex3f(x * SIZE + SIZE / 3, -10.0f, z * SIZE );
+		glVertex3f(x * SIZE + SIZE / 3, -10.0f, z * SIZE);
 		glTexCoord2d(1.0f, 0.0f);
 		glVertex3f(x * SIZE + SIZE / 3, -10.0f, (z + 1) * SIZE);
 		glTexCoord2d(1.0f, 1.0f);
-		glVertex3f(x * SIZE + SIZE / 3, wallHeight, (z + 1)*SIZE );
+		glVertex3f(x * SIZE + SIZE / 3, wallHeight, (z + 1)*SIZE);
 		glTexCoord2d(0.0f, 1.0f);
-		glVertex3f(x * SIZE + SIZE / 3, wallHeight, z * SIZE );
+		glVertex3f(x * SIZE + SIZE / 3, wallHeight, z * SIZE);
 		//right
 		glNormal3f(0.0, 1.0, 0.0);
 		glTexCoord2d(0.0f, 0.0f);
 		glVertex3f(x * SIZE + 2 * SIZE / 3, -10.0f, z * SIZE);
 		glTexCoord2d(1.0f, 0.0f);
-		glVertex3f(x * SIZE + 2 * SIZE / 3, -10.0f, (z + 1)* SIZE );
+		glVertex3f(x * SIZE + 2 * SIZE / 3, -10.0f, (z + 1)* SIZE);
 		glTexCoord2d(1.0f, 1.0f);
-		glVertex3f(x * SIZE + 2 * SIZE / 3, wallHeight, (z +1 ) *SIZE );
+		glVertex3f(x * SIZE + 2 * SIZE / 3, wallHeight, (z + 1) *SIZE);
 		glTexCoord2d(0.0f, 1.0f);
-		glVertex3f(x * SIZE + 2 * SIZE / 3, wallHeight, z * SIZE );
+		glVertex3f(x * SIZE + 2 * SIZE / 3, wallHeight, z * SIZE);
 	}
 	//bottom
 	glVertex3f(x * SIZE, -10.0f, z *SIZE);
 	glVertex3f((x + 1) * SIZE, -10.0f, z * SIZE);
 	glVertex3f((x + 1) * SIZE, -10.0f, (z + 1) *SIZE);
 	glVertex3f(x* SIZE, -10.0f, (z + 1)* SIZE);
-	
+
 }
 void Floor::DrawRoof(int x, int z)
 {
@@ -181,7 +181,7 @@ void Floor::Draw()
 	//glBindTexture should at the outside of glBegin and glEnd;
 	if (!Scene::GetGameStart()) //detect the game state, if game start then begin drawing
 	{
-		
+
 		widthUnit = generatorMap->GetMapWidth();
 		heightUnit = generatorMap->GetMapHeight();
 
@@ -189,13 +189,13 @@ void Floor::Draw()
 		glPushAttrib(GL_ALL_ATTRIB_BITS);
 		glDisable(GL_CULL_FACE);
 		glTranslatef(-300.0f, -20.0f, -300.0f);
-		
-		
+
+
 		for (int z = 0; z < heightUnit; z++)
 		{
 			for (int x = 0; x < widthUnit; x++)
 			{
-				
+
 				switch (generatorMap->GetBufferChar(x, z)) // Each object should apply different transform action, using switch case here
 				{
 				case 'a':
@@ -203,7 +203,7 @@ void Floor::Draw()
 					DrawRoofAndFloor(x, z);
 					break;
 				}
-				case 'b': 
+				case 'b':
 				{
 					DrawRoofAndFloor(x, z);
 					glBindTexture(GL_TEXTURE_2D, wallTexId);
@@ -214,7 +214,7 @@ void Floor::Draw()
 
 					break;
 				}
-				case 'c': 
+				case 'c':
 				{
 					DrawRoofAndFloor(x, z);
 					glBindTexture(GL_TEXTURE_2D, wallTexId);
@@ -229,14 +229,19 @@ void Floor::Draw()
 					glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
 					glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
 					glBegin(GL_QUADS);
-					if (generatorMap->GetBufferChar(x, z - 1) == 'b' && generatorMap->GetBufferChar(x, z + 1) == 'b')
+					if ((generatorMap->GetBufferChar(x, z - 1) == 'b' || 
+						generatorMap->GetBufferChar(x, z - 1) == 'c' || 
+						generatorMap->GetBufferChar(x, z - 1) == 'd') &&
+						(generatorMap->GetBufferChar(x, z + 1) == 'b' ||
+						generatorMap->GetBufferChar(x, z + 1) == 'c' ||
+						generatorMap->GetBufferChar(x, z + 1) == 'd'))
 					{
-						DrawSingleWindow(x, z, wallHeight / 2, true);
+						DrawSingleWindow(x, z, wallHeight / 2 + 0.5, true);
 					}
 					else
 					{
-						
-						DrawSingleWindow(x, z, wallHeight / 2, false);
+
+						DrawSingleWindow(x, z, wallHeight / 2 + 0.5, false);
 					}
 					glEnd();
 					glBindTexture(GL_TEXTURE_2D, 0);
@@ -253,18 +258,23 @@ void Floor::Draw()
 
 					glBindTexture(GL_TEXTURE_2D, doorTexId);
 					glBegin(GL_QUADS);
-					if (generatorMap->GetBufferChar(x, z - 1) == 'b' && generatorMap->GetBufferChar(x, z + 1) == 'b')
+					if ((generatorMap->GetBufferChar(x, z - 1) == 'b' ||
+						generatorMap->GetBufferChar(x, z - 1) == 'c' ||
+						generatorMap->GetBufferChar(x, z - 1) == 'd') &&
+						(generatorMap->GetBufferChar(x, z + 1) == 'b' ||
+						generatorMap->GetBufferChar(x, z + 1) == 'c' ||
+						generatorMap->GetBufferChar(x, z + 1) == 'd'))
 					{
-						DrawSingleWindow(x, z, wallHeight / 2, true);
+						DrawSingleWindow(x, z, wallHeight / 2 + 0.5, true);
 					}
 					else
 					{
-						DrawSingleWindow(x, z, wallHeight / 2, false);
+						DrawSingleWindow(x, z, wallHeight / 2 + 0.5, false);
 					}
 					glEnd();
 					glBindTexture(GL_TEXTURE_2D, 0);
 					break;
-					
+
 				}
 				case 'e':
 				{
@@ -373,7 +383,7 @@ void Floor::Draw()
 				}
 			}
 		}
-		
+
 		glPopMatrix();
 		glEnable(GL_CULL_FACE);
 		glPopAttrib();
@@ -391,7 +401,7 @@ void Floor::Update(const double& deltatime) //Change light intensity based on ti
 	{
 		lightColour -= 0.1f * deltatime;
 	}
-	if (lightColour >= 1.0f )
+	if (lightColour >= 1.0f)
 	{
 		lightChange = false;
 	}
@@ -404,9 +414,9 @@ void Floor::DrawUnitWall(int x, int z, float wallHeight, float y, int xSize, int
 {
 	glNormal3f(0.0, 1.0, 0.0);
 	glTexCoord2d(0.0f, 0.0f);
-	glVertex3f(x * SIZE +  xSize * SIZE / 3, y, z *SIZE + ySize * SIZE / 3);
+	glVertex3f(x * SIZE + xSize * SIZE / 3, y, z *SIZE + ySize * SIZE / 3);
 	glTexCoord2d(1.0f, 0.0f);
-	glVertex3f(x * SIZE + xSize * SIZE / 3, y, z *SIZE + (1+ ySize) *  SIZE / 3);
+	glVertex3f(x * SIZE + xSize * SIZE / 3, y, z *SIZE + (1 + ySize) *  SIZE / 3);
 	glTexCoord2d(1.0f, 1.0f);
 	glVertex3f(x * SIZE + xSize * SIZE / 3, wallHeight, z *SIZE + (1 + ySize) *   SIZE / 3);
 	glTexCoord2d(0.0f, 1.0f);
@@ -445,17 +455,19 @@ void Floor::DrawUnitWall(int x, int z, float wallHeight, float y, int xSize, int
 
 void Floor::DrawRoofAndFloor(int x, int z)
 {
+	glPushMatrix();
 	glBindTexture(GL_TEXTURE_2D, floorTexId);
 	glBegin(GL_QUADS);
 	DrawSingleFloor(x, z);
 	glEnd();
-	glBindTexture(GL_TEXTURE_2D, 0);
 
+	glTranslatef(0.0f, wallHeight + 9.9f, 0.0);
 	glBindTexture(GL_TEXTURE_2D, ceilingTexId);
 	glBegin(GL_QUADS);
-	DrawRoof(widthUnit, heightUnit);
+	DrawSingleFloor(x, z);
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
+	glPopMatrix();
 }
 
 void Floor::LoadTexture()
@@ -475,5 +487,5 @@ void Floor::LoadTexture()
 	windowTexId = Scene::GetTexture("./Resources/textures/window.bmp");
 	floorTexId = Scene::GetTexture("./Resources/textures/floor.bmp");
 	ceilingTexId = Scene::GetTexture("./Resources/textures/ceiling.bmp");
-	doorTexId = Scene::GetTexture("./Resources/textures/door.bmp");
+	doorTexId = Scene::GetTexture("./Resources/textures/RoomDoor.bmp");
 }

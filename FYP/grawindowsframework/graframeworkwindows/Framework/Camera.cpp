@@ -13,9 +13,9 @@ Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), currentButton(0), mouseX(
 	
 
     // set the camera position to start at (0,0,0)
-    eye[0] = 0.0f;
+    eye[0] = 100.0f;
     eye[1] = 0.0f;
-    eye[2] = 0.0f;
+    eye[2] = 100.0f;
     
     // set the view direction vector of the camera to be (0,0,-1)
     vd[0] = 0.0f;
@@ -115,7 +115,7 @@ void Camera::Update( const double& deltaTime )
     // 'jittery' feel to the camera.
     
     // variable to control how fast the camera moves in any one direction
-    float speed = 50.0f * deltaTime;
+    float speed = 100.0f * deltaTime;
 	int x = ((int)eye[0] + 300) / 50; // translate the current position to map file position
 	int y = ((int)eye[2] + 300) / 50;
 	if (file[x][y] == 'b' || file[x][y] == 'c')

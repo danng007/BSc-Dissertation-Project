@@ -13,4 +13,5 @@ public:
 	void Draw();
 private:
 	void DrawSurface();
+	void DrawDownSurface();
 };

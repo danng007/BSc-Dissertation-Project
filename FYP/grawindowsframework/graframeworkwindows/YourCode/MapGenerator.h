@@ -20,9 +20,13 @@ public:
 	int GetMapWidth();
 	int GetMapHeight();
 	char (*GetBuffer())[100];
+	int currentFile = 1;
 private:
+	void FileOut(int file, int width, int height);
+	void FileOutPut();
+	ofstream ofile;
 	ifstream myfile;
 	int lastj = 0, lastk = 0, mapWidth1, mapWidth2, mapWidth3, mapHeight1, mapHeight2, mapHeight3;
 	string fileString = "./file.txt";
-	int currentFile = 1;
+
 };

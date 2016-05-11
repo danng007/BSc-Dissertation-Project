@@ -11,8 +11,6 @@ public:
 	MapChange( int mapWidth, int mapHeight, char buffer[][100], MapGenerator* mapGenerator);
 	~MapChange(void);
 	void Draw();
-
-	
 	void HandleMouseClick(int button, int state, int x, int y);
 private:
 	int width = 0;

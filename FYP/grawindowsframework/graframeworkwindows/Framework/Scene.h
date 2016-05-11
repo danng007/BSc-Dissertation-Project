@@ -43,7 +43,7 @@ public:
     // This function will return a pointer to the Camera class
     static Camera* GetCamera() { return &camera; }
 	static bool GetGameStart();
-    
+
 protected:
 
 	// This function will be called before the window is opened
@@ -68,7 +68,7 @@ protected:
 	void AddObjectToScene( Object *object );
  
 private:
-	
+
 	static bool gameStart;
 	static Texture texture;
     static Camera camera;

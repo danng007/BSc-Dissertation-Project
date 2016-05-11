@@ -13,11 +13,11 @@ file3: 12*8 (14 * 10 with walls)
 MapGenerator::MapGenerator( int mapWidth, int mapHeight, Camera* camera)
 {
 	currentCamera = camera;
-	fileString = "./file.txt";
+	fileString = "./mapFiles/file.txt";
 	ReadFile(buffer1, &mapWidth1, &mapHeight1);
-	fileString = "./file2.txt";
+	fileString = "./mapFiles/file2.txt";
 	ReadFile(buffer2, &mapWidth2, &mapHeight2);
-	fileString = "./file3.txt";
+	fileString = "./mapFiles/file3.txt";
 	ReadFile(buffer3, &mapWidth3, &mapHeight3);
 	currentCamera->GetBuffer(buffer1);
 }
@@ -72,6 +72,60 @@ void MapGenerator::HandleMouseClick(int button, int state, int x, int y) //Detec
 	{
 		currentFile = 3;
 		currentCamera->GetBuffer(buffer3);
+	}
+	if (Scene::GetGameStart() && x > 450 && x < 800 && y <= 100 && state == 1)
+	{
+		FileOutPut();
+	}
+}
+
+void MapGenerator::FileOutPut()
+{
+	switch (currentFile)
+	{
+	case 1:
+		ofile.open("./mapFiles/outFile1.txt");
+		FileOut(1, mapWidth1, mapHeight1);
+		ofile.close();
+		break;
+	case 2:
+		ofile.open("./mapFiles/outFile2.txt");
+		FileOut(2, mapWidth2, mapHeight2);
+		ofile.close();
+		break;
+	case 3:
+		ofile.open("./mapFiles/outFile3.txt");
+		FileOut(3, mapWidth3, mapHeight3);
+		ofile.close();
+		break;
+	default:
+		break;
+	}
+}
+
+void MapGenerator::FileOut(int file, int width, int height)
+{
+	for (int i = 0; i < width; i++)
+	{
+		for (int j = 0; j < height; j++)
+		{
+			switch (file)
+			{
+
+			case 1:
+				ofile << buffer1[i][j];
+				break;
+			case 2:
+				ofile << buffer2[i][j];
+				break;
+			case 3:
+				ofile << buffer3[i][j];
+				break;
+				default:
+				break;
+			}
+		}
+		ofile << "\n";
 	}
 }
 
