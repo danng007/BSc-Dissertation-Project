@@ -13,7 +13,7 @@ file3: 12*8 (14 * 10 with walls)
 MapGenerator::MapGenerator( int mapWidth, int mapHeight, Camera* camera)
 {
 	currentCamera = camera;
-	fileString = "./mapFiles/file.txt";
+	fileString = "./mapFiles/file1.txt";
 	ReadFile(buffer1, &mapWidth1, &mapHeight1);
 	fileString = "./mapFiles/file2.txt";
 	ReadFile(buffer2, &mapWidth2, &mapHeight2);

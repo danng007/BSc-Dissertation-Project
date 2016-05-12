@@ -1,9 +1,9 @@
-﻿Build started 11/05/2016 18:18:50.
-     1>Project "Z:\FYP\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" on node 2 (Build target(s)).
+﻿Build started 2016/5/12 11:11:43.
+     1>Project "C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" on node 2 (Build target(s)).
      1>Link:
-         GRAFrameworkWindows.vcxproj -> Z:\FYP\grawindowsframework\Debug\GRAFrameworkWindows.exe
-     1>Done Building Project "Z:\FYP\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" (Build target(s)).
+         GRAFrameworkWindows.vcxproj -> C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\Debug\GRAFrameworkWindows.exe
+     1>Done Building Project "C:\Users\Want\Desktop\FYP\FinalYearProjectGit\FYP\grawindowsframework\GRAFrameworkWindows\GRAFrameworkWindows.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.54
+Time Elapsed 00:00:00.29
